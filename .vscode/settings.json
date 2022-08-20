@@ -1,0 +1,7 @@
+{
+    "pasteImage.defaultName": "YYMMDD_HHmmss",
+    "pasteImage.path": "${projectRoot}/images",
+    "pasteImage.basePath": "${projectRoot}",
+    "pasteImage.forceUnixStyleSeparator": true,
+    "pasteImage.prefix": ""
+}

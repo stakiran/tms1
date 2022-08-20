@@ -10,5 +10,10 @@ VSCode拡張機能をいくつか使います。
 - 2 [vscode-scb syntax - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=stakiran.vscode-scb-syntax)
 - 3 [vscode-scb commands - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=stakiran.vscode-scb-commands)
 
+## How to upload image
+Paste Image を使います。
+
+VSCode で images.md を開いて、ctrl + alt + v で放り込む感じになるでしょう。
+
 ## License
 ありません。

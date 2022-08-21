@@ -1,0 +1,242 @@
+[Scrapbox Reader - yuta0801の脳内 https://scrapbox.io/yuta0801/Scrapbox_Reader]
+[Scrapbox Reader - 井戸端 https://scrapbox.io/villagepump/Scrapbox_Reader]
+
+[/sta/tritask - Scrapbox Reader https://scrapbox-reader.vercel.app/sta/tritask]
+ code:html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta name="viewport" content="width=device-width"/>
+      <meta charSet="utf-8"/>
+      <meta name="robots" content="noindex, nofollow"/>
+      <title>Loading... - Scrapbox Reader</title>
+      <meta name="next-head-count" content="4"/>
+      <link rel="preload" href="/_next/static/css/827901d0921a64fa.css" as="style"/>
+      <link rel="stylesheet" href="/_next/static/css/827901d0921a64fa.css" data-n-g=""/>
+      <noscript data-n-css=""></noscript>
+      <script defer="" nomodule="" src="/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script><script src="/_next/static/chunks/webpack-69bfa6990bb9e155.js" defer=""></script><script src="/_next/static/chunks/framework-5f4595e5518b5600.js" defer=""></script><script src="/_next/static/chunks/main-b4ec63b23a5541d0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-61eef506d9447a7d.js" defer=""></script><script src="/_next/static/chunks/pages/%5Bproject%5D/%5Bpage%5D-3ff806a39a1913f9.js" defer=""></script><script src="/_next/static/GilAKjFOnnn_i0ypdhEUA/_buildManifest.js" defer=""></script><script src="/_next/static/GilAKjFOnnn_i0ypdhEUA/_ssgManifest.js" defer=""></script><script src="/_next/static/GilAKjFOnnn_i0ypdhEUA/_middlewareManifest.js" defer=""></script>
+    </head>
+    <body>
+      <div id="__next" data-reactroot="">loading...</div>
+      <script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{},"__N_SSG":true},"page":"/[project]/[page]","query":{},"buildId":"GilAKjFOnnn_i0ypdhEUA","isFallback":true,"gsp":true,"scriptLoader":[]}</script>
+    </body>
+  </html>
+ :c
+ formatterで整えた🐰
+ ---
+ 本文なくない？
+  ああ、サーバー側で保存して（キャッシュして？）それ表示するロジックだからか
+
+ cssわからん
+  が、見た感じ、scrapboxの拝借してる？（deco系とか特に）
+  ul や li がない
+  lineクラス？HTMLどう描画してんだろ……？
+  なるほど🐰🐰🐰
+   ` <div style="margin-left: 3em;" class="line">秀丸エディタ + Python</div>`
+   lineごとにdivでつくってる
+   margin-leftでインデント
+  が、阿部寛のホームページの速度からは遠のきそう（謎のこだわり🐰
+ code:css
+  @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i");
+  .page{
+      font-size:15px;
+      line-height:28px;
+      font-family:Roboto,Helvetica,Arial,Hiragino Sans,sans-serif;
+      background-color:#fefefe
+  }
+  .line{
+      white-space:pre-wrap;
+      word-wrap:break-word
+  }
+  .line img.icon{
+      height:1.3em;
+      vertical-align:top
+  }
+  .line img.strong-icon{
+      height:3.9em;
+      vertical-align:bottom
+  }
+  .deco .deco-\*-1{
+      font-weight:700
+  }
+  .deco .deco-\*-2{
+      font-weight:700;
+      font-size:1.2em;
+      line-height:28px
+  }
+  .deco .deco-\*-3{
+      font-weight:700;
+      font-size:1.44em;
+      line-height:35px
+  }
+  .deco .deco-\*-4{
+      font-weight:700;
+      font-size:1.73em;
+      line-height:42px
+  }
+  .deco .deco-\*-5{
+      font-weight:700;
+      font-size:2.07em;
+      line-height:49px
+  }
+  .deco .deco-\*-6{
+      font-weight:700;
+      font-size:2.49em;
+      line-height:56px
+  }
+  .deco .deco-\*-7{
+      font-weight:700;
+      font-size:3em;
+      line-height:63px
+  }
+  .deco .deco-\*-8{
+      font-weight:700;
+      font-size:3.58em;
+      line-height:77px
+  }
+  .deco .deco-\*-9{
+      font-weight:700;
+      font-size:4.3em;
+      line-height:91px
+  }
+  .deco .deco-\*-10{
+      font-weight:700;
+      font-size:5.16em;
+      line-height:105px
+  }
+  .deco .deco-\/{
+      font-style:italic
+  }
+  .deco .deco--{
+      text-decoration:line-through
+  }
+  .deco .deco-_{
+      text-decoration:underline
+  }
+  .line .quote{
+      margin:0;
+      font-style:italic;
+      background-color:hsla(0,0%,50%,.1);
+      display:block;
+      border-left:4px solid #a0a0a0;
+      padding-left:4px
+  }
+  .line .quote>.tag{
+      visibility:hidden
+  }
+  code{
+      font-family:Menlo,Monaco,Consolas,Courier New,monospace
+  }
+  .line code{
+      padding:0;
+      font-size:90%;
+      color:#342d9c;
+      white-space:pre-wrap;
+      word-wrap:break-word;
+      border-radius:4px
+  }
+  .line .code-block,.line code{
+      background-color:rgba(0,0,0,.04)
+  }
+  .line .code-block{
+      display:block;
+      line-height:2em
+  }
+  .line .code-block .code-block-start{
+      font-size:.9em;
+      background-color:#ffcfc6;
+      padding:1px 2px
+  }
+  .line code.helpfeel{
+      background-color:#fbebdd;
+      padding:3px!important
+  }
+  .line code.helpfeel .prefix{
+      color:#f17c00
+  }
+  .line code.helpfeel .entry{
+      color:#cc5020
+  }
+  .line a.link .image{
+      padding-bottom:3px;
+      border:1.5px #8fadf9;
+      border-style:none none solid
+  }
+  .table-block table{
+      border-collapse: collapse
+  }
+  .table-block .table-block-start{
+      padding:1px 2px;
+      font-size:.9em;
+      background-color:#ffcfc6
+  }
+  .table-block .cell{
+      margin:0;
+      padding:0 8px;
+      box-sizing: content-box;
+      white-space:pre
+  }
+  .table-block .cell:nth-child(2n){
+      background-color:rgba(0,0,0,.06)
+  }
+  .table-block .cell:nth-child(odd){
+      background-color:rgba(0,0,0,.04)
+  }
+  .line .formula{
+      margin:auto 6px
+  }
+  a{
+      color:#5e8af7
+  }
+  a:active,a:focus,a:hover{
+      color:#1555f3
+  }
+  .line a.page-link{
+      text-decoration:none
+  }
+  .line.line-title{
+      font-size:1.73em;
+      line-height:42px;
+      color:#000;
+      padding-bottom:21px
+  }
+  .line code.cli .prefix{
+      color:#9c6248
+  }
+  .line span.code-block .code-block-start a,.table-block .table-block-start a{
+      color:#342d9c;
+      text-decoration:underline
+  }
+ :c
+
+inner html
+ code:html
+  <div class="line line-title"><span>Tritask</span></div>
+  <div style="margin-left: 0em;" class="line"><a href="https://gyazo.com/bf15e6b024decb90c13c07dbd6597dff/thumb/1000" rel="noopener noreferrer" target="_blank"><img src="https://gyazo.com/bf15e6b024decb90c13c07dbd6597dff/thumb/1000" class="image"></a></div>
+  <div style="margin-left: 1.5em;" class="line"><a href="https://tritask.github.io/tritask-web/" rel="noopener noreferrer" target="_blank">Tritask 公式サイト</a></div>
+  <div style="margin-left: 1.5em;" class="line"><a class="link icon" href="/sta/sta"><img src="https://scrapbox.io/api/pages/sta/sta/icon" alt="sta" title="sta" class="icon"></a> が常用しているタスク管理ツール</div>
+  <div style="margin-left: 3em;" class="line"><a class="page-link" href="/sta/TaskChute">TaskChute</a>ベースに、テキストエディタでゴリゴリ書ける感じに</div>
+  <div style="margin-left: 3em;" class="line">秀丸エディタ + Python</div>
+  <div style="margin-left: 1.5em;" class="line">筆者の利用例</div>
+  <div style="margin-left: 3em;" class="line"><a class="page-link" href="/sta/home.trita">home.trita</a></div>
+  <div style="margin-left: 1.5em;" class="line">実装したいネタはこちらで扱う</div>
+  <div style="margin-left: 3em;" class="line"><a class="page-link" href="/sta/Tritask%E5%AE%9F%E8%A3%85%E3%83%8D%E3%82%BF">Tritask実装ネタ</a></div>
+  <div style="margin-left: 0em;" class="line"><br></div>
+  <div style="margin-left: 0em;" class="line">歴史</div>
+  <div style="margin-left: 1.5em;" class="line">いつから始めたんだっけ</div>
+  <div style="margin-left: 3em;" class="line">最古の<a class="page-link" href="/sta/home.trita">home.trita</a>データ</div>
+  <div style="margin-left: 4.5em;" class="line">
+    <blockquote class="quote"><span class="tag">&gt;</span>4 2017/07/22 Sat 07:30 07:30 typer 公開するかどうか決める</blockquote>
+  </div>
+  <div style="margin-left: 3em;" class="line"><a href="https://github.com/tritask/tritask-sta/commit/c17b7a5620558a8e19132abcdccf8a0b405b0d62" rel="noopener noreferrer" target="_blank">https://github.com/tritask/tritask-sta/commit/c17b7a5620558a8e19132abcdccf8a0b405b0d62</a></div>
+  <div style="margin-left: 4.5em;" class="line">2019/07/29</div>
+  <div style="margin-left: 4.5em;" class="line">これは公開整備始めたときなのでだいぶ後</div>
+  <div style="margin-left: 0em;" class="line"><br></div>
+  <div style="margin-left: 0em;" class="line">Diary</div>
+  <div style="margin-left: 1.5em;" class="line">2022/06/24 2年ぶりくらいの更新になるのか</div>
+  <div style="margin-left: 3em;" class="line"><a class="page-link" href="/sta/%E3%80%8C%E7%A7%81%E3%82%92n%E5%80%8B%E5%A2%97%E3%82%84%E3%81%97%E3%81%AA%E3%81%95%E3%81%84%E3%80%8D%E3%82%BF%E3%82%B9%E3%82%AF(clone%20task)">「私をn個増やしなさい」タスク(clone task)</a>を入れた</div>
+  <div style="margin-left: 3em;" class="line">あとREADMEとかのインデントが2でキモかったので4に直した</div>
+  <div style="margin-left: 3em;" class="line">2年も空くとREADMEやspecification.mdの文体の雰囲気とか何も覚えてない<a class="link icon" href="/sta/sta"><img src="https://scrapbox.io/api/pages/sta/sta/icon" alt="sta" title="sta" class="icon"></a><a class="link icon" href="/sta/sta"><img src="https://scrapbox.io/api/pages/sta/sta/icon" alt="sta" title="sta" class="icon"></a><a class="link icon" href="/sta/sta"><img src="https://scrapbox.io/api/pages/sta/sta/icon" alt="sta" title="sta" class="icon"></a></div>
+  <div style="margin-left: 4.5em;" class="line">読み返して「大体こんな感じやろ」と理解した上で今回も書いたつもりだが</div>
+  <div style="margin-left: 0em;" class="line"><br></div>
+ :c

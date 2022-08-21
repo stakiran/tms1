@@ -22,6 +22,20 @@ TMS1
  [TikTokで「'タスク管理'」を検索 | TikTokで検索 https://www.tiktok.com/search?q=%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86&t=1660819838881]
  [タスク管理 OR @invaliiiiiiiiidid - Twitter検索 / Twitter https://twitter.com/search?q=%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86%20OR%20%40invaliiiiiiiiidid&src=typed_query&f=live]
 
+実装
+ docs/ 配下の github pages でいい
+  github actions
+  面倒くさそうならvercepに逃げる🐰
+ 阿部寛レベルの軽いサイトにしたいｗ
+  [阿部寛ウェブサイトのHTMLソースを見る]
+ cssでbulletを消す、マージンとかも調整する
+ scrapbox-readerどうしてるっけ？
+  [scrapbox-readerを読む]
+  ` <div style="margin-left: XXXXem;" class="line">XXXX</div>`でしたわ
+ 静的サイトジェネレーターつくればいいよな
+  いったんmarkdownに変換とか面倒くさいし
+  ついでだからscb to objectみたいな汎用処理も書いてしまえばいい
+
 ネタ2
  私とタスク管理。taskchute、次第にexcel重いの気に入らない、でも全部自分でつくるのきついtaskchuteだってexcelに乗っかってる、俺は秀丸エディタに乗ることにした、tritask。認知資源との戦い、todarosとか格言問題とか。タスクの総量を減らす努力も忘れない、ミニマリズム。
  買い物リスト。たとえば「りんご」と「鶏肉」と「白だし」を買いに行くとしよう。タスクとはなんだろうか。「買い物」か。「りんごを買う」「鶏肉を買う」か。それとも「スーパーに行く」もか。何なら「着替える」「買い物バッグを準備する」もか。答えは全部正しい。

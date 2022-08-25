@@ -3,6 +3,8 @@ Task Management Systematization 1
 
 ![image](https://user-images.githubusercontent.com/23325839/185373039-d81ee51c-37bb-476d-b926-9983ec4797e0.png)
 
+![image](https://user-images.githubusercontent.com/23325839/186641152-5d665691-8695-40e4-971d-a2ae7d9d61d4.png)
+
 ## How to write
 VSCode拡張機能をいくつか使います。
 

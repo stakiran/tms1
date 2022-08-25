@@ -1,0 +1,39 @@
+
+データ構造
+ ルート
+  class Page
+   nodes: Node[]
+ 行はノードとして扱う感じ
+  class Node
+   indent: number
+   content: Line
+   children: Node[]
+ 1行内にはnのインライン要素があるという感じ
+  class Line
+   content: InlineElement[]
+ インライン要素は色々あるので、基底を定義してこれを実装させる
+  interface InlineElement
+  class Plain
+  class Link
+  class Literal
+  class Image
+  class CodeStart
+  class InCode
+  class CodeEnd
+
+1
+ docs/ 配下の github pages でいい
+  github actions
+  面倒くさそうならvercepに逃げる🐰
+ 阿部寛レベルの軽いサイトにしたいｗ
+  [阿部寛ウェブサイトのHTMLソースを見る]
+ cssでbulletを消す、マージンとかも調整する
+ scrapbox-readerどうしてるっけ？
+  [scrapbox-readerを読む]
+  ` <div style="margin-left: XXXXem;" class="line">XXXX</div>`でしたわ
+  良いアイデア🐰
+   これなら箇条書き内にコード記法、も表現できる（コード記法みたいな装飾で見せればいいだけ）
+   そもそも箇条書き(ul and li)使わなくなるわけだし
+ 静的サイトジェネレーターつくればいいよな
+  いったんmarkdownに変換とか面倒くさいし
+  ついでだからscb to objectみたいな汎用処理も書いてしまえばいい

@@ -21,12 +21,24 @@
   class InCode
   class CodeEnd
 
-1
+もうフロントにデータ載せて動的に描画するのもアリか？
+ いわゆるCSR、client side rendering になるのか？
+ Reactって使える？
+  使える
+  まさにrender()の中でhtml文字列つくってるじゃんね🐰
+
+✅scb to 中間言語変換をつくる
+ まずはこれをつくる
+ で、その後、中間言語 to HTML とか、to Markdownとかすればいい
+ 中間言語の表現力は、まあHTML相当で良かろう🐰
+
+✅ghpaages or vercel
  docs/ 配下の github pages でいい
   github actions
-  面倒くさそうならvercepに逃げる🐰
- 阿部寛レベルの軽いサイトにしたいｗ
-  [阿部寛ウェブサイトのHTMLソースを見る]
+  面倒くさそうならvercekに逃げる🐰
+
+✅阿部寛レベルの軽いサイトにしたいかも
+ [阿部寛ウェブサイトのHTMLソースを見る]
  cssでbulletを消す、マージンとかも調整する
  scrapbox-readerどうしてるっけ？
   [scrapbox-readerを読む]
@@ -34,6 +46,3 @@
   良いアイデア🐰
    これなら箇条書き内にコード記法、も表現できる（コード記法みたいな装飾で見せればいいだけ）
    そもそも箇条書き(ul and li)使わなくなるわけだし
- 静的サイトジェネレーターつくればいいよな
-  いったんmarkdownに変換とか面倒くさいし
-  ついでだからscb to objectみたいな汎用処理も書いてしまえばいい

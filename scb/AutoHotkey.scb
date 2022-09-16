@@ -1,0 +1,3 @@
+[AutoHotkey https://www.autohotkey.com/]
+
+Windowsで使えるスクリプト言語。今でこそ言語だが、元はキーマップを変更するツールだった。その気になれば GUI アプリまでつくれてしまう。Hotstringという[Text_Expansion]機能もある。

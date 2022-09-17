@@ -5,6 +5,10 @@ Task Management Systematization 1
 
 ![image](https://user-images.githubusercontent.com/23325839/186641152-5d665691-8695-40e4-971d-a2ae7d9d61d4.png)
 
+## How to read
+- Start from `home.scb`
+- Workspace root is `__.scb`
+
 ## How to write
 VSCode拡張機能をいくつか使います。
 

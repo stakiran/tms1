@@ -6,7 +6,7 @@
 
 ツールの一覧
 
-BTS
+[BTS]
  Backlog
  GitHub Issues
  Redmine
@@ -18,32 +18,34 @@ BTS
 
 [タイムトラッキング]
  Toggl
- TaskChute
+
+[プロデイリー]
+ Remember The Milk
+ Things
+ Todoist
 
 [ルーチンタスク管理]
  ルータム
- Remember The Milk
- Todoist
  [Todaros]
 
 ロボット
+ [TaskChute]
  [Tritask]
  タスクペディア
 
-イベントミクスチャ
+[イベントミクスチャ]
  Sorted³
  Outlook
+
+[習慣トラッカー]
+ Habitica
+
+Framework Based
+ OmniFocus
 
 アナログ
  yPad
  あな吉手帳術
-
-習慣トラッカー
- Habitica
-
-OmniFocus GTD-oriented
-Things [The all-new Things. Your to-do list for Mac & iOS https://culturedcode.com/things/]
-日常生活よりのタスク管理 ←これ作りたい
 
 ---
 
@@ -54,7 +56,7 @@ Things [The all-new Things. Your to-do list for Mac & iOS https://culturedcode.c
  GTD
  PARAメソッド
 
-集中管理
+生産性管理
  ポモドーロテクニック
 
 タスク管理

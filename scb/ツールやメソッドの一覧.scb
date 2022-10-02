@@ -2,28 +2,60 @@
  世に存在するこれらを網羅することは現実的ではないため、うまい分類を交えながらいくつかを取り上げることにする。
  使用感など実際に使ったことによる解像度の高い説明はしない。また明示もしない。が、最低限説明できる程度には調査・試行したいものである。
 
---- ツールの一覧 ---
- TaskChute
- Tritask
- Todaros
- Todoist
- Remember The Milk
- Sorted³
- ClickUp
- Habitica
- Redmine
- GitHub Issues
- OutlookとかPlannerとかその辺（MS365）
- Asana
- Toggl
- ルータム
+---
 
- todo.txt
+ツールの一覧
+
+BTS
+ Backlog
+ GitHub Issues
+ Redmine
+
+[プロジェクトタスク管理]
+ Asana
+ ClickUp
+ Trello
+
+[タイムトラッキング]
+ Toggl
+ TaskChute
+
+[ルーチンタスク管理]
+ ルータム
+ Remember The Milk
+ Todoist
+ [Todaros]
+
+ロボット
+ [Tritask]
+ タスクペディア
+
+イベントミクスチャ
+ Sorted³
+ Outlook
+
+アナログ
  yPad
  あな吉手帳術
 
---- メソッドの一覧 ---
+習慣トラッカー
+ Habitica
 
+OmniFocus GTD-oriented
+Things [The all-new Things. Your to-do list for Mac & iOS https://culturedcode.com/things/]
+日常生活よりのタスク管理 ←これ作りたい
+
+---
+
+メソッドの一覧
+
+人生管理
+ Bullet Journal
  GTD
  PARAメソッド
- バレットジャーナル
+
+集中管理
+ ポモドーロテクニック
+
+タスク管理
+ todo.txt

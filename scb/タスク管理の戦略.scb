@@ -3,6 +3,62 @@
  これらの発想を参考にすることで、あなたは一から試行錯誤しなくても済む。もちろん、だからといって試行錯誤がなくなるわけではない（[タスク管理は本質的に個人的なもの]である）。
  これらは不可分ではなく、二つ以上を使い分けたり組み合わせたりする場合もありえる。
 
+---
+
+まずは俯瞰してみよう。
+
+何を拠り所にするか
+ 時間で区切る
+  Dailer
+  Calendarer
+  Slotter
+ 話題で区切る
+  Issueist
+  Topician
+ 一箇所にまとめる
+  Richild
+  Monolith
+ 繰り返しの力で回す
+  Robot
+  Tracker
+ 自分の脳内が正義
+  Inboxer
+
+習熟コストの高さ
+ Lv4
+  Robot
+  Dailer
+ Lv3
+  Slotter
+  Issueist
+  Topician
+ Lv2
+  Calendarer
+  Tracker
+  Richild
+  Monolith
+ Lv1
+  Inboxer
+
+私の体感による人口
+ 多い。一般人でもよく見かける。
+  Calendarer
+  Richild
+  Inboxer
+ 少ない。が、ナレッジワーカーやクリエイターには珍しくない。
+  Dailer
+  Slotter
+  Monolith
+  Tracker
+ かなり少ない。希少種。
+  Robot
+  Issueist
+  Topician
+
+---
+
+続いて各々をかんたんに紹介しよう。
+
 デイラー
  Dailer
  [デイリータスクリスト]など今日やるエリアをつくり、その中にあるタスクを全部やれば今日はおしまいとする。明日以降のエリアも併せてつくることが多い。

@@ -1,7 +1,10 @@
-以下の3つである
- Attribute [属性] 
- Arrow 関係
- Attachment 機能
+以下の3つ
+ code:3
+  Attribute  属性
+  Arrow      関係
+  Attachment 機能
+ :c
+ これを便宜上タスクの[パラメーター]と呼ぶことにする。
 
 属性
  [属性]を参照

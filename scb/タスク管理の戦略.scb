@@ -5,59 +5,7 @@
 
 ---
 
-まずは俯瞰してみよう。
-
-何を拠り所にするか
- 時間で区切る
-  Dailer
-  Calendarer
-  Slotter
- 話題で区切る
-  Issueist
-  Topician
- 一箇所にまとめる
-  Richild
-  Monolith
- 繰り返しの力で回す
-  Robot
-  Tracker
- 自分の脳内が正義
-  Inboxer
-
-習熟コストの高さ
- Lv4
-  Robot
-  Dailer
- Lv3
-  Slotter
-  Issueist
-  Topician
- Lv2
-  Calendarer
-  Tracker
-  Richild
-  Monolith
- Lv1
-  Inboxer
-
-私の体感による人口
- 多い。一般人でもよく見かける。
-  Calendarer
-  Richild
-  Inboxer
- 少ない。が、ナレッジワーカーやクリエイターには珍しくない。
-  Dailer
-  Slotter
-  Monolith
-  Tracker
- かなり少ない。希少種。
-  Robot
-  Issueist
-  Topician
-
----
-
-続いて各々をかんたんに紹介しよう。
+まずは各々を紹介しよう。
 
 デイラー
  Dailer
@@ -136,3 +84,55 @@
  管理対象として主に日課や習慣が選ばれる事が多い。まさにその用途でつくられたのが習慣トラッカーであり、一大ジャンルとなっている。管理対象数を絞ればアナログでも実現でき、たとえばラジオ体操カードは有名であろう（ラジオ体操に参加するという一つのタスクのみ管理している）。
  メリットは日々の運用がしやすいこと。やったかやらなかったをプロットするだけである。
  デメリットは、まず扱えるタスクの幅が狭いこと。特に単発のタスクは管理しづらく、「単発タスクエリアを空にする」のような工夫した運用が必要となる。次に[スケールしない]こと。タスク数が5～10程度ならまだ回せるが、それ以上を超えると[認知資源]の負荷が爆発的に増え（そもそも物理的に入りきらなくもなってもくる）、すべてを漏れなくこなすことが難しくなり、[スキップマネジメント]を考える必要性など込み入った運用が要求されてくる。そもそも、トラッカーにタスク管理をまかなえるほどの能力は無く（無いと考えられており）、だからこそ習慣トラッカーの域を出ていない。
+
+---
+
+続いて俯瞰してみよう。
+
+何を拠り所にするか
+ 時間で区切る
+  Dailer
+  Calendarer
+  Slotter
+ 話題で区切る
+  Issueist
+  Topician
+ 一箇所にまとめる
+  Richild
+  Monolith
+ 繰り返しの力で回す
+  Robot
+  Tracker
+ 自分の脳内が正義
+  Inboxer
+
+習熟コストの高さ
+ Lv4
+  Robot
+  Dailer
+ Lv3
+  Slotter
+  Issueist
+  Topician
+ Lv2
+  Calendarer
+  Tracker
+  Richild
+  Monolith
+ Lv1
+  Inboxer
+
+私の体感による人口
+ 多い。一般人でもよく見かける。
+  Calendarer
+  Richild
+  Inboxer
+ 少ない。が、ナレッジワーカーやクリエイターには珍しくない。
+  Dailer
+  Slotter
+  Monolith
+  Tracker
+ かなり少ない。希少種。
+  Robot
+  Issueist
+  Topician

@@ -1,4 +1,17 @@
 
+code:bnf
+ <page> ::= <nodes>
+ <nodes> ::= <node> <nodes> | ""
+
+ <node> ::= <block> | <line>
+ <block> ::= <codeblock> | <tableblock>
+
+ <line> ::= <inline-elements>
+ <inline-elements> ::= <inline-element> <inline-elements> | ""
+ <inline-element> ::= <plain> | <link> | <literal> | <
+
+:c
+
 データ構造
  ルート
   class Page
@@ -23,7 +36,7 @@
 
 ブロックはどう表現する？
  中間言語としては、いちいちstart/in/endなんて意識したくない
- 
+ネストはどう表現する？
 
 
 パース

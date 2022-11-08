@@ -1,5 +1,19 @@
 
-code:bnf
+code:bnf2
+ <page> ::= <nodes>
+ <nodes> ::= <node> <nodes> | ""
+
+ <node> ::= <block> | <line>
+ <block> ::= <codeblock> | <tableblock> | <quoteblock>
+
+ <line> ::= <indent> <inline-elements>
+ <inline-elements> ::= <inline-element> <inline-elements> | ""
+ <inline-element> ::= <plain> | <link> | <image> | <literal>
+
+ <indent> ::= " " <indent> | ""
+:c
+
+code:bnf1
  <page> ::= <nodes>
  <nodes> ::= <node> <nodes> | ""
 
@@ -35,9 +49,16 @@ code:bnf
   class InCode
   class CodeEnd
 
-✅ブロックはどう表現する？
- 中間言語としては、いちいちstart/in/endなんて意識したくない
- nodeレベルにすることにした
+目的は？
+ 1 この読み物をHTMLで公開するために、変換をつくること
+ 2 scb記法一般について、1ができるようにしたい
+ 3 クラインなどよく使う概念も取り込んで、プログラムで扱いやすくしたい（漠然！）
+ ---
+ fimp🐰
+  3は[手段の目的化]感
+  できれば2が欲しい。この読み物以外にもscbは結構使っているし、手元で書いたのを公開したいときとかにこれがあると仕事でも便利だろうから
+  が、直近は1でもいい。だらだらしても仕方ないし、2はscb記法ちゃんと考えて変換もちゃんとつくるってことだから一朝一夕ではない。1でいいのでは？
+  
 
 引用はどう表現する？
  ブロックでいい🐰
@@ -57,6 +78,10 @@ code:bnf
   Nodeと同列の概念で、n行の空行を表現する
   Pageとは、NodeとBlankからなるリストと呼ぶことができる
   ……いや、Nodeの中にBlankを入れればいいのか🐰
+ そしてBlankも二つあるけど
+  indent=0のblank
+  indent>0のblank
+  つまりどこで（どの階層で）区切っているかが違う🐰
 
 ネストはどう表現する？
  Nodeにindent: numberを持たせる、ではダメなんだっけ？
@@ -112,6 +137,10 @@ code:bnf
   ただ、ブロックの解釈時は、始点見つけたら終点まで一気に解釈して、続きはその後ろから、って感じになるはず🐰
  1 まずはnodeレベルでリストつくる
  2 その後、node各々をinlineレベルでリスト化する
+
+✅ブロックはどう表現する？
+ 中間言語としては、いちいちstart/in/endなんて意識したくない
+ nodeレベルにすることにした
 
 ✅react使うかで悩んでいる構図
  inbox

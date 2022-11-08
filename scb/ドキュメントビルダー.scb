@@ -27,6 +27,49 @@ code:bnf1
  <indent> ::= " " <indent> | ""
 :c
 
+1
+ Page
+  nodes: Node[]
+ Node
+  indent: number
+  content: Block | Line
+  children: Node[]
+ interface Block
+ CodeBlock
+ TableBlock
+ BlankBlock
+ Line
+  frontline_element: FrontlineElement
+  inline_elements: InlineElement[]
+ interface InlineElement
+ Plain
+  text: string
+ Link
+  url: string
+  text: string
+ Image
+  url: string
+  text: string
+ Literal
+  text: string
+
+ ただのリストもブロックにするべきか。Blockのメンバ設計とも絡む
+ 引用はどう持たせるべきか。frontline的なやつとか、Line.is_quoteとか
+
+
+ 1行内にはnのインライン要素があるという感じ
+  class Line
+   content: InlineElement[]
+ インライン要素は色々あるので、基底を定義してこれを実装させる
+  interface InlineElement
+  class Plain
+  class Link
+  class Literal
+  class Image
+  class CodeStart
+  class InCode
+  class CodeEnd
+
 データ構造
  ルート
   class Page
@@ -48,26 +91,6 @@ code:bnf1
   class CodeStart
   class InCode
   class CodeEnd
-
-目的は？
- 1 この読み物をHTMLで公開するために、変換をつくること
- 2 scb記法一般について、1ができるようにしたい
- 3 クラインなどよく使う概念も取り込んで、プログラムで扱いやすくしたい（漠然！）
- ---
- fimp🐰
-  3は[手段の目的化]感
-  できれば2が欲しい。この読み物以外にもscbは結構使っているし、手元で書いたのを公開したいときとかにこれがあると仕事でも便利だろうから
-  が、直近は1でもいい。だらだらしても仕方ないし、2はscb記法ちゃんと考えて変換もちゃんとつくるってことだから一朝一夕ではない。1でいいのでは？
- 仮に1に特化して実装するとしたら？🐰
-  scb to htmlを直に書くことになる
-  厳密に設計せずとも、適当にパースすればよい
-   が、行指向的に前から一行ずつ処理する、だと地獄を見たので、nodeをつくる（scrapbox-parser）系のアルゴリズムにはしたい
-    [stakiran/scbjson2ghpages: Scrapbox Exported JSON to Markdown for GitHub Pages. https://github.com/stakiran/scbjson2ghpages]
-   他に良いアルゴリズムはあるか？思いつかん……
-  あとでデバッグが大変なので、テストコードは先にガッツリやってしまいたい
-  いや、結局scb to 中間言語要るなぁ🐰🐰
-   ただのそのクオリティをどこまで突き詰めるかの問題
- うん、scb to 中間言語と中間言語 to HTMLにしよう🐰
 
 引用はどう表現する？
  ブロックでいい🐰
@@ -146,6 +169,28 @@ code:bnf1
   ただ、ブロックの解釈時は、始点見つけたら終点まで一気に解釈して、続きはその後ろから、って感じになるはず🐰
  1 まずはnodeレベルでリストつくる
  2 その後、node各々をinlineレベルでリスト化する
+
+✅目的は？ ほか
+ 1 この読み物をHTMLで公開するために、変換をつくること
+ 2 scb記法一般について、1ができるようにしたい
+ 3 クラインなどよく使う概念も取り込んで、プログラムで扱いやすくしたい（漠然！）
+ ---
+ 結論: 1でも結局中間言語作るレベルじゃないとたぶん通用しないので、素直に2のつもりでやればよろし🐰
+ ---
+ fimp🐰
+  3は[手段の目的化]感
+  できれば2が欲しい。この読み物以外にもscbは結構使っているし、手元で書いたのを公開したいときとかにこれがあると仕事でも便利だろうから
+  が、直近は1でもいい。だらだらしても仕方ないし、2はscb記法ちゃんと考えて変換もちゃんとつくるってことだから一朝一夕ではない。1でいいのでは？
+ 仮に1に特化して実装するとしたら？🐰
+  scb to htmlを直に書くことになる
+  厳密に設計せずとも、適当にパースすればよい
+   が、行指向的に前から一行ずつ処理する、だと地獄を見たので、nodeをつくる（scrapbox-parser）系のアルゴリズムにはしたい
+    [stakiran/scbjson2ghpages: Scrapbox Exported JSON to Markdown for GitHub Pages. https://github.com/stakiran/scbjson2ghpages]
+   他に良いアルゴリズムはあるか？思いつかん……
+  あとでデバッグが大変なので、テストコードは先にガッツリやってしまいたい
+  いや、結局scb to 中間言語要るなぁ🐰🐰
+   ただのそのクオリティをどこまで突き詰めるかの問題
+ うん、scb to 中間言語と中間言語 to HTMLにしよう🐰
 
 ✅ブロックはどう表現する？
  中間言語としては、いちいちstart/in/endなんて意識したくない

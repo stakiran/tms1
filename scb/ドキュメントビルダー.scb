@@ -30,6 +30,7 @@ code:bnf1
 1
  Page
   nodes: Node[]
+  clines: Cline[] クラインも扱ってみたいんだよなー……🐰
  Node
   indent: number
   content: Block | Line
@@ -37,6 +38,7 @@ code:bnf1
  interface Block
   startline: string
   endline: string
+  content: string[]
  CodeBlock
  TableBlock
  BlankBlock
@@ -58,12 +60,21 @@ code:bnf1
 
  ただのリストもブロックにするべきか。Blockのメンバ設計とも絡む
   まったくピンと来ねえんだけど……🐰
-  
+ ✅ブロック内の要素はどう表現する？クラス？
+  ブロックごとに系統が違うから実装が独自になるよねぇ……
+   例:codeだとただの行だろうし、tableだと頑張ってパースしてテーブル形式にしたい
+  案1 XXXBlockでは内部的にパース処理を書いて、I/Fとしては便利メソッドやプロパティを見せるだけ
+  案2 案1+ブロックの下層にあたる構造もちゃんと定義する
+   無理じゃね？
+  ……案1でいいか。他に浮かばん。案2は綺麗さ求めすぎな気もするしね →[手段の目的化]
  ✅引用はどう持たせるべきか。frontline的なやつとか、Line.is_quoteとか
   is_quoteの場合、判定処理や本文抜き出しをLineが担うことになる。他にもfront系が来たらLineの責務が増える。
   frontlineelementは違う。element単体で完結するべき（本文も含んでいるべき）だが、quoteは`>`しか含んでない。違う。
   QuoteLine……くらいしかねえよなぁ
-
+ ✅ネストはどこで持たせる？
+  後述のとおり、Nodeで持たせる
+  利用者は、Nodeが持つインデント情報を「必要なら」使う
+   Scrapboxレベルのネスト表現力（ネスト中にコードブロックとか）を持ってるとは限らないので、強制はしない🐰
 
  1行内にはnのインライン要素があるという感じ
   class Line

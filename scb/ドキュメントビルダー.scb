@@ -35,12 +35,15 @@ code:bnf1
   content: Block | Line
   children: Node[]
  interface Block
+  startline: string
+  endline: string
  CodeBlock
  TableBlock
  BlankBlock
  Line
-  frontline_element: FrontlineElement
+  raw: string
   inline_elements: InlineElement[]
+ QuoteLine
  interface InlineElement
  Plain
   text: string
@@ -54,7 +57,12 @@ code:bnf1
   text: string
 
  ただのリストもブロックにするべきか。Blockのメンバ設計とも絡む
- 引用はどう持たせるべきか。frontline的なやつとか、Line.is_quoteとか
+  まったくピンと来ねえんだけど……🐰
+  
+ ✅引用はどう持たせるべきか。frontline的なやつとか、Line.is_quoteとか
+  is_quoteの場合、判定処理や本文抜き出しをLineが担うことになる。他にもfront系が来たらLineの責務が増える。
+  frontlineelementは違う。element単体で完結するべき（本文も含んでいるべき）だが、quoteは`>`しか含んでない。違う。
+  QuoteLine……くらいしかねえよなぁ
 
 
  1行内にはnのインライン要素があるという感じ
@@ -92,7 +100,7 @@ code:bnf1
   class InCode
   class CodeEnd
 
-引用はどう表現する？
+❌引用はどう表現する？
  ブロックでいい🐰
   最低でも行まるごとになる。これは1行からなるブロックとみなせる
   そもそも引用記法は本来はブロック的だよね

@@ -1,4 +1,86 @@
+Structure:
+ Page
+  nodes: Node[]
+ Node
+  indent: number
+  content: Block | Line
+  children: Node[]
+ interface Block
+  startline: string
+  endline: string
+  content: string[]
+ CodeBlock
+ TableBlock
+ BlankBlock
+ Line
+  raw: string
+  inline_elements: InlineElement[]
+ QuoteLine
+ BlankLine
+ interface InlineElement
+ Plain
+  text: string
+ Link
+  url: string
+  text: string
+ Image
+  url: string
+  text: string
+ Literal
+  text: string
 
+✅クラインを扱うためにはどうする？
+ page側でclineの操作をサポートしたい？
+ 空行ブロックをつくれば事実上サポートできることになる？
+  個人的にこれは欲しい🐰
+  空行は解釈に曖昧性が出やすいので、このパーサ側で全部要素化してしまいたい
+ が、利用者側でクライン使うってのは、直近はなさそう
+  クライン数でランキングつくるくらいか？インデックスページとして
+ 後からも足せるし、クラインは要らないな🐰
+あとは、空行の取り扱い
+ 空行ブロック案
+  こっちは強引って気がする
+  ブロックはインデント下げてその中を隠蔽するってイメージなので……
+ 空ライン案
+  いったんこっちでいいか🐰
+
+✅ただのリストもブロックにするべきか？
+ Blockのメンバ設計とも絡む
+ まったくピンと来ねえんだけど……🐰
+ が、ブロックを下記案1 隠蔽式にしたので、ただのリストは無しでいいのでは？
+  それにリストブロックサポートすると、compositパターンみたいなことになる
+  ちょっと煩雑かなぁ
+ でもリストブロックにして構造化しておけば、利用者側で扱うのが楽だ
+  行入れ替えとか
+  いや、だから、行入れ替えは今回しねえだろ🐰
+  エディタつくるわけじゃないし
+ ならリストブロックはなしでいい🐰
+
+✅ブロック内の要素はどう表現する？クラス？
+ ブロックごとに系統が違うから実装が独自になるよねぇ……
+  例:codeだとただの行だろうし、tableだと頑張ってパースしてテーブル形式にしたい
+ 案1 XXXBlockでは内部的にパース処理を書いて、I/Fとしては便利メソッドやプロパティを見せるだけ
+ 案2 案1+ブロックの下層にあたる構造もちゃんと定義する
+  無理じゃね？
+ ……案1でいいか。他に浮かばん。案2は綺麗さ求めすぎな気もするしね →[手段の目的化]
+✅引用はどう持たせるべきか。frontline的なやつとか、Line.is_quoteとか
+ is_quoteの場合、判定処理や本文抜き出しをLineが担うことになる。他にもfront系が来たらLineの責務が増える。
+ frontlineelementは違う。element単体で完結するべき（本文も含んでいるべき）だが、quoteは`>`しか含んでない。違う。
+ QuoteLine……くらいしかねえよなぁ
+✅ネストはどこで持たせる？
+ 後述のとおり、Nodeで持たせる
+ 利用者は、Nodeが持つインデント情報を「必要なら」使う
+  Scrapboxレベルのネスト表現力（ネスト中にコードブロックとか）を持ってるとは限らないので、強制はしない🐰
+
+ブロックとは
+ コンテンツも機能も一手に引き受けた単位
+ Pageからは「ほげほげブロック」ということしか見えない
+  lineがどうなってるとかは見えない🐰🐰
+ 逆を言えば、ほげほげブロックは、自分が持つlinesをどう扱いどう見せるかを自身が責任負う
+
+---
+
+1
 code:bnf2
  <page> ::= <nodes>
  <nodes> ::= <node> <nodes> | ""
@@ -26,55 +108,6 @@ code:bnf1
 
  <indent> ::= " " <indent> | ""
 :c
-
-1
- Page
-  nodes: Node[]
-  clines: Cline[] クラインも扱ってみたいんだよなー……🐰
- Node
-  indent: number
-  content: Block | Line
-  children: Node[]
- interface Block
-  startline: string
-  endline: string
-  content: string[]
- CodeBlock
- TableBlock
- BlankBlock
- Line
-  raw: string
-  inline_elements: InlineElement[]
- QuoteLine
- interface InlineElement
- Plain
-  text: string
- Link
-  url: string
-  text: string
- Image
-  url: string
-  text: string
- Literal
-  text: string
-
- ただのリストもブロックにするべきか。Blockのメンバ設計とも絡む
-  まったくピンと来ねえんだけど……🐰
- ✅ブロック内の要素はどう表現する？クラス？
-  ブロックごとに系統が違うから実装が独自になるよねぇ……
-   例:codeだとただの行だろうし、tableだと頑張ってパースしてテーブル形式にしたい
-  案1 XXXBlockでは内部的にパース処理を書いて、I/Fとしては便利メソッドやプロパティを見せるだけ
-  案2 案1+ブロックの下層にあたる構造もちゃんと定義する
-   無理じゃね？
-  ……案1でいいか。他に浮かばん。案2は綺麗さ求めすぎな気もするしね →[手段の目的化]
- ✅引用はどう持たせるべきか。frontline的なやつとか、Line.is_quoteとか
-  is_quoteの場合、判定処理や本文抜き出しをLineが担うことになる。他にもfront系が来たらLineの責務が増える。
-  frontlineelementは違う。element単体で完結するべき（本文も含んでいるべき）だが、quoteは`>`しか含んでない。違う。
-  QuoteLine……くらいしかねえよなぁ
- ✅ネストはどこで持たせる？
-  後述のとおり、Nodeで持たせる
-  利用者は、Nodeが持つインデント情報を「必要なら」使う
-   Scrapboxレベルのネスト表現力（ネスト中にコードブロックとか）を持ってるとは限らないので、強制はしない🐰
 
  1行内にはnのインライン要素があるという感じ
   class Line

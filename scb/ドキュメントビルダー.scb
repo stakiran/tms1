@@ -30,17 +30,52 @@ Structure:
   text: string
 
 Command:
- python doc.py OPTIONS
+ python dobu.py OPTIONS
 
 options:
- mebjを人間用に表示する
- 入力と期待を与えてテストするみたいなのほしい
-  testdata/ 配下に .input と .expect を揃える感じ
+ 以下は入力ファイル。単一かディレクトリ丸ごと
+ -i (Input-path)
+  入力ファイルを指定
+ --from-cd
+  カレントディレクトリをインプットにする。`./*.scb`と同義
+ 
+ 以下はフォーマット指定。なければ --to-dobu がデフォ
+ --to-dobu
+  human readable
+ --to-html
+ 
+ 以下は出力形式指定。なければstdout
+ --file
+  ファイルに出す
+  出力ファイル名は固定
 
-利用まわり
- tms/ 配下の *.scb を全部対象にする
- テストしやすくするため、単発の実行も可能にする
- scb to 中間言語
+ htmlのカスタマイズ系……
+ テンプレートがいいかな……
+
+ 🐰
+  出力ファイル名の指定はない。常に`{basename}.{output-format-extension}`で固定する。
+   1 そんなところで迷いたくないので
+   2 リンク文字列の変換を行う以上、名前のフォーマットを固定しないといけないので
+  globなどはいったん要らないのでボツ。minimumにしようぜ。
+ 
+ 以下はボツ
+ -g input Glob pattern
+  自由に指定させるためにglobに投げる🐰
+  デフォは `/**/*.scb`
+
+formats:
+ Human Readable(to string)、拡張子は .dobu
+ HTML
+
+dobuフォーマット
+ mebj用のreadable format
+ 人間も読めるし、テストコードなどで照合もしやすい
+
+登場人物
+ 1 scb
+  入力ファイルフォーマット。hidemaru scbフォーマット
+ 2 mebject
+  scbから変換する中間オブジェクト
 
 ✅中間オブジェクト
  scb to XXX
@@ -48,13 +83,16 @@ options:
  XXX to Markdown
  このXXXにあたるデータ構造のこと
  最初は「中間言語」と呼んでいたが、文法仕様があるわけではなく単にオブジェクトとして保持して扱うだけなので、たぶん「オブジェクト」が正しい🐰
- 長いので mediator object mebject とでも呼ぶことにする🐰
+ 長いので mediator object = mebject とでも呼ぶことにする🐰
   通称mebj
 
 ✅コマンド名
  良いの思いつかない……
  打ちやすいのがいい
  今は雑にdocとかにしておく🐰
+  いや、わからんのでなし
+ document builder で dobu
+  ドブｗ
 
 ---
 2 structure決めるまで

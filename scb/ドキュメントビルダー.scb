@@ -28,6 +28,11 @@ Structure:
   text: string
  Literal
   text: string
+ ---
+ つまり、
+  Pageはn-Nodeを持つ
+  Nodeの本体はBlockまたはLine
+  Lineはn-InlineElementを持つ
 
 Command:
  python dobu.py OPTIONS
@@ -41,7 +46,6 @@ options:
  
  以下はフォーマット指定。なければ --to-dobu がデフォ
  --to-dobu
-  human readable
  --to-html
  
  以下は出力形式指定。なければstdout
@@ -56,12 +60,12 @@ options:
   出力ファイル名の指定はない。常に`{basename}.{output-format-extension}`で固定する。
    1 そんなところで迷いたくないので
    2 リンク文字列の変換を行う以上、名前のフォーマットを固定しないといけないので
-  globなどはいったん要らないのでボツ。minimumにしようぜ。
  
- 以下はボツ
- -g input Glob pattern
-  自由に指定させるためにglobに投げる🐰
-  デフォは `/**/*.scb`
+ ❌以下はボツ
+  -g input Glob pattern
+   自由に指定させるためにglobに投げる🐰
+   デフォは `/**/*.scb`
+   まずはminimumにつくりたいので後回しでよい
 
 formats:
  Human Readable(to string)、拡張子は .dobu

@@ -33,11 +33,18 @@ def parse_arguments():
 class FileParser:
     def __init__(self, contents_by_lines):
         self._lines = contents_by_lines
+        # parse時の状態はここで持つしかないかぁ？
 
-    def _parse_1file():
-        pass
-
-    def _parse_1line(line):
+    def _parse(self):
+        '''
+        create page
+        linesをlineごとにparseしてく
+         create block_or_line
+          ここで一気にn行かっさらうことがある。for line in linesとかだときつい。カウンタは原始的に管理すべきか
+         create node
+         node.add(block_or_line)
+         page.add_node(node)
+        '''
         pass
 
 class Page:

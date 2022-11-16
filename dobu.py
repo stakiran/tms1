@@ -30,5 +30,21 @@ def parse_arguments():
     args = parser.parse_args()
     return args
 
+class FileParser:
+    def __init__(self, contents_by_lines):
+        self._lines = contents_by_lines
+
+    def _parse_1file():
+        pass
+
+    def _parse_1line(line):
+        pass
+
+class Page:
+    pass
+
+class Node:
+    pass
+
 if __name__ == "__main__":
     args = parse_arguments()

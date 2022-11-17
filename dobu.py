@@ -30,6 +30,23 @@ def parse_arguments():
     args = parser.parse_args()
     return args
 
+class LinePasser:
+    def __init__(self, lines):
+        self._lines = lines
+        self._idx = 0
+
+    def raise_if_already_empty(self):
+        lastidx = len(self._lines)
+        if self._idx >= lastidx:
+            raise RuntimeError('LinePasser says "already empty."')
+
+    @property
+    def next(self):
+        self.raise_if_already_empty()
+        line = self._lines[self._idx]
+        self._idx += 1
+        return line
+
 class FileParser:
     def __init__(self, contents_by_lines):
         self._lines = contents_by_lines

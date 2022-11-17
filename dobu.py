@@ -34,6 +34,7 @@ class FileParser:
     def __init__(self, contents_by_lines):
         self._lines = contents_by_lines
         # parse時の状態はここで持つしかないかぁ？
+        # lineman.next() みたいな iterator があると便利そう
 
     def _parse(self):
         '''

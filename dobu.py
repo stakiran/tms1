@@ -63,9 +63,18 @@ class FileParser:
          node.add(block_or_line)
          page.add_node(node)
         '''
+        lp = self._lp
         page = Page()
-        while False:
-            pass
+        while True:
+            if lp.already_empty():
+                break
+            line = lp.next
+
+            '''
+            1 block or lineをつくる
+             このとき、lpも渡して、必要ならn行分を取得してつくってしまう（block）
+            2 nodeつくって、1をadd
+            '''
 
 class Page:
     def __init__(self):
@@ -75,8 +84,9 @@ class Page:
         self._nodes.append(node)
 
 class Node:
-    def __init__(self):
-        pass
+    def __init__(self, linepasser):
+        INITIAL_DUMMY = 0
+        self._indent = INITIAL_DUMMY
 
 if __name__ == "__main__":
     args = parse_arguments()

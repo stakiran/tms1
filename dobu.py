@@ -35,14 +35,16 @@ class LinePasser:
         self._lines = lines
         self._idx = 0
 
-    def raise_if_already_empty(self):
+    def already_empty(self):
         lastidx = len(self._lines)
         if self._idx >= lastidx:
-            raise RuntimeError('LinePasser says "already empty."')
+            return True
+        return False
 
     @property
     def next(self):
-        self.raise_if_already_empty()
+        if self.already_empty():
+            raise RuntimeError('LinePasser says "already empty."')
         line = self._lines[self._idx]
         self._idx += 1
         return line

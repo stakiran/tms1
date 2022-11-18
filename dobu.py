@@ -48,10 +48,8 @@ class LinePasser:
         return line
 
 class FileParser:
-    def __init__(self, contents_by_lines):
-        self._lines = contents_by_lines
-        # parse時の状態はここで持つしかないかぁ？
-        # lineman.next() みたいな iterator があると便利そう
+    def __init__(self, linepasser):
+        self._lp = linepasser
 
     def _parse(self):
         '''
@@ -63,13 +61,20 @@ class FileParser:
          node.add(block_or_line)
          page.add_node(node)
         '''
-        pass
+        page = Page()
+        while False:
+            pass
 
 class Page:
-    pass
+    def __init__(self):
+        self._nodes = []
+
+    def add_node(self, node):
+        self._nodes.append(node)
 
 class Node:
-    pass
+    def __init__(self):
+        pass
 
 if __name__ == "__main__":
     args = parse_arguments()

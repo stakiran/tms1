@@ -120,8 +120,8 @@ class NodeFactory:
 
     def proceed_as_something(self, indent, line_without_indent, lp):
         if Judgement.is_codeblock_start(line_without_indent):
-            return self.proceeded_as_codeblock()
-        return self.proceeded_as_line()
+            return self.proceeded_as_codeblock(indent, line_without_indent, lp)
+        return self.proceeded_as_line(line_without_indent)
 
     def proceeded_as_codeblock(self, indent, line_without_indent, lp):
         return None

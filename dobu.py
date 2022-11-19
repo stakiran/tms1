@@ -30,6 +30,25 @@ def list2file(filepath, ls):
     with open(filepath, encoding='utf8', mode='w') as f:
         f.writelines(['{:}\n'.format(line) for line in ls] )
 
+class Indent:
+    @staticmethod
+    def get_depth(s):
+        depth = 0
+        while True:
+            is_outofindex = depth >= len(s)
+            if is_outofindex:
+                break
+            c = s[depth]
+            if c == ' ':
+                depth += 1
+                continue
+            break
+        return depth
+
+    @staticmethod
+    def trim(s):
+        return s.strip(' ')
+
 class LinePasser:
     def __init__(self, lines):
         self._lines = lines

@@ -63,6 +63,12 @@ class Indent:
     def trim(s):
         return s.strip(' ')
 
+    @staticmethod
+    def cut_as_subline(s, base_depth):
+        if len(s)<base_depth:
+            return s
+        return s[base_depth+1:]
+
 class LinePasser:
     def __init__(self, lines):
         self._lines = lines
@@ -124,6 +130,14 @@ class NodeFactory:
         return self.proceeded_as_line(line_without_indent)
 
     def proceeded_as_codeblock(self, indent, line_without_indent, lp):
+        _, caption = line_without_indent.split(':', maxsplit=1)
+
+        codelines = []
+        while True:
+            line = lp.next
+            line = Indent.cut_as_subline(line, base_depth=indent)
+            break
+
         return None
 
     def proceeded_as_line(self, line):

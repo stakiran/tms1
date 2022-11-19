@@ -92,5 +92,41 @@ class TestIndent(unittest.TestCase):
         a = dobu.Indent.get_depth(s)
         self.assertEqual(e, a)
 
+    def test_cut_as_subline(self):
+        #code:aaa
+        # i0         indent0
+        #  i1        indent1
+        #   i2       indent2
+        #a           no-indent
+        #            blank
+        #            indent0 and spaceonly
+        #            indent1 and spaceonly
+
+        base_depth = 0
+
+        # 混乱してる！ちょっとまって……🐰🐰
+
+        e = 'i0'
+        a = dobu.Indent.cut_as_subline(' i0', base_depth=base_depth)
+        self.assertEqual(e, a)
+        e = ' i1'
+        a = dobu.Indent.cut_as_subline('  i1', base_depth=base_depth)
+        self.assertEqual(e, a)
+        e = '  i2'
+        a = dobu.Indent.cut_as_subline('   i2', base_depth=base_depth)
+        self.assertEqual(e, a)
+        e = 'a'
+        a = dobu.Indent.cut_as_subline('a', base_depth=base_depth)
+        self.assertEqual(e, a)
+        e = ''
+        a = dobu.Indent.cut_as_subline('', base_depth=base_depth)
+        self.assertEqual(e, a)
+        e = ' '
+        a = dobu.Indent.cut_as_subline(' ', base_depth=base_depth)
+        self.assertEqual(e, a)
+        e = ' '
+        a = dobu.Indent.cut_as_subline('  ', base_depth=base_depth)
+        self.assertEqual(e, a)
+
 if __name__ == '__main__':
     unittest.main()

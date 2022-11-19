@@ -30,6 +30,20 @@ def list2file(filepath, ls):
     with open(filepath, encoding='utf8', mode='w') as f:
         f.writelines(['{:}\n'.format(line) for line in ls] )
 
+class Judgement:
+    @staticmethod
+    def is_codeblock_start(line_without_indent):
+        line = line_without_indent
+
+        ok_prefix = line.startswith('code:')
+        is_there_caption = len(line) > len('code:')
+
+        if not ok_prefix:
+            return False
+        if not is_there_caption:
+            return False
+        return True
+
 class Indent:
     @staticmethod
     def get_depth(s):
@@ -96,14 +110,23 @@ class NodeFactory:
         indent = Indent.get_depth(line)
         line_without_indent = Indent.trim(line)
 
-        '''
-        indent判定
+        node = Node()
+        node.set_indent_depth(indent)
 
-        block判定
+        nodecontent = self.proceed_as_something(indent, line_without_indent, lp)
+        node.set_content(nodecontent)
 
-        if blockじゃない then lineとして処理
-        else blockとして処理
-        '''
+        return node
+
+    def proceed_as_something(self, indent, line_without_indent, lp):
+        if Judgement.is_codeblock_start(line_without_indent):
+            return self.proceeded_as_codeblock()
+        return self.proceeded_as_line()
+
+    def proceeded_as_codeblock(self, indent, line_without_indent, lp):
+        return None
+
+    def proceeded_as_line(self, line):
         return None
 
 class Page:
@@ -115,8 +138,39 @@ class Page:
 
 class Node:
     def __init__(self):
-        INITIAL_DUMMY = 0
-        self._indent = INITIAL_DUMMY
+        INDENT_DEPTH_UNDEFINED = -1
+        self._indent_depth = INDENT_DEPTH_UNDEFINED
+        self._nodecontent = None
+
+    def set_indent_depth(self, indent_depth):
+        self._indent_depth = indent_depth
+
+    def set_content(self, nodecontent):
+        self._nodecontent = nodecontent
+
+class NodeContent:
+    def __init__(self):
+        #TYPE_BLOCK = 0
+        TYPE_LINE = 1
+        TYPE_CODEBLOCK = 2
+        TYPE_UNDEFINED = -1
+        self._type = TYPE_UNDEFINED
+
+        self._content_by_obj = None
+
+    def is_line(self):
+        return False
+
+    def is_codeblock(self):
+        return False
+
+class CodeBlock:
+    def __init__(self):
+        pass
+
+class Line:
+    def __init__(self):
+        pass
 
 if __name__ == "__main__":
     args = parse_arguments()

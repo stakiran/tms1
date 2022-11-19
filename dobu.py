@@ -92,6 +92,10 @@ class NodeFactory:
     def get_next_node(self):
         lp = self._lp
         line = lp.next
+
+        indent = Indent.get_depth(line)
+        line_without_indent = Indent.trim(line)
+
         '''
         indent判定
 

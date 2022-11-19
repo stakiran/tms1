@@ -1,15 +1,5 @@
 # encoding: utf-8
 
-def file2list(filepath):
-    ret = []
-    with open(filepath, encoding='utf8', mode='r') as f:
-        ret = [line.rstrip('\n') for line in f.readlines()]
-    return ret
-
-def list2file(filepath, ls):
-    with open(filepath, encoding='utf8', mode='w') as f:
-        f.writelines(['{:}\n'.format(line) for line in ls] )
-
 def parse_arguments():
     import argparse
 
@@ -29,6 +19,16 @@ def parse_arguments():
 
     args = parser.parse_args()
     return args
+
+def file2list(filepath):
+    ret = []
+    with open(filepath, encoding='utf8', mode='r') as f:
+        ret = [line.rstrip('\n') for line in f.readlines()]
+    return ret
+
+def list2file(filepath, ls):
+    with open(filepath, encoding='utf8', mode='w') as f:
+        f.writelines(['{:}\n'.format(line) for line in ls] )
 
 class LinePasser:
     def __init__(self, lines):

@@ -49,32 +49,39 @@ class LinePasser:
         self._idx += 1
         return line
 
-class FileParser:
+class PageParser:
+    # nodefactoryをもらうようにした方がいいか？たぶんここでlpは使わねえし
     def __init__(self, linepasser):
         self._lp = linepasser
 
     def _parse(self):
-        '''
-        create page
-        linesをlineごとにparseしてく
-         create block_or_line
-          ここで一気にn行かっさらうことがある。for line in linesとかだときつい。カウンタは原始的に管理すべきか
-         create node
-         node.add(block_or_line)
-         page.add_node(node)
-        '''
-        lp = self._lp
         page = Page()
+        nodefactory = NodeFactory(self._lp)
         while True:
-            if lp.already_empty():
+            if nodefactory.already_empty():
                 break
-            line = lp.next
+            node = nodefactory.get_next_node()
+            page.add_node(node)
 
-            '''
-            1 block or lineをつくる
-             このとき、lpも渡して、必要ならn行分を取得してつくってしまう（block）
-            2 nodeつくって、1をadd
-            '''
+class NodeFactory:
+    def __init__(self, linepasser):
+        self._lp = linepasser
+
+    def already_empty(self):
+        return self._lp.already_empty()
+
+    def get_next_node(self):
+        lp = self._lp
+        line = lp.next
+        '''
+        indent判定
+
+        block判定
+
+        if blockじゃない then lineとして処理
+        else blockとして処理
+        '''
+        return None
 
 class Page:
     def __init__(self):
@@ -84,7 +91,7 @@ class Page:
         self._nodes.append(node)
 
 class Node:
-    def __init__(self, linepasser):
+    def __init__(self):
         INITIAL_DUMMY = 0
         self._indent = INITIAL_DUMMY
 

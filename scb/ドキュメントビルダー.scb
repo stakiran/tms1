@@ -82,6 +82,20 @@ dobuフォーマット
  2 mebject
   scbから変換する中間オブジェクト
 
+書いてる1
+ blockやlineをつくるところをどう書くかに悩んでる🐰🐰
+ 1: parserが、Nodeに、必要に応じてlineを与えることで、Node側で確定させる
+ 2: Nodeにlinepasserを渡して、Node側で確定させる
+ 3: linepasserを使う確定者を用意して、確定後、Nodeをつくる
+  NodeFactory
+   already_empty()
+   determin()
+    Node一つ分を確定させる
+    内部的に lp.next を n 回行う
+    1つのline or blockをつくり、さらにnodeもつくる
+    このnodeをreturnする
+  
+
 ✅HTMLのカスタマイズ
  headerとfooter、あるいはテンプレートつくって`{contents}`と書いたところに埋め込む、みたいなやつ
  cssでいじれるようにするためクラス名はちゃんとつけるべき

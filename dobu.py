@@ -163,7 +163,7 @@ class NodeFactory:
         lineobj = Line(line)
         nodecontent = NodeContent()
         nodecontent.set_line(lineobj)
-        return None
+        return nodecontent
 
 class Page:
     def __init__(self):
@@ -188,6 +188,10 @@ class Node:
     def set_content(self, nodecontent):
         self._nodecontent = nodecontent
 
+    @property
+    def content(self):
+        return self._nodecontent
+
 class NodeContent:
     '''
     コンテンツのセットは利用者の責任で行わせる
@@ -200,6 +204,9 @@ class NodeContent:
         self._type = self.TYPE_UNDEFINED
 
         self._content_by_obj = None
+
+    def __str__(self):
+        return f'type:{self._type}'
 
     def set_codeblock(self, codeblock):
         self._content_by_obj = codeblock

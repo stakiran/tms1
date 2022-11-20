@@ -130,6 +130,9 @@ code:rootcodeblock
         page = pageparser.parse()
         nodes = page.nodes
 
+        for node in nodes:
+            print(node.content)
+
         e = 11
         a = len(nodes)
         self.assertEquals(e, a)

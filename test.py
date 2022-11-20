@@ -134,7 +134,7 @@ code:rootcodeblock
 
         e = 11
         a = len(nodes)
-        self.assertEquals(e, a)
+        self.assertEqual(e, a)
 
 if __name__ == '__main__':
     unittest.main()

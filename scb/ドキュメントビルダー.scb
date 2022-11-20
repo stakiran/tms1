@@ -87,10 +87,31 @@ block判定
  code
   `code:xxx`
 
-XXXX is not defined Pylance(reportUndefinedVariable)
+codeblockやlineクラスの処理内容に一貫性がない……
+ 今
+  codeblockは、外からlinesを与えるだけ
+  lineは、中でパースしようとしている
+ 外でやって与えるのか、中でパースするのか、統一したいよね🐰
+ misc
+  1 少なくともcodeblockの中でパースするには、lpを渡してやる必要がある
+  2 中でパースした方が綺麗
+ 1のせいでcodeblockは外からlinesを与える形にしているなう🐰
+  が、これも間に「lpを解釈してコードブロック分のlinesをgetして、それをcodeblockにわたす」役割の奴を入れればいいよね？🐰 to_5j
+ 改めて、こいつらのクラスには何をさせたいの？
+  文字列データを与えてパースしてほしい
+   文字列の範囲は呼び出し元で保証する
+  使いやすいよう情報を整えて、使いやすいi/f経由で使えるようにしてほしい
+  うん、だよな🐰
+ とすると、 to_5j は正しい🐰
+  呼び出し元で保証すればいいんだよ
+ ok
+ 
+
+✅XXXX is not defined Pylance(reportUndefinedVariable)
  XXXXが見えてない
   このエラー出てるよりも前でXXXXを定義する必要がある
  PylanceはVSCodeとかで使われてる言語サーバーのこと
+ というか、reportUndefinedVariableという言い回しもpylanceのものっぽいね🐰
 
 ❌codeblock内部のインデントってどう取ったらいい？
  scb記法的にはブッレブレだよなぁ……🐰

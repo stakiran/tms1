@@ -87,7 +87,12 @@ block判定
  code
   `code:xxx`
 
-codeblock内部のインデントってどう取ったらいい？
+XXXX is not defined Pylance(reportUndefinedVariable)
+ XXXXが見えてない
+  このエラー出てるよりも前でXXXXを定義する必要がある
+ PylanceはVSCodeとかで使われてる言語サーバーのこと
+
+❌codeblock内部のインデントってどう取ったらいい？
  scb記法的にはブッレブレだよなぁ……🐰
  code:1 普通にscrapbox風
   aaa
@@ -109,7 +114,9 @@ aaa
  ムズい……
   というか記法レベルで曖昧だから、たぶんきれいな確定は無理だ……🐰
  諦めて「そのまま保持」でいいか？つまり常に2として解釈する
- 
+  うん、いったんこれにする 2022/11/20
+  まずは形にしたいし🐰
+   [cut as subline1]
 
 ✅blockやlineをつくるところをどう書くかに悩んでる
  1: parserが、Nodeに、必要に応じてlineを与えることで、Node側で確定させる

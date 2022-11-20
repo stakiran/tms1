@@ -1,5 +1,8 @@
 # encoding: utf-8
 
+from xml.sax.handler import property_declaration_handler
+
+
 def parse_arguments():
     import argparse
 
@@ -44,6 +47,19 @@ class Judgement:
             return False
         return True
 
+    @staticmethod
+    def is_codeblock_end(line_without_indent):
+        line = line_without_indent
+
+        ok_terminate = line.startswith(':c')
+        ok_terminate_only = len(line) == len(':c')
+
+        if not ok_terminate:
+            return False
+        if not ok_terminate_only:
+            return False
+        return True
+
 class Indent:
     @staticmethod
     def get_depth(s):
@@ -62,12 +78,6 @@ class Indent:
     @staticmethod
     def trim(s):
         return s.strip(' ')
-
-    @staticmethod
-    def cut_as_subline(s, base_depth):
-        if len(s)<base_depth:
-            return s
-        return s[base_depth+1:]
 
 class LinePasser:
     def __init__(self, lines):
@@ -135,12 +145,23 @@ class NodeFactory:
         codelines = []
         while True:
             line = lp.next
-            line = Indent.cut_as_subline(line, base_depth=indent)
+            line_without_indent = Indent.trim(line)
+            if Judgement.is_codeblock_end(line_without_indent):
+                break
+            # いったんコードブロック内のインデントは何も加工しない。場合分けムズい……
+            # see [codeblock内部のインデントってどう取ったらいい？]
+            codelines.append(line)
             break
 
-        return None
+        codeblock = CodeBlock(caption, codelines)
+        nodecontent = NodeContent()
+        nodecontent.set_codeblock(codeblock)
+        return nodecontent
 
     def proceeded_as_line(self, line):
+        lineobj = Line(line)
+        nodecontent = NodeContent()
+        nodecontent.set_line(lineobj)
         return None
 
 class Page:
@@ -163,14 +184,25 @@ class Node:
         self._nodecontent = nodecontent
 
 class NodeContent:
+    '''
+    コンテンツのセットは利用者の責任で行わせる
+    '''
+    TYPE_LINE = 1
+    TYPE_CODEBLOCK = 2
+    TYPE_UNDEFINED = -1
+
     def __init__(self):
-        #TYPE_BLOCK = 0
-        TYPE_LINE = 1
-        TYPE_CODEBLOCK = 2
-        TYPE_UNDEFINED = -1
-        self._type = TYPE_UNDEFINED
+        self._type = self.TYPE_UNDEFINED
 
         self._content_by_obj = None
+
+    def set_codeblock(self, codeblock):
+        self._content_by_obj = codeblock
+        self._type = self.TYPE_CODEBLOCK
+
+    def set_line(self, instance_of_line):
+        self._content_by_obj = instance_of_line
+        self._type = self.TYPE_LINE
 
     def is_line(self):
         return False
@@ -179,12 +211,21 @@ class NodeContent:
         return False
 
 class CodeBlock:
-    def __init__(self):
-        pass
+    def __init__(self, caption, lines):
+        self._caption = caption
+        self._lines = lines
+
+    @property
+    def caption(self):
+        return self._caption
+    
+    @property
+    def lines(self):
+        return self._lines
 
 class Line:
-    def __init__(self):
-        pass
+    def __init__(self, line):
+        self._raw = line
 
 if __name__ == "__main__":
     args = parse_arguments()

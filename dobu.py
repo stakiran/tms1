@@ -152,7 +152,6 @@ class NodeFactory:
             if Judgement.is_codeblock_end(line_without_indent):
                 break
             codelines.append(line)
-            break
 
         codeblock = CodeBlock(caption, codelines)
         nodecontent = NodeContent()

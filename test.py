@@ -92,5 +92,47 @@ class TestIndent(unittest.TestCase):
         a = dobu.Indent.get_depth(s)
         self.assertEqual(e, a)
 
+class TestPage(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def test_onepass(self):
+        scb = """scb page sample
+line
+ line1
+ line1
+  line2
+block
+ code:codeblock1
+  aaa
+  あいうえお
+ :c
+ line1
+ code:codeblock2.scb
+  not line1
+   not line2
+    not line3
+ :c
+  line2
+code:rootcodeblock
+ not line1
+:c
+"""
+
+        lines = scb.split('\n')
+        linepasser = dobu.LinePasser(lines)
+
+        pageparser = dobu.PageParser(linepasser)
+
+        page = pageparser.parse()
+        nodes = page.nodes
+
+        e = 11
+        a = len(nodes)
+        self.assertEquals(e, a)
+
 if __name__ == '__main__':
     unittest.main()

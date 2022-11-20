@@ -99,11 +99,13 @@ class LinePasser:
         return line
 
 class PageParser:
-    # nodefactoryをもらうようにした方がいいか？たぶんここでlpは使わねえし
     def __init__(self, linepasser):
+        self.set_linepasser(linepasser)
+
+    def set_linepasser(self, linepasser):
         self._lp = linepasser
 
-    def _parse(self):
+    def parse(self):
         page = Page()
         nodefactory = NodeFactory(self._lp)
         while True:
@@ -111,6 +113,7 @@ class PageParser:
                 break
             node = nodefactory.get_next_node()
             page.add_node(node)
+        return page
 
 class NodeFactory:
     def __init__(self, linepasser):
@@ -168,6 +171,10 @@ class Page:
 
     def add_node(self, node):
         self._nodes.append(node)
+
+    @property
+    def nodes(self):
+        return self._nodes
 
 class Node:
     def __init__(self):

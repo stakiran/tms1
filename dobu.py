@@ -216,10 +216,14 @@ class NodeContent:
         self._type = self.TYPE_LINE
 
     def is_line(self):
-        return False
+        return self._type == self.TYPE_LINE
 
     def is_codeblock(self):
-        return False
+        return self._type == self.TYPE_CODEBLOCK
+
+    @property
+    def content(self):
+        return self._content_by_obj
 
 class CodeBlock:
     def __init__(self, caption, lines):

@@ -129,12 +129,16 @@ code:rootcodeblock
         page = pageparser.parse()
         nodes = page.nodes
 
-        for node in nodes:
-            print(node.content)
-
         e = 11
         a = len(nodes)
         self.assertEqual(e, a)
+
+        self.assertTrue(nodes[0].content.is_line())
+        self.assertTrue(nodes[1].content.is_line())
+        self.assertTrue(nodes[2].content.is_line())
+        self.assertTrue(nodes[3].content.is_line())
+        self.assertTrue(nodes[4].content.is_line())
+        self.assertTrue(nodes[5].content.is_line())
 
 if __name__ == '__main__':
     unittest.main()

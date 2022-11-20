@@ -129,17 +129,17 @@ class NodeFactory:
         node = Node()
         node.set_indent_depth(indent)
 
-        nodecontent = self.proceed_as_something(indent, line_without_indent, lp)
+        nodecontent = self.proceed_as_something(line_without_indent, lp)
         node.set_content(nodecontent)
 
         return node
 
-    def proceed_as_something(self, indent, line_without_indent, lp):
+    def proceed_as_something(self, line_without_indent, lp):
         if Judgement.is_codeblock_start(line_without_indent):
-            return self.proceeded_as_codeblock(indent, line_without_indent, lp)
+            return self.proceeded_as_codeblock(line_without_indent, lp)
         return self.proceeded_as_line(line_without_indent)
 
-    def proceeded_as_codeblock(self, indent, line_without_indent, lp):
+    def proceeded_as_codeblock(self, line_without_indent, lp):
         _, caption = line_without_indent.split(':', maxsplit=1)
 
         codelines = []
@@ -148,8 +148,6 @@ class NodeFactory:
             line_without_indent = Indent.trim(line)
             if Judgement.is_codeblock_end(line_without_indent):
                 break
-            # いったんコードブロック内のインデントは何も加工しない。場合分けムズい……
-            # see [codeblock内部のインデントってどう取ったらいい？]
             codelines.append(line)
             break
 
@@ -226,6 +224,10 @@ class CodeBlock:
 class Line:
     def __init__(self, line):
         self._raw = line
+
+    @property
+    def raw(self):
+        return self._raw
 
 if __name__ == "__main__":
     args = parse_arguments()

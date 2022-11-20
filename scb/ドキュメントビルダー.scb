@@ -87,7 +87,7 @@ block判定
  code
   `code:xxx`
 
-codeblockやlineクラスの処理内容に一貫性がない……
+✅codeblockやlineクラスの処理内容に一貫性がない……
  今
   codeblockは、外からlinesを与えるだけ
   lineは、中でパースしようとしている
@@ -105,7 +105,8 @@ codeblockやlineクラスの処理内容に一貫性がない……
  とすると、 to_5j は正しい🐰
   呼び出し元で保証すればいいんだよ
  ok
- 
+  いや、現時点で1も別に普通に呼び出し元でパースしてたわ🐰
+
 
 ✅XXXX is not defined Pylance(reportUndefinedVariable)
  XXXXが見えてない

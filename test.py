@@ -119,8 +119,7 @@ block
   line2
 code:rootcodeblock
  not line1
-:c
-"""
+:c"""
 
         lines = scb.split('\n')
         linepasser = dobu.LinePasser(lines)

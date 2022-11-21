@@ -243,6 +243,11 @@ class Line:
         self._raw = line
         self._inline_elements = []
 
+    def _parse(self):
+        line = self._raw
+
+        # で、パースしていくわけだけど、どうやればいい？
+
     @property
     def raw(self):
         return self._raw

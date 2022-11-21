@@ -82,6 +82,22 @@ dobuフォーマット
  2 mebject
   scbから変換する中間オブジェクト
 
+lineのパースどうやる？
+ 1 正規表現
+ 2 自製で頑張る
+ 3 inlineelementの特定までは自製、その後は正規表現
+ ---
+ 1はどうやるんだっけ？
+  前から順番にヒットさせて、ヒットさせたところは除外して次からはじめて、みたいなこと、正規表現でできるっけ？
+   https://github.com/stakiran/scbjson2ghpages のときに色々正規表現頑張った気がするけど覚えてねえ🐰
+   [PythonでinlineのScrapbox記法をMarkdown記法に変換する正規表現 - stakiran研究所 https://scrapbox.io/sta/Python%E3%81%A7inline%E3%81%AEScrapbox%E8%A8%98%E6%B3%95%E3%82%92Markdown%E8%A8%98%E6%B3%95%E3%81%AB%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE]
+   たしか正規表現と「前から順番に処理する逐次」は相性悪かった覚えがある……🐰
+ 入れ子とかないし、2で行っちゃった方が案外早いかもしんね🐰
+ と思ってたら3はどう？
+  literal は `
+  link と image は [
+  うん、これやな……🐰
+
 ✅codeblockやlineクラスの処理内容に一貫性がない……
  今
   codeblockは、外からlinesを与えるだけ

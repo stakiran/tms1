@@ -139,6 +139,11 @@ code:rootcodeblock
         self.assertTrue(nodes[3].content.is_line())
         self.assertTrue(nodes[4].content.is_line())
         self.assertTrue(nodes[5].content.is_line())
+        self.assertTrue(nodes[6].content.is_codeblock())
+        self.assertTrue(nodes[7].content.is_line())
+        self.assertTrue(nodes[8].content.is_codeblock())
+        self.assertTrue(nodes[9].content.is_line())
+        self.assertTrue(nodes[10].content.is_codeblock())
 
 if __name__ == '__main__':
     unittest.main()

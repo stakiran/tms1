@@ -82,11 +82,6 @@ dobuフォーマット
  2 mebject
   scbから変換する中間オブジェクト
 
-block判定
- tableはまだないので無視
- code
-  `code:xxx`
-
 ✅codeblockやlineクラスの処理内容に一貫性がない……
  今
   codeblockは、外からlinesを与えるだけ

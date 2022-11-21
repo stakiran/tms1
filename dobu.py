@@ -241,10 +241,59 @@ class CodeBlock:
 class Line:
     def __init__(self, line):
         self._raw = line
+        self._inline_elements = []
 
     @property
     def raw(self):
         return self._raw
+
+    @property
+    def inline_elements(self):
+        return self._inline_elements
+
+class QuoteLine:
+    def __init__(self):
+        pass
+
+class BlankLine:
+    def __init__(self):
+        pass
+
+class InlineElement:
+    def __init__(self):
+        pass
+
+    @property
+    def text(self):
+        return self._text
+
+    @property
+    def uri(self):
+        return self._uri
+
+    @text.setter
+    def text(self, text):
+        self._text = text
+
+    @uri.setter
+    def uri(self, uri):
+        self._uri = uri
+
+class Plain(InlineElement):
+    def __init__(self):
+        super().__init__()
+
+class Link(InlineElement):
+    def __init__(self):
+        super().__init__()
+
+class Image(InlineElement):
+    def __init__(self):
+        super().__init__()
+
+class Literal(InlineElement):
+    def __init__(self):
+        super().__init__()
 
 if __name__ == "__main__":
     args = parse_arguments()

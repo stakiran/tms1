@@ -268,22 +268,14 @@ class Line:
         line = self._raw
         linelen = len(line)
 
-        p = 0
-        while True:
-            is_over = p >= linelen
-            if is_over:
-                break
+        # 1 リテラルを解釈する
+        # 開始位置が見つかったら、終了位置も探しに行く
 
-            c = line[p]
+        # 2 リンクを解釈する
+        # リンク用スタックを使って、最も内側のリンク表記だけ解釈されるようにする
 
-            if c == '[':
-                pass
-            if c == '`':
-                pass
-            if c == ']':
-                pass
-
-        # で、パースしていくわけだけど、どうやればいい？
+        # 3 組み立てる
+        # 
 
     @property
     def raw(self):

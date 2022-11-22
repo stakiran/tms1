@@ -1,0 +1,70 @@
+ 内側から確定させる形なのでスタックが要る？
+  `
+  [
+  ]
+  backtickが手強いな startもendも同じ記号
+  事実上、事前にパースしきって偶数個じゃなかったらエラーにする、みたいな先読みしないといけないか🐰
+ これじゃダメよな？
+ code:1.py
+    def _parse(self):
+        line = self._raw
+        linelen = len(line)
+
+        stack = Stack([])
+
+        p = 0
+        while True:
+            is_over = p >= linelen
+            if is_over:
+                break
+
+            c = line[p]
+            p += 1
+
+            if c == '[':
+                stack.push('[')
+                continue
+
+            if c == '`':
+                elm, is_empty = stack.peek()
+                if is_empty:
+                    stack.push('`')
+                    continue
+                if elm != '`':
+                    stack.push('`')
+                    continue
+ :c
+  `aaa[link]aaa`みたいなパターンでうまくいかない
+  いや、いくのでは？popしてるので要素削れてるでしょ
+  code:aaa
+   stack=1 `aaa
+   stack=2 `aaa[
+   stack=2 `aaa[link
+   stack=1 `aaa[link]
+   stack=1 `aaa[link]aaa
+   stack=1 `aaa[link]aaa` で、ここで最初に入れた ` が見えるよな
+  :c
+  code:これは？
+   `aaa[link[link`
+  :c
+  ダメそう……
+  現実的にこんなパターン書くことはなさそうだが、それでもこういうちょっと思いついたパターンがもうダメってのは解せない
+ 全部パターンで洗う必要があるのか？
+  `[`1 と `]`2 と `｀`a がある
+   書きづらいので1,2,aと名付けることにする
+  11 ❌ リンクの中にリンクは書けない
+  12 🔴 リンク
+  1a ❌ リンクの中にリテラルは書けないし、ページ名としてbacktickを使うのも無しで良い
+  21 🔴 リンク終わった後、次のリンクを書くケース
+  22 ❌ same as 11
+  2a 🔴 リンク終わった後、リテラルを書くケース
+  a1 🔴 リテラル終わった後にリンクを書く or リテラルの中に [ を書く
+  a2 🔴 リテラルの中に ] を書く
+  aa 🔴 リテラル
+  とすると、以下を防げばいいわけか
+   [[
+   [`
+   ]]
+ 
+ いやー、スタック案ダメそう
+  たとえばリテラルはリテラル終点以外全部を含めるんだから、開始見つかった時点で終点までごっそり飛ばすしかないよね

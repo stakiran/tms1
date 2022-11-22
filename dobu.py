@@ -43,6 +43,17 @@ class Stack:
     def push(self, element):
         self._contents.append(element)
 
+    def peek(self):
+        bottompos = len(self._contents) - 1
+
+        is_empty = bottompos==-1
+
+        element = None
+        if not is_empty:
+            element = self._contents[bottompos]
+
+        return element, is_empty
+
 class Judgement:
     @staticmethod
     def is_codeblock_start(line_without_indent):

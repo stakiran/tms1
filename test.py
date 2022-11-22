@@ -43,6 +43,25 @@ class TestStack(unittest.TestCase):
         a = stack.pop()
         self.assertEqual(e, a)
 
+    def test_peek(self):
+        stack = dobu.Stack(['a'])
+        e_elm = 'a'
+        a_elm, a_res = stack.peek()
+        self.assertEqual(e_elm, a_elm)
+        self.assertFalse(a_res)
+
+        stack.pop()
+        _, a_res = stack.peek()
+        self.assertTrue(a_res)
+
+        stack.push('123')
+        stack.push('789')
+        stack.push('456')
+        e_elm = '456'
+        a_elm, a_res = stack.peek()
+        self.assertEqual(e_elm, a_elm)
+        self.assertFalse(a_res)
+
 class TestLinePasser(unittest.TestCase):
     def setUp(self):
         pass

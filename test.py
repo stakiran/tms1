@@ -3,6 +3,46 @@ import unittest
 
 import dobu
 
+class TestStack(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def test_0(self):
+        stack = dobu.Stack([])
+
+        with self.assertRaises(IndexError):
+            stack.pop()
+
+        stack.push('a')
+
+        e = 'a'
+        a = stack.pop()
+        self.assertEqual(e, a)
+
+        with self.assertRaises(IndexError):
+            stack.pop()
+
+    def test_1(self):
+        stack = dobu.Stack(['1'])
+
+        e = '1'
+        a = stack.pop()
+        self.assertEqual(e, a)
+
+    def test_2(self):
+        stack = dobu.Stack(['1', 'a'])
+
+        e = 'a'
+        a = stack.pop()
+        self.assertEqual(e, a)
+
+        e = '1'
+        a = stack.pop()
+        self.assertEqual(e, a)
+
 class TestLinePasser(unittest.TestCase):
     def setUp(self):
         pass

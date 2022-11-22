@@ -33,6 +33,16 @@ def list2file(filepath, ls):
     with open(filepath, encoding='utf8', mode='w') as f:
         f.writelines(['{:}\n'.format(line) for line in ls] )
 
+class Stack:
+    def __init__(self, ls):
+        self._contents = ls
+
+    def pop(self):
+        return self._contents.pop()
+
+    def push(self, element):
+        self._contents.append(element)
+
 class Judgement:
     @staticmethod
     def is_codeblock_start(line_without_indent):
@@ -245,6 +255,22 @@ class Line:
 
     def _parse(self):
         line = self._raw
+        linelen = len(line)
+
+        p = 0
+        while True:
+            is_over = p >= linelen
+            if is_over:
+                break
+
+            c = line[p]
+
+            if c == '[':
+                pass
+            if c == '`':
+                pass
+            if c == ']':
+                pass
 
         # で、パースしていくわけだけど、どうやればいい？
 

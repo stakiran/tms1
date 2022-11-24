@@ -130,7 +130,11 @@ lineのパースどうやる？
   2 次にリンクをパースする。リンク用スタックを使って、!の内側に侵食しない形で確定していく。
  
  あとは組み立て
-  
+  1の段階で `xxx●xx●●xx●xx`みたいに（●がリテラル部分）に置換できる
+   もっと言えばこれは inlineelement, literal, inlineelement, literal, literal, inlineelement, literal, inlineelement
+  2は、inlineelement各々について行えば良い
+   リンクはリテラルをまたげないので、これで良いはず……🐰
+   合ってる、よね？🐰🐰
 
 ✅codeblockやlineクラスの処理内容に一貫性がない……
  今

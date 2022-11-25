@@ -137,6 +137,25 @@ lineのパースどうやる？
    合ってる、よね？🐰🐰
    Lineとして再帰的にパースすればよい！🐰
     とすると、Line.extend() も要る
+ ---
+ どう実装すればいいかが浮かばん……
+ 
+ 1 line全体から成るplain element
+ これをnのelementに分割したい
+ 2 まずはliteralをパース
+ これで plain, literal, plain, literal, literal, plain, literal, plain になる
+ plain部分はlinkなど他の文法が残ってる可能性があるから再パースが要る
+ 3 linkとして再パース
+ これでたとえば plain, literal, (link, plain), literal, literal, (plain, link, plain), literal, (link, link, plain) になる
+ 今のところないけど、link以外にも文法があれば、さらにそれも再パースが要る🐰
+ ……
+ で、すべてのパースを終えたら、
+ 4 plainはplainのまま確定させる
+ これで plain, literal, link, plain, literal, literal, plain, link, plain, literal, link, link, plain
+ 
+ plainだとややこしいから、未確定 undefined にする
+
+ 
 
 ✅codeblockやlineクラスの処理内容に一貫性がない……
  今

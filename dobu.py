@@ -266,9 +266,9 @@ class Line:
 
     def _parse(self):
         line = self._raw
-        linelen = len(line)
 
         # 1 リテラルを解釈する
+        self._parse_as_literal(line)
         # 開始位置が見つかったら、終了位置も探しに行く
 
         # 2 リンクを解釈する
@@ -276,6 +276,9 @@ class Line:
 
         # 3 組み立てる
         # 
+
+    def _parse_as_literal(self, line):
+        pass
 
     @property
     def raw(self):
@@ -312,6 +315,10 @@ class InlineElement:
     @uri.setter
     def uri(self, uri):
         self._uri = uri
+
+class Undefined(InlineElement):
+    def __init__(self):
+        super().__init__()
 
 class Plain(InlineElement):
     def __init__(self):

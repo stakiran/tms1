@@ -155,6 +155,10 @@ lineのパースどうやる？
  
  plainだとややこしいから、未確定 undefined にする
  
+ 実装中... 2022/11/26 08:25:35
+
+literal parseのテストを書きたい
+ literalのparseが終わった時点の inlineelements が見れればいい
  
 
 ✅codeblockやlineクラスの処理内容に一貫性がない……

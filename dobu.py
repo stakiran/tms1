@@ -286,8 +286,8 @@ class Line:
                     break
 
                 # ......`......`...
-                # ^^^^^^
-                #  head    
+                # ^^^^^^        ^^^
+                #  head         tail
 
                 head = line[start_of_parse:startpos]
                 head_is_undefined_yet = Undefined(head)
@@ -298,6 +298,9 @@ class Line:
                 new_inline_elements.append(literalobj)
 
                 start_of_parse = endpos+1
+            tail = line[start_of_parse:] 
+            tail_is_undefined_yet = Undefined(tail)
+            new_inline_elements.append(tail_is_undefined_yet)
         # これで new_inline_elements は undefined, literal, literal, undfined, undefined, literal みたいになる
 
         self._inline_elements = new_inline_elements

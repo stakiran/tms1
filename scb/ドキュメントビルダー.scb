@@ -159,7 +159,21 @@ lineのパースどうやる？
 
 literal parseのテストを書きたい
  literalのparseが終わった時点の inlineelements が見れればいい
- 
+ パターン全部網羅すべき
+  undef
+  literal
+  undef literal
+  literal undef
+  ---
+  undef literal undef literal
+  literal undef literal undef
+  ---
+  literal literal
+  undef literal literal
+  literal literal undef
+  まあこれくらいでええか
+   複数回出現も捉えたい
+   `aaa``bbb`みたいな連続パターンも捉えたい
 
 ✅codeblockやlineクラスの処理内容に一貫性がない……
  今

@@ -264,21 +264,32 @@ class Line:
         self._raw = line
         self._inline_elements = []
 
+        initial = Undefined(self._raw)
+        self._inline_elements.append(initial)
+        self._parse()
+
     def _parse(self):
-        line = self._raw
+        new_inline_elements = []
+        for inlineelement in self._inline_elements:
+            # 1 リテラルの解釈
+            pass
+        # これで new_inline_elements は undefined, literal, literal, undfined, undefined, literal みたいになる
+    
+        self._inline_elements = new_inline_elements
+        new_inline_elements = []
+        for inlineelement in self._inline_elements:
+            # 2 リンクの解釈
+            pass
+        # これで new_inline_elements は undefined, literal, literal, (undefined, link, link), (link), literal みたいになる
 
-        # 1 リテラルを解釈する
-        self._parse_as_literal(line)
-        # 開始位置が見つかったら、終了位置も探しに行く
+        self._inline_elements = new_inline_elements
+        new_inline_elements = []
+        for inlineelement in self._inline_elements:
+            # プレーンの解釈
+            pass
+        # これで new_inline_elements は plain, literal, literal, plain, link, link, link, literal みたいになる
 
-        # 2 リンクを解釈する
-        # リンク用スタックを使って、最も内側のリンク表記だけ解釈されるようにする
-
-        # 3 組み立てる
-        # 
-
-    def _parse_as_literal(self, line):
-        pass
+        self._inline_elements = new_inline_elements
 
     @property
     def raw(self):
@@ -297,8 +308,14 @@ class BlankLine:
         pass
 
 class InlineElement:
-    def __init__(self):
-        pass
+    def __init__(self, raw):
+        self._raw = raw
+        self._text = None
+        self._uri = None
+
+    @property
+    def raw(self):
+        return self._raw
 
     @property
     def text(self):
@@ -317,24 +334,24 @@ class InlineElement:
         self._uri = uri
 
 class Undefined(InlineElement):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, raw):
+        super().__init__(raw)
 
 class Plain(InlineElement):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, raw):
+        super().__init__(raw)
 
 class Link(InlineElement):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, raw):
+        super().__init__(raw)
 
 class Image(InlineElement):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, raw):
+        super().__init__(raw)
 
 class Literal(InlineElement):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, raw):
+        super().__init__(raw)
 
 if __name__ == "__main__":
     args = parse_arguments()

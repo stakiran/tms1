@@ -154,7 +154,7 @@ lineのパースどうやる？
  これで plain, literal, link, plain, literal, literal, plain, link, plain, literal, link, link, plain
  
  plainだとややこしいから、未確定 undefined にする
-
+ 
  
 
 ✅codeblockやlineクラスの処理内容に一貫性がない……

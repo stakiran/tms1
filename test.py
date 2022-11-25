@@ -204,5 +204,20 @@ code:rootcodeblock
         self.assertTrue(nodes[9].content.is_line())
         self.assertTrue(nodes[10].content.is_codeblock())
 
+class TestLine(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def test_onepass(self):
+        line = ' やっぱり[趣味]は[プログラミング]に限りますな。`print(f"hello world! {array[i]=}");` とか `import os` みたいな[リテラル記法]はよく使いますよね'
+        lineobj = dobu.Line(line)
+
+        print('')
+        for inlineelement in lineobj.inline_elements:
+            print(f'|{inlineelement.raw}|')
+
 if __name__ == '__main__':
     unittest.main()

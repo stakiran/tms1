@@ -272,9 +272,37 @@ class Line:
         new_inline_elements = []
         for inlineelement in self._inline_elements:
             # 1 リテラルの解釈
-            pass
+            line = inlineelement.raw
+            start_of_parse = 0
+            while True:
+                startpos = line.find('`', start_of_parse)
+                not_found_startpos = startpos == -1
+                if not_found_startpos:
+                    break
+
+                endpos = line.find('`', startpos+1)
+                not_found_endpos = endpos == -1
+                if not_found_endpos:
+                    break
+
+                # ......`......`...
+                # ^^^^^^
+                #  head    
+
+                head = line[start_of_parse:startpos]
+                head_is_undefined_yet = Undefined(head)
+                new_inline_elements.append(head_is_undefined_yet)
+
+                literal = line[startpos+1:endpos]
+                literalobj = Literal(literal)
+                new_inline_elements.append(literalobj)
+
+                start_of_parse = endpos+1
         # これで new_inline_elements は undefined, literal, literal, undfined, undefined, literal みたいになる
-    
+
+        self._inline_elements = new_inline_elements
+        return
+
         self._inline_elements = new_inline_elements
         new_inline_elements = []
         for inlineelement in self._inline_elements:

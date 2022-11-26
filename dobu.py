@@ -301,6 +301,7 @@ class Line:
             tail = line[start_of_parse:] 
             tail_is_undefined_yet = Undefined(tail)
             new_inline_elements.append(tail_is_undefined_yet)
+        self._inline_elements_at_literal = new_inline_elements
         # これで new_inline_elements は undefined, literal, literal, undfined, undefined, literal みたいになる
 
         self._inline_elements = new_inline_elements
@@ -383,6 +384,7 @@ class Image(InlineElement):
 class Literal(InlineElement):
     def __init__(self, raw):
         super().__init__(raw)
+        self.text = raw
 
 if __name__ == "__main__":
     args = parse_arguments()

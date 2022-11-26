@@ -215,9 +215,12 @@ class TestLine(unittest.TestCase):
         line = ' やっぱり[趣味]は[プログラミング]に限りますな。`print(f"hello world! {array[i]=}");` とか `import os` みたいな[リテラル記法]はよく使いますよね'
         lineobj = dobu.Line(line)
 
-        print('')
-        for inlineelement in lineobj.inline_elements:
-            print(f'|{inlineelement.raw}|')
+        a = lineobj._inline_elements_at_literal
+        self.assertEqual(' やっぱり[趣味]は[プログラミング]に限りますな。', a[0].raw)
+        self.assertEqual('print(f"hello world! {array[i]=}");', a[1].text)
+        self.assertEqual(' とか ', a[2].raw)
+        self.assertEqual('import os', a[3].text)
+        self.assertEqual(' みたいな[リテラル記法]はよく使いますよね', a[4].raw)
 
 if __name__ == '__main__':
     unittest.main()

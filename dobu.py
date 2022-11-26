@@ -305,13 +305,16 @@ class Line:
         # これで new_inline_elements は undefined, literal, literal, undfined, undefined, literal みたいになる
 
         self._inline_elements = new_inline_elements
-        return
-
-        self._inline_elements = new_inline_elements
         new_inline_elements = []
         for inlineelement in self._inline_elements:
             # 2 リンクの解釈
-            pass
+            is_literal = isinstance(inlineelement, Literal)
+            if is_literal:
+                new_inline_elements.append(inlineelement)
+                continue
+
+            line = inlineelement.raw
+            # ここどうパースするかですよ...
         # これで new_inline_elements は undefined, literal, literal, (undefined, link, link), (link), literal みたいになる
 
         self._inline_elements = new_inline_elements
@@ -377,7 +380,8 @@ class Link(InlineElement):
     def __init__(self, raw):
         super().__init__(raw)
 
-class Image(InlineElement):
+class Uri(InlineElement):
+    # 今のところ画像は無いので、Image ではなく「URLのみ記されたもの」的な概念として定義しておく
     def __init__(self, raw):
         super().__init__(raw)
 

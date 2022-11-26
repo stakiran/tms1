@@ -178,6 +178,64 @@ literal parseのテストを書きたい
    複数回出現も捉えたい
    `aaa``bbb`みたいな連続パターンも捉えたい
 
+line中のブラケティングを取得する方法
+ それも plain 部分も順序保存した上で頑張る必要がある……
+ 正規表現だと厳しい気がする……
+ code:aaa
+  aaa[bbb[ccc]bbb]
+  ^^^^^^^ ^^^ ^^^^
+  1       2   3
+  plain1, link2, plain3
+
+  aaa[bbb[ccc]bbb[ccc[ddd]bbb]]
+  ^^^^^^^ ^^^ ^^^^^^^ ^^^ ^^^^^
+  1       2   3       4   5
+  plain1, link2, plain3, link4, plain5
+
+  aaa[bbb]aaaaa[bbb]aaaa[bbb][bbb]aaaaa
+  ^^^ ^^^ ^^^^^ ^^^ ^^^^ ^^^  ^^^ ^^^^^
+  1   2   3     4   5    6    7   8
+  plain1, link2, plain3, link4, plain5, link6, link7, plain8
+ :c
+ ❌アルゴリズムとしては、
+  右端から見に行って、
+   1 `[`があれば
+   2 対向の`]`までをリンクにする
+    この間に `[` があった場合は、そこで探索を打ち止め
+ いや、左端からでよくね？
+  左端から見に行って、
+   1 `[`があれば
+   2 対向の`]`までをリンクにする
+    ただしその間に`[`があった場合は、その探索は打ち止め
+    かつ、見つけたそこから再開する
+同上、inline elements リストを維持しながら展開していく方法
+ literalと同じく head body tail方式でいける
+あとは、linkの細かい違いをどう表現するか🐰
+ `[ページ内リンク]`
+ `[uriつきリンク https://www.google.co.jp]`
+ `[https://www.google.co.jp uriつきリンク]`
+ `[https://gyazo.com/979e6478f2df64b08ad95863e751d405]` 画像 
+ `[https://gyazo.com/979e6478f2df64b08ad95863e751d405/raw]` 画像
+ 今は raw, text, uriしか持たせてない
+  足りるか🐰
+ 画像の判定はどうやればいいんだ？
+  通信して見に行かないとダメだよな？（ScrapboxはGyazoと開発元同じだから密に見に行けてるだろうけど）
+  そもそもstascbでは画像使ってない
+   が、https:// があると url とみなすのでリンク先を開く挙動になる
+ つまり
+  1 `[ページ内リンク]`
+  2 `[uriつきリンク https://www.google.co.jp]`
+  3 `[https://www.google.co.jp uriつきリンク]`
+  4 `[https://gyazo.com/979e6478f2df64b08ad95863e751d405]` URI
+  この4パターンを想定すればいい🐰🐰
+  a https:// の有無を調べる
+  b split(' ')で分割されるかを調べる
+  if a and b then 2か3
+  if a and not b then 4
+  else 1
+ この判定は Line クラスで行う
+  で、Link なり Image なりをつくればいい（今のところ Image は無いので Link 一択かな）
+
 ✅codeblockやlineクラスの処理内容に一貫性がない……
  今
   codeblockは、外からlinesを与えるだけ

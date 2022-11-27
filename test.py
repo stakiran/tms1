@@ -222,8 +222,18 @@ class TestLine(unittest.TestCase):
         self.assertEqual('import os', a[3].text)
         self.assertEqual(' みたいな[リテラル記法]はよく使いますよね', a[4].raw)
 
-        for e in lineobj._inline_elements_at_link:
-            print(f'|{e.raw}|')
+        a = lineobj._inline_elements_at_link
+        self.assertEqual(' やっぱり', a[0].raw)
+        self.assertEqual('趣味', a[1].uri)
+        self.assertEqual('は', a[2].raw)
+        self.assertEqual('プログラミング', a[3].uri)
+        self.assertEqual('に限りますな。', a[4].raw)
+        self.assertEqual('print(f"hello world! {array[i]=}");', a[5].text)
+        self.assertEqual(' とか ', a[6].raw)
+        self.assertEqual('import os', a[7].text)
+        self.assertEqual(' みたいな', a[8].raw)
+        self.assertEqual('リテラル記法', a[9].uri)
+        self.assertEqual('はよく使いますよね', a[10].raw)
 
 if __name__ == '__main__':
     unittest.main()

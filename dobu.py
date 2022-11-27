@@ -423,6 +423,11 @@ class Link(InlineElement):
     def __init__(self, raw):
         super().__init__(raw)
 
+        # 一通りパースが必要……
+        # とりあえずちゃんとlinkになってることを試すために uri に入れておく
+        self._text = raw
+        self._uri = raw
+
 class Uri(InlineElement):
     # 今のところ画像は無いので、Image ではなく「URLのみ記されたもの」的な概念として定義しておく
     def __init__(self, raw):

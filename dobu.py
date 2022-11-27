@@ -314,7 +314,50 @@ class Line:
                 continue
 
             line = inlineelement.raw
-            # ここどうパースするかですよ...
+            start_of_parse = 0
+            while True:
+                startpos = line.find('[', start_of_parse)
+                not_found_startpos = startpos == -1
+                if not_found_startpos:
+                    break
+
+                # ...[....[...
+                #    1    2
+                # 終端 ] の前に先に [ が見つかった場合、後者の位置から探索を再開
+
+                # ...[....]...[...
+                #    1    2
+                # 終端 ] が先に来た場合、リンクとみなせる
+
+                nextstartpos = line.find('[', start_of_parse+1)
+                endpos = line.find(']', startpos+1)
+
+                not_found_endpos = endpos == -1
+                if not_found_endpos:
+                    break
+
+                maybe_nested = -1 < nextstartpos and nextstartpos < endpos
+                if maybe_nested:
+                    start_of_parse = nextstartpos + 1
+                    continue
+
+                # ......[......]...
+                # ^^^^^^        ^^^
+                #  head         tail
+
+                head = line[start_of_parse:startpos]
+                head_is_undefined_yet = Undefined(head)
+                new_inline_elements.append(head_is_undefined_yet)
+
+                link = line[startpos+1:endpos]
+                link = Link(link)
+                new_inline_elements.append(link)
+
+                start_of_parse = endpos+1
+            tail = line[start_of_parse:] 
+            tail_is_undefined_yet = Undefined(tail)
+            new_inline_elements.append(tail_is_undefined_yet)
+        self._inline_elements_at_link = new_inline_elements
         # これで new_inline_elements は undefined, literal, literal, (undefined, link, link), (link), literal みたいになる
 
         self._inline_elements = new_inline_elements

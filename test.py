@@ -222,5 +222,8 @@ class TestLine(unittest.TestCase):
         self.assertEqual('import os', a[3].text)
         self.assertEqual(' みたいな[リテラル記法]はよく使いますよね', a[4].raw)
 
+        for e in lineobj._inline_elements_at_link:
+            print(f'|{e.raw}|')
+
 if __name__ == '__main__':
     unittest.main()

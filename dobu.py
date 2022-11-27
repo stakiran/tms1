@@ -329,7 +329,7 @@ class Line:
                 #    1    2
                 # 終端 ] が先に来た場合、リンクとみなせる
 
-                nextstartpos = line.find('[', start_of_parse+1)
+                nextstartpos = line.find('[', startpos+1)
                 endpos = line.find(']', startpos+1)
 
                 not_found_endpos = endpos == -1

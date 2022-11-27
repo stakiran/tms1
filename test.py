@@ -222,6 +222,10 @@ class TestLine(unittest.TestCase):
         self.assertEqual('import os', a[3].text)
         self.assertEqual(' みたいな[リテラル記法]はよく使いますよね', a[4].raw)
 
+        # 今は literal=textがある、link=uriがある、というテキトーな判定になっている（実装からしてそう合わせている）
+        # 暫定でしかない
+        # どこかでちゃんとした判定（isinstanceとか）+中身の判定も切り替える（linkの場合、textとuriが分かれてるとか）必要
+
         a = lineobj._inline_elements_at_link
         self.assertEqual(' やっぱり', a[0].raw)
         self.assertEqual('趣味', a[1].uri)

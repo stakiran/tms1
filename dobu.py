@@ -40,8 +40,12 @@ def is_http(line, use_https=False):
     else:
         s = 'http://'
     sl = len(s)
-    is_http = len(line_without_casesensitive)>sl and line_without_casesensitive[sl-1]
-    return is_http
+
+    if len(line_without_casesensitive)<sl:
+        return False
+    if line_without_casesensitive[:sl]==s:
+        return True
+    return False
 
 def is_https(line):
     return is_http(line, use_https=True)

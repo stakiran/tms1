@@ -3,6 +3,31 @@ import unittest
 
 import dobu
 
+class TestIsHttp(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def test(self):
+        a = dobu.is_http('http://www.google.co.jp')
+        self.assertTrue(a)
+        a = dobu.is_http('http://www.google.co.jp ')
+        self.assertTrue(a)
+        a = dobu.is_http('ttp://www.google.co.jp')
+        self.assertFalse(a)
+        a = dobu.is_http('')
+        self.assertFalse(a)
+        # そんな厳密な判定はしてないのでプロトコル部分が合えば、もう ok になってる
+        a = dobu.is_http('http://')
+        self.assertTrue(a)
+
+        a = dobu.is_https('https://www.google.co.jp')
+        self.assertTrue(a)
+        a = dobu.is_http('https://www.google.co.jp')
+        self.assertFalse(a)
+
 class TestStack(unittest.TestCase):
     def setUp(self):
         pass

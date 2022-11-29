@@ -33,6 +33,19 @@ def list2file(filepath, ls):
     with open(filepath, encoding='utf8', mode='w') as f:
         f.writelines(['{:}\n'.format(line) for line in ls] )
 
+def is_http(line, use_https=False):
+    line_without_casesensitive = line.lower()
+    if use_https:
+        s = 'https://'
+    else:
+        s = 'http://'
+    sl = len(s)
+    is_http = len(line_without_casesensitive)>sl and line_without_casesensitive[sl-1]
+    return is_http
+
+def is_https(line):
+    return is_http(line, use_https=True)
+
 class Stack:
     def __init__(self, ls):
         self._contents = ls
@@ -427,6 +440,30 @@ class Link(InlineElement):
         # とりあえずちゃんとlinkになってることを試すために uri に入れておく
         self._text = raw
         self._uri = raw
+
+    def _parse(self):
+        line = self._raw
+        ls = line.split(' ')
+        is_single_element = len(ls)==0
+
+        # [xxxx]
+        # [http://...]
+        # [https://...]
+        if is_single_element:
+            if is_http(line) or is_https(line):
+                self._text = None
+                self._uri = line
+                return
+            self._text = line
+            self._uri = None
+            return
+
+        # [uri rest]
+        # [rest uri]
+        # restは複数のスペースを含む可能性がある
+        first = ls[0]
+        last = ls[-1]
+        pass
 
 class Uri(InlineElement):
     # 今のところ画像は無いので、Image ではなく「URLのみ記されたもの」的な概念として定義しておく

@@ -286,5 +286,16 @@ class TestLink(unittest.TestCase):
         self.assertEqual('', link.text)
         self.assertEqual('https://scrapbox.io/sta/', link.uri)
 
+        link = dobu.Link('俺の人生を見ろや https://scrapbox.io/sta/')
+        self.assertEqual('俺の人生を見ろや', link.text)
+        self.assertEqual('https://scrapbox.io/sta/', link.uri)
+        link = dobu.Link('https://scrapbox.io/sta/ 俺の人生を見ろや')
+        self.assertEqual('俺の人生を見ろや', link.text)
+        self.assertEqual('https://scrapbox.io/sta/', link.uri)
+
+        link = dobu.Link('http://scrapbox.io/sta/ httpも 一応見ておこうね')
+        self.assertEqual('httpも 一応見ておこうね', link.text)
+        self.assertEqual('http://scrapbox.io/sta/', link.uri)
+
 if __name__ == '__main__':
     unittest.main()

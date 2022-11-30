@@ -253,15 +253,16 @@ class TestLine(unittest.TestCase):
 
         a = lineobj._inline_elements_at_link
         self.assertEqual(' やっぱり', a[0].raw)
-        self.assertEqual('趣味', a[1].uri)
+        self.assertTrue(isinstance(a[1], dobu.Link))
+        self.assertEqual('趣味', a[1].text)
         self.assertEqual('は', a[2].raw)
-        self.assertEqual('プログラミング', a[3].uri)
+        self.assertTrue(isinstance(a[3], dobu.Link))
         self.assertEqual('に限りますな。', a[4].raw)
         self.assertEqual('print(f"hello world! {array[i]=}");', a[5].text)
         self.assertEqual(' とか ', a[6].raw)
         self.assertEqual('import os', a[7].text)
         self.assertEqual(' みたいな', a[8].raw)
-        self.assertEqual('リテラル記法', a[9].uri)
+        self.assertTrue(isinstance(a[9], dobu.Link))
         self.assertEqual('はよく使いますよね', a[10].raw)
 
 class TestLink(unittest.TestCase):

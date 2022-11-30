@@ -271,12 +271,20 @@ class TestLink(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_onepass(self):
+    def test_(self):
         content_in_bracket = '別ページ'
         c = content_in_bracket
         link = dobu.Link(c)
         self.assertEqual('別ページ', link.text)
         self.assertIsNone(link.uri)
+
+        link = dobu.Link('別ページ スペース入り 問題なく認識される')
+        self.assertEqual('別ページ スペース入り 問題なく認識される', link.text)
+        self.assertIsNone(link.uri)
+
+        link = dobu.Link('https://scrapbox.io/sta/')
+        self.assertIsNone(link.text)
+        self.assertEqual('https://scrapbox.io/sta/', link.uri)
 
 if __name__ == '__main__':
     unittest.main()

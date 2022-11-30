@@ -468,11 +468,11 @@ class Link(InlineElement):
         last = ls[-1]
         if is_http(first) or is_https(first):
             self._uri = first
-            self._text = ls[1:].join(' ')
+            self._text = ' '.join(ls[1:])
             return
         if is_http(last) or is_https(last):
             self._uri = last
-            self._text = ls[:-1].join(' ')
+            self._text = ' '.join(ls[:-1])
             return
         self._text = line
         self._uri = None

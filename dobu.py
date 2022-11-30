@@ -439,11 +439,8 @@ class Plain(InlineElement):
 class Link(InlineElement):
     def __init__(self, raw):
         super().__init__(raw)
-
-        # 一通りパースが必要……
-        # とりあえずちゃんとlinkになってることを試すために uri に入れておく
-        self._text = raw
-        self._uri = raw
+        
+        self._parse()
 
     def _parse(self):
         line = self._raw

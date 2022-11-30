@@ -236,7 +236,7 @@ class TestLine(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def xtest_onepass(self):
+    def test_onepass(self):
         line = ' やっぱり[趣味]は[プログラミング]に限りますな。`print(f"hello world! {array[i]=}");` とか `import os` みたいな[リテラル記法]はよく使いますよね'
         lineobj = dobu.Line(line)
 

@@ -272,8 +272,11 @@ class TestLink(unittest.TestCase):
         pass
 
     def test_onepass(self):
-        line = ' やっぱり[趣味]は[プログラミング]に限りますな。`print(f"hello world! {array[i]=}");` とか `import os` みたいな[リテラル記法]はよく使いますよね'
-        lineobj = dobu.Link(line)
+        content_in_bracket = '別ページ'
+        c = content_in_bracket
+        link = dobu.Link(c)
+        self.assertEqual('別ページ', link.text)
+        self.assertIsNone(link.uri)
 
 if __name__ == '__main__':
     unittest.main()

@@ -439,7 +439,9 @@ class Plain(InlineElement):
 class Link(InlineElement):
     def __init__(self, raw):
         super().__init__(raw)
-        
+
+        self._text = None
+        self._uri = None
         self._parse()
 
     def _parse(self):

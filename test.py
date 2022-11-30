@@ -264,5 +264,16 @@ class TestLine(unittest.TestCase):
         self.assertEqual('リテラル記法', a[9].uri)
         self.assertEqual('はよく使いますよね', a[10].raw)
 
+class TestLink(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def test_onepass(self):
+        line = ' やっぱり[趣味]は[プログラミング]に限りますな。`print(f"hello world! {array[i]=}");` とか `import os` みたいな[リテラル記法]はよく使いますよね'
+        lineobj = dobu.Link(line)
+
 if __name__ == '__main__':
     unittest.main()

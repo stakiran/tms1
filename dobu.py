@@ -467,7 +467,16 @@ class Link(InlineElement):
         # restは複数のスペースを含む可能性がある
         first = ls[0]
         last = ls[-1]
-        pass
+        if is_http(first) or is_https(first):
+            self._uri = first
+            self._text = ls[1:].join(' ')
+            return
+        if is_http(last) or is_https(last):
+            self._uri = last
+            self._text = ls[:-1].join(' ')
+            return
+        self._text = line
+        self._uri = None
 
 class Uri(InlineElement):
     # 今のところ画像は無いので、Image ではなく「URLのみ記されたもの」的な概念として定義しておく

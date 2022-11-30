@@ -276,14 +276,14 @@ class TestLink(unittest.TestCase):
         c = content_in_bracket
         link = dobu.Link(c)
         self.assertEqual('別ページ', link.text)
-        self.assertIsNone(link.uri)
+        self.assertEqual('', link.uri)
 
         link = dobu.Link('別ページ スペース入り 問題なく認識される')
         self.assertEqual('別ページ スペース入り 問題なく認識される', link.text)
-        self.assertIsNone(link.uri)
+        self.assertEqual('', link.uri)
 
         link = dobu.Link('https://scrapbox.io/sta/')
-        self.assertIsNone(link.text)
+        self.assertEqual('', link.text)
         self.assertEqual('https://scrapbox.io/sta/', link.uri)
 
 if __name__ == '__main__':

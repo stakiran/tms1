@@ -440,8 +440,8 @@ class Link(InlineElement):
     def __init__(self, raw):
         super().__init__(raw)
 
-        self._text = None
-        self._uri = None
+        self._text = ''
+        self._uri = ''
         self._parse()
 
     def _parse(self):
@@ -454,11 +454,9 @@ class Link(InlineElement):
         # [https://...]
         if is_single_element:
             if is_http(line) or is_https(line):
-                self._text = None
                 self._uri = line
                 return
             self._text = line
-            self._uri = None
             return
 
         # [uri rest]
@@ -475,7 +473,6 @@ class Link(InlineElement):
             self._text = ' '.join(ls[:-1])
             return
         self._text = line
-        self._uri = None
 
 class Uri(InlineElement):
     # 今のところ画像は無いので、Image ではなく「URLのみ記されたもの」的な概念として定義しておく

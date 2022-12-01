@@ -380,9 +380,17 @@ class Line:
         self._inline_elements = new_inline_elements
         new_inline_elements = []
         for inlineelement in self._inline_elements:
-            # プレーンの解釈
-            pass
+            is_literal = isinstance(inlineelement, Literal)
+            is_link = isinstance(inlineelement, Link)
+            if is_literal or is_link:
+                new_inline_elements.append(inlineelement)
+                continue
+
+            line = inlineelement.raw
+            plain = Plain(line)
+            new_inline_elements.append(plain)
         # これで new_inline_elements は plain, literal, literal, plain, link, link, link, literal みたいになる
+        self._inline_elements_at_plain = new_inline_elements
 
         self._inline_elements = new_inline_elements
 
@@ -435,6 +443,7 @@ class Undefined(InlineElement):
 class Plain(InlineElement):
     def __init__(self, raw):
         super().__init__(raw)
+        self._text = raw
 
 class Link(InlineElement):
     def __init__(self, raw):

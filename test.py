@@ -261,6 +261,14 @@ class TestLine(unittest.TestCase):
         self.assertTrue(isinstance(a[9], dobu.Link))
         self.assertEqual('はよく使いますよね', a[10].raw)
 
+        a = lineobj._inline_elements_at_plain
+        self.assertTrue(isinstance(a[0], dobu.Plain))
+        self.assertTrue(isinstance(a[2], dobu.Plain))
+        self.assertTrue(isinstance(a[4], dobu.Plain))
+        self.assertTrue(isinstance(a[6], dobu.Plain))
+        self.assertTrue(isinstance(a[8], dobu.Plain))
+        self.assertTrue(isinstance(a[10], dobu.Plain))
+
 class TestLink(unittest.TestCase):
     def setUp(self):
         pass

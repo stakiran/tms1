@@ -82,7 +82,32 @@ dobuフォーマット
  2 mebject
   scbから変換する中間オブジェクト
 
-lineのパースどうやる？
+パーサ一通り書いたけど次は？
+ CLIを経由した出力ワンパス
+ まだhtmlはない。内部的なdobu形式
+ to string。json？
+  to mebj ここの位置づけどうするんだ？🐰
+  to json
+  to html
+  ---
+  mebjは内部的なオブジェクト。そもそも特定のフォーマットは持たない
+  が、それじゃテストができない
+  何らかのフォーマットを出す必要がある
+ こうだな
+  1 /to html
+  2 /to json
+  2 /to plain text
+  2 /to markdown
+  3 /to json
+  1 不可逆でfor human rich。はmust。だがまずはmebjのテストしたいので後
+  2 不可逆でfor human plain。はmebjのテストのために何かしら要る。for humanならあえてjson選ぶ必要はないと思うが
+  3 可逆。今は必要性わからん。
+ 2の不可逆 for human plainをどうするか……
+  node自体は一次元リストで繋いでるし、markdownでいいか？
+   1-section 1-nodeで並べればいいだけだし
+   section間は必ず空行を入れる。あるいは区切り線
+
+✅lineのパースどうやる？
  1 正規表現
  2 自製で頑張る
  3 inlineelementの特定までは自製、その後は正規表現
@@ -210,7 +235,7 @@ literal parseのテストを書きたい
     かつ、見つけたそこから再開する
 ✅同上、inline elements リストを維持しながら展開していく方法
  literalと同じく head body tail方式でいける
-あとは、linkの細かい違いをどう表現するか🐰
+✅あとは、linkの細かい違いをどう表現するか🐰
  `[ページ内リンク]`
  `[uriつきリンク https://www.google.co.jp]`
  `[https://www.google.co.jp uriつきリンク]`

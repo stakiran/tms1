@@ -1,8 +1,5 @@
 # encoding: utf-8
 
-from xml.sax.handler import property_declaration_handler
-
-
 def parse_arguments():
     import argparse
 

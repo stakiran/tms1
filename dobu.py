@@ -598,15 +598,19 @@ class DebugRenderer(Renderer):
         return ['}---- page footer ----']
 
     def _render_line_header(self, rawline, indent_depth):
-        return []
+        lines = []
+        lines.append('head of line{')
+        return lines
 
     def _render_line_footer(self, rawline, indent_depth):
-        return []
+        lines = []
+        lines.append('}tail of line')
+        return lines
 
     def _render_codeblock(self, codeblock, indent_depth):
         lines = []
-        lines.append(codeblock.caption)
-        lines.append(f'indent: {indent_depth}')
+        lines.append(f'codeblock: {codeblock.caption}')
+        lines.append(f' indent: {indent_depth}')
         lines.append('====')
         lines.extend(codeblock.lines)
         return lines

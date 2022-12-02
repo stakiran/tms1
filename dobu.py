@@ -223,6 +223,10 @@ class Node:
         self._nodecontent = nodecontent
 
     @property
+    def indent_depth(self):
+        return self._indent_depth
+
+    @property
     def content(self):
         return self._nodecontent
 
@@ -489,6 +493,142 @@ class Literal(InlineElement):
     def __init__(self, raw):
         super().__init__(raw)
         self.text = raw
+
+class Renderer:
+    def __init__(self, page):
+        self.page = page
+
+    @property
+    def page(self):
+        return self._page
+
+    @page.setter
+    def page(self, page):
+        self._page = page
+
+    def render(self):
+        page = self.page
+        nodes = page.nodes
+        outlines = []
+
+        lines = self._render_page_header(page)
+        outlines.extend(lines)
+
+        for node in nodes:
+            lines = self._render_node(node)
+            outlines.extend(lines)
+
+        lines = self._render_page_footer(page)
+        outlines.extend(lines)
+
+        return outlines
+
+    def _render_node(self, node):
+        indent_depth = node.indent_depth
+        nodecontent = node.content
+        contentobj = nodecontent.content
+
+        lines = ['<NOT INTERPRETED in node level>']
+        if nodecontent.is_codeblock():
+            lines = self._render_codeblock(contentobj, indent_depth)
+        if nodecontent.is_line():
+            lines = self._render_line(contentobj, indent_depth)
+        return lines
+
+    def _render_line(self, lineobj, indent_depth):
+        outlines = []
+
+        inline_elements = lineobj.inline_elements
+        rawline = lineobj.raw
+
+        element_outlines = self._render_line_header(rawline, indent_depth)
+        outlines.extend(element_outlines)
+
+        for inline_element in inline_elements:
+            element_outlines = ['<NOT INTERPRETED in inline-element level>']
+            if isinstance(inline_element, Link):
+                element_outlines = self._render_link(inline_element)
+            if isinstance(inline_element, Literal):
+                element_outlines = self._render_literal(inline_element)
+            if isinstance(inline_element, Link):
+                element_outlines = self._render_link(inline_element)
+            if isinstance(inline_element, Plain):
+                element_outlines = self._render_plain(inline_element)
+            outlines.extend(element_outlines)
+
+            # たぶん inlineelement 間のマージンを入れるi/fもあった方がいい……
+
+        element_outlines = self._render_line_footer(rawline, indent_depth)
+        outlines.extend(element_outlines)
+
+        return outlines
+
+    def _render_page_header(self, page):
+        raise NotImplementedError('Must return lines!')
+
+    def _render_page_footer(self, page):
+        raise NotImplementedError('Must return lines!')
+
+    def _render_codeblock(self, codeblock, indent_depth):
+        raise NotImplementedError('Must return lines!')
+
+    def _render_line_header(self, rawline, indent_depth):
+        raise NotImplementedError('Must return lines!')
+
+    def _render_line_footer(self, rawline, indent_depth):
+        raise NotImplementedError('Must return lines!')
+
+    def _render_link(self, inline_element):
+        raise NotImplementedError('Must return lines!')
+
+    def _render_literal(self, inline_element):
+        raise NotImplementedError('Must return lines!')
+
+    def _render_plain(self, inline_element):
+        raise NotImplementedError('Must return lines!')
+
+class DebugRenderer(Renderer):
+    def __init__(self, page):
+        super().__init__(page)
+
+    def _render_page_header(self, page):
+        return ['---- page header ----{']
+
+    def _render_page_footer(self, page):
+        return ['}---- page footer ----']
+
+    def _render_line_header(self, rawline, indent_depth):
+        return []
+
+    def _render_line_footer(self, rawline, indent_depth):
+        return []
+
+    def _render_codeblock(self, codeblock, indent_depth):
+        lines = []
+        lines.append(codeblock.caption)
+        lines.append(f'indent: {indent_depth}')
+        lines.append('====')
+        lines.extend(codeblock.lines)
+        return lines
+
+    def _render_link(self, inline_element):
+        lines = []
+        lines.append('Link')
+        lines.append(f' uri :"{inline_element.uri}"')
+        lines.append(f' text:"{inline_element.text}"')
+        return lines
+
+    def _render_literal(self, inline_element):
+        lines = []
+        lines.append('Literal')
+        lines.append(f' "{inline_element.text}"')
+        return lines
+
+    def _render_plain(self, inline_element):
+        lines = []
+        lines.append('Plain')
+        lines.append(f' "{inline_element.text}"')
+        return lines
 
 if __name__ == "__main__":
     args = parse_arguments()

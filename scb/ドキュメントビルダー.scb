@@ -82,7 +82,7 @@ dobuフォーマット
  2 mebject
   scbから変換する中間オブジェクト
 
-パーサ一通り書いたけど次は？
+✅パーサ一通り書いたけど次は？
  CLIを経由した出力ワンパス
  まだhtmlはない。内部的なdobu形式
  to string。json？
@@ -93,6 +93,8 @@ dobuフォーマット
   mebjは内部的なオブジェクト。そもそも特定のフォーマットは持たない
   が、それじゃテストができない
   何らかのフォーマットを出す必要がある
+
+Renderer
  こうだな
   1 /to html
   2 /to json
@@ -106,6 +108,13 @@ dobuフォーマット
   node自体は一次元リストで繋いでるし、markdownでいいか？
    1-section 1-nodeで並べればいいだけだし
    section間は必ず空行を入れる。あるいは区切り線
+   lineは、sub sectionつくるか……
+ Rendererクラス
+  どこまでi/fにするか
+   1 renderメソッド程度
+   2 lineやcodeblockなど各データクラス単位
+    まあこっちだよなぁ
+    pageのparseは基底側で行ってしまいたい
 
 ✅lineのパースどうやる？
  1 正規表現
@@ -182,7 +191,7 @@ dobuフォーマット
  
  実装中... 2022/11/26 08:25:35
 
-literal parseのテストを書きたい
+❌literal parseのテストを書きたい
  literalのparseが終わった時点の inlineelements が見れればいい
   どうやる？🐰
   self._inline_elements_at_literal_parsed みたいなのを内部的にもたせてしまう
@@ -202,6 +211,7 @@ literal parseのテストを書きたい
   まあこれくらいでええか
    複数回出現も捉えたい
    `aaa``bbb`みたいな連続パターンも捉えたい
+ 07:13:54 いったんサボる……
 
 ✅line中のブラケティングを取得する方法
  それも plain 部分も順序保存した上で頑張る必要がある……

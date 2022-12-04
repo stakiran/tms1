@@ -130,7 +130,12 @@ HTML Renderer
   いや、勉強にならんから、地道に書いて反映させていくことにしようぜ🐰
  [scrapboxのページのHTMLのソース]
  ---
- 
+ 1 テキトーに書いた
+ で、ぱっと目についたのは
+  実行ごとにhtmlファイルを生成したい
+  cssクラス
+  page title
+  codeblockにindentが及んでない
 
 
 ✅lineのパースどうやる？

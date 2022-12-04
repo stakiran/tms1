@@ -693,7 +693,7 @@ class HTMLRenderer(Renderer):
 
         # ページ内リンク時に valid name への変換が要るけど……
 
-        lines.append(f'<a href="f{inline_element.uri}">{inline_element.text}</a>')
+        lines.append(f'<a href="{inline_element.uri}">{inline_element.text}</a>')
         return lines
 
     def _render_literal(self, inline_element):

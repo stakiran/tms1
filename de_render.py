@@ -5,13 +5,7 @@ import dobu
 
 class TestRenderer(unittest.TestCase):
     def setUp(self):
-        pass
-
-    def tearDown(self):
-        pass
-
-    def test_print_with_debugrenderer(self):
-        scb = """scb page sample
+        self._scb = """scb page sample
 line
  line1
  line1
@@ -33,6 +27,12 @@ code:rootcodeblock
  not line1
 :c"""
 
+    def tearDown(self):
+        pass
+
+    def test_print_with_debugrenderer(self):
+        scb = self._scb
+
         lines = scb.split('\n')
         linepasser = dobu.LinePasser(lines)
         pageparser = dobu.PageParser(linepasser)
@@ -42,6 +42,21 @@ code:rootcodeblock
         lines = renderer.render()
 
         print('[Debug Render]')
+        for line in lines:
+            print(line)
+
+    def test_print_with_htmlrenderer(self):
+        scb = self._scb
+
+        lines = scb.split('\n')
+        linepasser = dobu.LinePasser(lines)
+        pageparser = dobu.PageParser(linepasser)
+        page = pageparser.parse()
+
+        renderer = dobu.HTMLRenderer(page)
+        lines = renderer.render()
+
+        print('[HTML Render]')
         for line in lines:
             print(line)
 

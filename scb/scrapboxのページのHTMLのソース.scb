@@ -1,0 +1,35 @@
+
+[クローズドエンバイロメント - stakiran研究所 https://scrapbox.io/sta/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%BA%E3%83%89%E3%82%A8%E3%83%B3%E3%83%90%E3%82%A4%E3%83%AD%E3%83%A1%E3%83%B3%E3%83%88]
+code:html
+ <!DOCTYPE html>
+ <html data-assets-version="assets-20221130-055322">
+
+ <head>
+ <meta charSet="utf-8"/>
+ <meta name="referrer" content="same-origin"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+ <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+ <title>Scrapbox</title>
+ <link id="favicon" rel="icon" href="/assets/img/favicon/favicon.ico"/>
+ <link rel="manifest" href="/manifest.json"/>
+ <meta name="apple-mobile-web-app-title" content="Scrapbox"/>
+ <link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicon/apple-touch-icon.png"/>
+ <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-touch-icon-180.png"/>
+ <link href="/assets/css/app.css" rel="stylesheet"/>
+ <link href="/assets/css/app_icons.css" rel="stylesheet"/>
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i|Roboto:400,400i,500,500i,700,700i"/>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css"/>
+ <script src="/assets/modern-browser-message.js" type="text/javascript" defer=""></script>
+ <script src="/assets/index.js" type="text/javascript" defer=""></script>
+ <script id="stripe-js" src="https://js.stripe.com/v3/" async=""></script>
+ <link rel="search" type="application/opensearchdescription+xml" title="Scrapbox" href="/api/opensearch/opensearch.xml"/>
+ </head>
+
+ <body>
+  <div id="dedicated-container"></div>
+  <div id="app-container"></div>
+ </body>
+
+ </html>
+:c

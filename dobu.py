@@ -26,6 +26,10 @@ def file2list(filepath):
         ret = [line.rstrip('\n') for line in f.readlines()]
     return ret
 
+LB = '\n'
+def string2lines(s):
+    return s.split(LB)
+
 def list2file(filepath, ls):
     with open(filepath, encoding='utf8', mode='w') as f:
         f.writelines(['{:}\n'.format(line) for line in ls] )
@@ -632,6 +636,74 @@ class DebugRenderer(Renderer):
         lines = []
         lines.append('Plain')
         lines.append(f' "{inline_element.text}"')
+        return lines
+
+class HTMLRenderer(Renderer):
+    def __init__(self, page):
+        super().__init__(page)
+
+    def _render_page_header(self, page):
+        title = 'タイトルどうする？'
+        s = f"""
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charSet="utf-8"/>
+        <meta name="referrer" content="same-origin"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+        <title>{title}</title>
+        <link rel="stylesheet" href="まだ考えてない.css"/>
+    </head>
+    <body>
+"""
+        lines = string2lines(s)
+        return lines
+
+    def _render_page_footer(self, page):
+        s = f"""
+    </body>
+</html>
+"""
+        lines = string2lines(s)
+        return lines
+
+    def _render_line_header(self, rawline, indent_depth):
+        lines = []
+        otamesi = '.'*indent_depth
+        s = f"""<div>{otamesi}"""
+        lines = string2lines(s)
+        return lines
+
+    def _render_line_footer(self, rawline, indent_depth):
+        lines = []
+        blankline = ''
+        lines.append('</div>')
+        lines.append(blankline)
+        return lines
+
+    def _render_codeblock(self, codeblock, indent_depth):
+        lines = []
+        lines.append('<code>')
+        lines.extend(codeblock.lines)
+        lines.append('</code>')
+        return lines
+
+    def _render_link(self, inline_element):
+        lines = []
+
+        # ページ内リンク時に valid name への変換が要るけど……
+
+        lines.append(f'<a href="f{inline_element.uri}">{inline_element.text}</a>')
+        return lines
+
+    def _render_literal(self, inline_element):
+        lines = []
+        lines.append(f'<b><i>{inline_element.text}</i></b>')
+        return lines
+
+    def _render_plain(self, inline_element):
+        lines = []
+        lines.append(f'{inline_element.text}')
         return lines
 
 if __name__ == "__main__":

@@ -64,22 +64,6 @@ def get_corrected_filename(filename):
         ret = ret.replace(target_char, after_char)
     return ret
 
-def fix_filename_to_scb_compatible(filename):
-    newname = filename
-
-    invalid_chars = ['(', ')', '（', '）', '！', '？', '　', '～']
-    afterstr = '_'
-    for invalid_char in invalid_chars:
-        newname = newname.replace(invalid_char, afterstr)
-
-    newname = zenkaku2hankaku(newname)
-
-    firstchar = newname[0]
-    if firstchar=='.' or firstchar=='#' or firstchar=='_':
-        newname = '-'+newname
-
-    return newname
-
 class Stack:
     def __init__(self, ls):
         self._contents = ls

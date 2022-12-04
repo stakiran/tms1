@@ -240,3 +240,17 @@ inner html
   <div style="margin-left: 4.5em;" class="line">読み返して「大体こんな感じやろ」と理解した上で今回も書いたつもりだが</div>
   <div style="margin-left: 0em;" class="line"><br></div>
  :c
+
+codeblock html
+ code:html
+  <div style="margin-left:3em" class="line">
+   <code class="code-block">
+    <span class="code-block-start" title="trita">trita</span>
+    <div style="margin-left:1.5em">
+  2022/06/08 Wed             vip1 clone:0
+  2022/06/08 Wed             vip2 clone:0
+  2022/06/08 Wed             vip3 clone:0
+    </div>
+   </code>
+  </div>
+ :c

@@ -94,7 +94,7 @@ dobuフォーマット
   が、それじゃテストができない
   何らかのフォーマットを出す必要がある
 
-Renderer
+Renderer方針
  こうだな
   1 /to html
   2 /to json
@@ -115,6 +115,22 @@ Renderer
    2 lineやcodeblockなど各データクラス単位
     まあこっちだよなぁ
     pageのparseは基底側で行ってしまいたい
+
+HTML Renderer
+ どういうhtml tagやcss使えばいいか何もわからんのだが
+ [scrapbox-readerを読む]
+  基本的にdiv行を列挙する
+   codeは`<code>`で、ファイル名部分はspan、それ以外はdivで囲ってmargin-leftだけ入れて、あとはベタ書き
+  inline要素も全部div
+   classはline, icon, page-link
+   page-linkは`<a>`
+ インデントはdivにmargin-leftを入れる
+ cssはパクればいいか🐰
+  MITだし
+  いや、勉強にならんから、地道に書いて反映させていくことにしようぜ🐰
+ ---
+ 
+
 
 ✅lineのパースどうやる？
  1 正規表現

@@ -57,6 +57,7 @@ code:rootcodeblock
         linepasser = dobu.LinePasser(lines)
         pageparser = dobu.PageParser(linepasser)
         page = pageparser.parse()
+        page.name = 'scb page sample'
 
         renderer = dobu.HTMLRenderer(page)
         lines = renderer.render()

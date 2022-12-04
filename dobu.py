@@ -206,6 +206,7 @@ class NodeFactory:
 class Page:
     def __init__(self):
         self._nodes = []
+        self._name = ''
 
     def add_node(self, node):
         self._nodes.append(node)
@@ -213,6 +214,14 @@ class Page:
     @property
     def nodes(self):
         return self._nodes
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        self._name = name
 
 class Node:
     def __init__(self):
@@ -643,7 +652,7 @@ class HTMLRenderer(Renderer):
         super().__init__(page)
 
     def _render_page_header(self, page):
-        title = 'タイトルどうする？'
+        title = f'{page.name}'
         s = f"""
 <!DOCTYPE html>
 <html>

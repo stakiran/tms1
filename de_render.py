@@ -16,6 +16,7 @@ line
    [https://scrapbox.io/sta/ 後ろにsta]
    [https://scrapbox.io/sta/ 後ろに スペース区切りで sta]
    [前に スペース区切りで sta https://scrapbox.io/sta/]
+   [URLなしで スペース区切りの リンクは ただのページ内リンク]
 block
  code:codeblock1
   aaa

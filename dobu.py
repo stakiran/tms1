@@ -51,6 +51,35 @@ def is_http(line, use_https=False):
 def is_https(line):
     return is_http(line, use_https=True)
 
+def get_corrected_filename(filename):
+    # Use algorithm og https://github.com/stakiran/vscode-scb/blob/master/language-feature/src/util.ts#L29
+    invalid_chars ='\\/:*?"<>|'
+    noisy_chars =' '
+    target_chars = invalid_chars + noisy_chars
+
+    after_char = '_'
+
+    ret = filename
+    for target_char in target_chars:
+        ret = ret.replace(target_char, after_char)
+    return ret
+
+def fix_filename_to_scb_compatible(filename):
+    newname = filename
+
+    invalid_chars = ['(', ')', '（', '）', '！', '？', '　', '～']
+    afterstr = '_'
+    for invalid_char in invalid_chars:
+        newname = newname.replace(invalid_char, afterstr)
+
+    newname = zenkaku2hankaku(newname)
+
+    firstchar = newname[0]
+    if firstchar=='.' or firstchar=='#' or firstchar=='_':
+        newname = '-'+newname
+
+    return newname
+
 class Stack:
     def __init__(self, ls):
         self._contents = ls
@@ -699,9 +728,16 @@ class HTMLRenderer(Renderer):
     def _render_link(self, inline_element):
         lines = []
 
-        # ページ内リンク時に valid name への変換が要るけど……
+        uri = inline_element.uri
+        text = inline_element.text
+        is_link_in_page = inline_element.uri == ''
+        if is_link_in_page:
+            filename = text
+            uri = filename
+            uri = get_corrected_filename(uri)
+            uri = f'{uri}.html'
 
-        lines.append(f'<a href="{inline_element.uri}">{inline_element.text}</a>')
+        lines.append(f'<a href="{uri}">{text}</a>')
         return lines
 
     def _render_literal(self, inline_element):

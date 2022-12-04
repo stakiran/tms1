@@ -134,8 +134,9 @@ HTML Renderer
  で、ぱっと目についたのは
   実行ごとにhtmlファイルを生成したい
   cssクラス
-  page title
+  page title入れる
   codeblockにindentが及んでない
+  リンク先のファイル名変換
 
 
 ✅lineのパースどうやる？

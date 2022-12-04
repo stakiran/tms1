@@ -654,14 +654,13 @@ class HTMLRenderer(Renderer):
         <title>{title}</title>
         <link rel="stylesheet" href="まだ考えてない.css"/>
     </head>
-    <body>
+<body>
 """
         lines = string2lines(s)
         return lines
 
     def _render_page_footer(self, page):
-        s = f"""
-    </body>
+        s = f"""</body>
 </html>
 """
         lines = string2lines(s)

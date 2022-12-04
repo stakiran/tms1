@@ -11,6 +11,11 @@ line
  line1
   line2
    やっぱり[趣味]は[プログラミング]に限りますな。`print(f"hello world! {array[i]=}");` とか `import os` みたいな[リテラル記法]はよく使いますよね
+  url系も使いましょう
+   [前にsta https://scrapbox.io/sta/]
+   [https://scrapbox.io/sta/ 後ろにsta]
+   [https://scrapbox.io/sta/ 後ろに スペース区切りで sta]
+   [前に スペース区切りで sta https://scrapbox.io/sta/]
 block
  code:codeblock1
   aaa

@@ -3,6 +3,34 @@ import unittest
 
 import dobu
 
+class TestIsCorrectFilename(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def test(self):
+        e = 'aa_bb__cc'
+        a = dobu.get_corrected_filename('aa bb  cc')
+        self.assertEqual(e, a)
+
+        e = 'aa_bb_cc'
+        a = dobu.get_corrected_filename('aa_bb_cc')
+        self.assertEqual(e, a)
+
+        e = r'D__work_github_stakiran_til_python_path_directory_filename.md'
+        a = dobu.get_corrected_filename(r'D:\work\github\stakiran\til\python_path_directory_filename.md')
+        self.assertEqual(e, a)
+
+        e = 'https___scrapbox.io_sta_'
+        a = dobu.get_corrected_filename('https://scrapbox.io/sta/')
+        self.assertEqual(e, a)
+
+        e = 'command____dev_null_2_&1'
+        a = dobu.get_corrected_filename('command > /dev/null 2>&1')
+        self.assertEqual(e, a)
+
 class TestIsHttp(unittest.TestCase):
     def setUp(self):
         pass

@@ -36,6 +36,10 @@ code:rootcodeblock
     def tearDown(self):
         pass
 
+    @staticmethod
+    def to_file(filename, lines):
+        return dobu.list2file(filename, lines)
+
     def test_print_with_debugrenderer(self):
         scb = self._scb
 
@@ -47,9 +51,7 @@ code:rootcodeblock
         renderer = dobu.DebugRenderer(page)
         lines = renderer.render()
 
-        print('[Debug Render]')
-        for line in lines:
-            print(line)
+        self.to_file('1_debug_debugout.txt', lines)
 
     def test_print_with_htmlrenderer(self):
         scb = self._scb
@@ -63,9 +65,7 @@ code:rootcodeblock
         renderer = dobu.HTMLRenderer(page)
         lines = renderer.render()
 
-        print('[HTML Render]')
-        for line in lines:
-            print(line)
+        self.to_file('2_html_debugout.html', lines)
 
 if __name__ == '__main__':
     unittest.main()

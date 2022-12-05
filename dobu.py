@@ -691,8 +691,7 @@ class HTMLRenderer(Renderer):
     def _render_line_header(self, rawline, indent_depth):
         lines = []
         otamesi = '.'*indent_depth
-        s = f"""<div>{otamesi}"""
-        lines = string2lines(s)
+        lines.append(f'<div>{otamesi}')
         return lines
 
     def _render_line_footer(self, rawline, indent_depth):

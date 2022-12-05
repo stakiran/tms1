@@ -137,7 +137,32 @@ HTML Renderer
   page title入れる
   codeblockにindentが及んでない
   リンク先のファイル名変換
+ ---
+ 2 どこに何の属性をつければいいんだ？
+  scrapbox-reader読んでる🐰
+   div
+    class="line"
+   code
+    class="code-block"
+   a
+    class="page-link"
+   blockquote
+    class="quote"
+   話逸れるけど、div class="line"の中にblockquoteもcodeもある感じ🐰
+    ああ、そうか、html的にはどっちもブロックだから問題ないのか
+    class lineといいつつ、複数行が入ることがある（codeの場合）
+    lineというか、nodeってニュアンスだよな
+   話逸れるけど2、全部divで囲ってるのか
+    やっぱりdivがnodeの位置づけだな🐰
+    今はそうなってない
+  結局、classはどこにつければいいんだ？
+   結局はcssでいじれれば何でもいいよなぁ
+   🐰的には
+    div側にはlineとかcodeblockとかつけたい
+    divの中、codeやaやblockquoteは？
+     たぶん何かしら要るはず。でないと細かい調整できないだろうし
 
+引用がないのでサポートしろ
 
 ✅lineのパースどうやる？
  1 正規表現

@@ -163,6 +163,34 @@ HTML Renderer
      たぶん何かしら要るはず。でないと細かい調整できないだろうし
 
 引用がないのでサポートしろ
+ 実装
+ ✅デバッグ用データ
+ テストデータ
+ all green
+ ---
+ どこで解釈すればいいんだ？
+  Lineクラスに is_quote みたいな判定つける？
+  Lineを使う側で判断してもらう？
+  今
+   code:py
+    def proceeded_as_line(self, line):
+        lineobj = Line(line)
+        nodecontent = NodeContent()
+        nodecontent.set_line(lineobj)
+        return nodecontent
+   :c
+   blockなどを先に処理して、どれにも当てはまらなかったら最後にlineとみなしてる感じ
+   あとQuoteLineクラスなんかとりあえずつくってる
+   ここで判定するのが楽だよなぁ🐰
+    先頭の`>`があったら、QuoteLineをつくればいいだけ
+   うーん
+    Line.enable_quote() とかの方がよくないか？
+    呼び出し元で統一的に扱うためには、Lineのインスタンスを前提とするべき
+     引用かどうかは line.is_quote() とかで統一的に判定できる
+     インターフェースの場合だとそもそもサブ側のQuoteLineを扱えない（Lineインターフェースで扱えなくなる）
+    うん、これ🐰
+     寝かせるzzz
+     
 
 ✅lineのパースどうやる？
  1 正規表現

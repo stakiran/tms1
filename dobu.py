@@ -714,13 +714,19 @@ class HTMLRenderer(Renderer):
     def _render_line_header(self, lineobj, indent_depth):
         lines = []
         otamesi = '.'*indent_depth
-        lines.append(f'<div>{otamesi}')
+        quote_part = ''
+        if lineobj.is_quote:
+            quote_part = '<blockquote>'
+        lines.append(f'<div>{quote_part}{otamesi}')
         return lines
 
     def _render_line_footer(self, lineobj, indent_depth):
         lines = []
         blankline = ''
-        lines.append('</div>')
+        quote_part = ''
+        if lineobj.is_quote:
+            quote_part = '</blockquote>'
+        lines.append(f'{quote_part}</div>')
         lines.append(blankline)
         return lines
 

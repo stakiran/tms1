@@ -587,7 +587,7 @@ class Renderer:
         inline_elements = lineobj.inline_elements
         rawline = lineobj.raw
 
-        element_outlines = self._render_line_header(rawline, indent_depth)
+        element_outlines = self._render_line_header(lineobj, indent_depth)
         outlines.extend(element_outlines)
 
         for inline_element in inline_elements:
@@ -604,7 +604,7 @@ class Renderer:
 
             # たぶん inlineelement 間のマージンを入れるi/fもあった方がいい……
 
-        element_outlines = self._render_line_footer(rawline, indent_depth)
+        element_outlines = self._render_line_footer(lineobj, indent_depth)
         outlines.extend(element_outlines)
 
         return outlines
@@ -643,12 +643,12 @@ class DebugRenderer(Renderer):
     def _render_page_footer(self, page):
         return ['}---- page footer ----']
 
-    def _render_line_header(self, rawline, indent_depth):
+    def _render_line_header(self, lineobj, indent_depth):
         lines = []
         lines.append('head of line{')
         return lines
 
-    def _render_line_footer(self, rawline, indent_depth):
+    def _render_line_footer(self, lineobj, indent_depth):
         lines = []
         lines.append('}tail of line')
         return lines
@@ -708,13 +708,13 @@ class HTMLRenderer(Renderer):
         lines = string2lines(s)
         return lines
 
-    def _render_line_header(self, rawline, indent_depth):
+    def _render_line_header(self, lineobj, indent_depth):
         lines = []
         otamesi = '.'*indent_depth
         lines.append(f'<div>{otamesi}')
         return lines
 
-    def _render_line_footer(self, rawline, indent_depth):
+    def _render_line_footer(self, lineobj, indent_depth):
         lines = []
         blankline = ''
         lines.append('</div>')

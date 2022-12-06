@@ -645,7 +645,10 @@ class DebugRenderer(Renderer):
 
     def _render_line_header(self, lineobj, indent_depth):
         lines = []
-        lines.append('head of line{')
+        quote = ''
+        if lineobj.is_quote:
+            quote = '(>)'
+        lines.append(f'head of line{quote}{{')
         return lines
 
     def _render_line_footer(self, lineobj, indent_depth):

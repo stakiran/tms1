@@ -307,10 +307,26 @@ class Line:
     def __init__(self, line):
         self._raw = line
         self._inline_elements = []
+        self._is_quote = False
 
         initial = Undefined(self._raw)
         self._inline_elements.append(initial)
+        self._parse_mode()
         self._parse()
+
+    def _parse_mode(self):
+        line = self._raw
+        is_empty = len(line)==0
+        is_no_content = len(line)==1
+
+        if is_empty:
+            return
+        if is_no_content:
+            return
+
+        firstchar = line[0]
+        if firstchar == '>':
+            self._is_quote = True
 
     def _parse(self):
         new_inline_elements = []
@@ -428,6 +444,10 @@ class Line:
     @property
     def inline_elements(self):
         return self._inline_elements
+
+    @property
+    def is_quote(self):
+        return self._is_quote
 
 class QuoteLine:
     def __init__(self):

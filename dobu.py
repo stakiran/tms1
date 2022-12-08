@@ -717,7 +717,7 @@ class HTMLRenderer(Renderer):
         quote_part = ''
         if lineobj.is_quote:
             quote_part = '<blockquote>'
-        lines.append(f'<div>{quote_part}{otamesi}')
+        lines.append(f'<div class="node">{quote_part}{otamesi}')
         return lines
 
     def _render_line_footer(self, lineobj, indent_depth):
@@ -732,9 +732,9 @@ class HTMLRenderer(Renderer):
 
     def _render_codeblock(self, codeblock, indent_depth):
         lines = []
-        lines.append('<code>')
+        lines.append('<div class="code-block"><code>')
         lines.extend(codeblock.lines)
-        lines.append('</code>')
+        lines.append('</code></div>')
         return lines
 
     def _render_link(self, inline_element):
@@ -749,17 +749,17 @@ class HTMLRenderer(Renderer):
             uri = get_corrected_filename(uri)
             uri = f'{uri}.html'
 
-        lines.append(f'<a href="{uri}">{text}</a>')
+        lines.append(f'<span class="link"><a href="{uri}">{text}</a></span>')
         return lines
 
     def _render_literal(self, inline_element):
         lines = []
-        lines.append(f'<b><i>{inline_element.text}</i></b>')
+        lines.append(f'<code class="literal">{inline_element.text}</code>')
         return lines
 
     def _render_plain(self, inline_element):
         lines = []
-        lines.append(f'{inline_element.text}')
+        lines.append(f'<span class="plain">{inline_element.text}</span>')
         return lines
 
 if __name__ == "__main__":

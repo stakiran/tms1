@@ -305,6 +305,13 @@ class TestLine(unittest.TestCase):
         count_of_element_is_only_literal = 1
         self.assertEqual(count_of_element_is_only_literal, len(a))
 
+        line = '[link]'
+        lineobj = dobu.Line(line)
+        a = lineobj._inline_elements_at_link
+        self.assertTrue(isinstance(a[0], dobu.Link))
+        count_of_element_is_only_link = 1
+        self.assertEqual(count_of_element_is_only_link, len(a))
+
 class TestLink(unittest.TestCase):
     def setUp(self):
         pass

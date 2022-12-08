@@ -412,9 +412,14 @@ class Line:
                 # ^^^^^^        ^^^
                 #  head         tail
 
+
                 head = line[start_of_parse:startpos]
-                head_is_undefined_yet = Undefined(head)
-                new_inline_elements.append(head_is_undefined_yet)
+                is_head_empty = len(head)==0
+                if is_head_empty:
+                    pass
+                else:
+                    head_is_undefined_yet = Undefined(head)
+                    new_inline_elements.append(head_is_undefined_yet)
 
                 link = line[startpos+1:endpos]
                 link = Link(link)
@@ -422,6 +427,9 @@ class Line:
 
                 start_of_parse = endpos+1
             tail = line[start_of_parse:] 
+            is_tail_empty = len(tail)==0
+            if is_tail_empty:
+                continue
             tail_is_undefined_yet = Undefined(tail)
             new_inline_elements.append(tail_is_undefined_yet)
         self._inline_elements_at_link = new_inline_elements

@@ -297,6 +297,14 @@ class TestLine(unittest.TestCase):
         self.assertTrue(isinstance(a[8], dobu.Plain))
         self.assertTrue(isinstance(a[10], dobu.Plain))
 
+    def test_no_blank_plain(self):
+        line = '`literal`'
+        lineobj = dobu.Line(line)
+        a = lineobj._inline_elements_at_literal
+        self.assertTrue(isinstance(a[0], dobu.Literal))
+        count_of_element_is_only_literal = 1
+        self.assertEqual(count_of_element_is_only_literal, len(a))
+
 class TestLink(unittest.TestCase):
     def setUp(self):
         pass

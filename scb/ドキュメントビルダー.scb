@@ -166,6 +166,26 @@ HTML Renderer
   🐰
    divにはclass="node"
    その中の各html要素はまあよしなに
+ ok。あとは試しながらでやるしかねえ 2022/12/09
+ ---
+ 3 
+
+空白のplainが入る問題
+ 机上で解消
+ テストコードでやっぱり一通りやっておくべき（to_Lr でサボってたやつだなｗ）
+ ---
+ code:html
+  <div class="node">...
+  <span class="plain"></span>
+  <span class="link"><a href="https://scrapbox.io/sta/">前に スペース区切りで sta</a></span>
+  <span class="plain"></span>
+  </div>
+ :c
+ literalでも入るので、あのアルゴリズムだな
+ そっか、headとtail、必ず入れるようになってる🐰
+  空のときは弾くべき
+ 
+ 先テストコード書くか
 
 ✅引用がないのでサポートしろ
  実装
@@ -272,7 +292,7 @@ HTML Renderer
  
  実装中... 2022/11/26 08:25:35
 
-❌literal parseのテストを書きたい
+❌literal parseのテストを書きたい to_Lr
  literalのparseが終わった時点の inlineelements が見れればいい
   どうやる？🐰
   self._inline_elements_at_literal_parsed みたいなのを内部的にもたせてしまう

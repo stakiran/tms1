@@ -755,7 +755,8 @@ class HTMLRenderer(Renderer):
         indent_part = f'margin-left: {margin_value}em;'
 
         lines.append(f'<div class="node" style="{indent_part}">')
-        lines.append(f'<code class="code-block">{codeblock.caption}')
+        lines.append(f'<span class="code-block-start">{codeblock.caption}</span>')
+        lines.append(f'<code class="code-block">')
         lines.extend(codeblock.lines)
         lines.append('</code></div>')
         return lines

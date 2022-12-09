@@ -712,7 +712,7 @@ class HTMLRenderer(Renderer):
         <meta name="referrer" content="same-origin"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
         <title>{title}</title>
-        <link rel="stylesheet" href="まだ考えてない.css"/>
+        <link rel="stylesheet" href="stylesheet.css"/>
     </head>
 <body>
 """

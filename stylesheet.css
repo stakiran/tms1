@@ -40,10 +40,3 @@ blockquote{
 }
 
 /* line */
-.line{
-    display: table;
-}
-.line span{
-    display: inline-block;
-}
-

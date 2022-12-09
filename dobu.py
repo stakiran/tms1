@@ -735,7 +735,7 @@ class HTMLRenderer(Renderer):
         quote_part = ''
         if lineobj.is_quote:
             quote_part = '<blockquote>'
-        lines.append(f'<div class="node line" style="{indent_part}">{quote_part}')
+        lines.append(f'<div class="node line" style="{indent_part}">{quote_part}<span>')
         return lines
 
     def _render_line_footer(self, lineobj, indent_depth):
@@ -744,7 +744,7 @@ class HTMLRenderer(Renderer):
         quote_part = ''
         if lineobj.is_quote:
             quote_part = '</blockquote>'
-        lines.append(f'{quote_part}</div>')
+        lines.append(f'</span>{quote_part}</div>')
         lines.append(blankline)
         return lines
 

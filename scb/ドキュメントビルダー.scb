@@ -184,6 +184,26 @@ div内のspan間に空白ができる問題
  2 html上の改行のせいで空白になっているのを除去する
   物理的に消すか、<!-->みたいなコメントでpaddingするか
   どっちも微妙……🐰
+ [【CSS】連続する <span> 要素の間に隙間ができてしまう問題について | にゃんタロー商会ブログ https://nyantaro-shokai.com/solution_for_gaps_between_span_tags]
+ 3 display: table; で、そもそもブロック要素をやめる
+ 3のやり方だとダメだ🐰
+  やっぱり改行を消すしかねえのか……
+ ---
+ white-space？
+  スクボは .line に white-space: pre-wrap; を当てているが、俺のだと普通に改行されてしまう……
+   code:css
+    .line{
+     white-space: pre-wrap;
+     word-wrap: break-word;
+    }
+   :c
+ div > span ではなく span > span にすればいい？
+  スクボもそうなってるわ
+  が、真似してもダメだなぁ🐰
+  上記 white space とか入れても同様
+ ---
+ いや、スクボもhtmlとしては改行無かったわ🐰🐰🐰
+  開発者ツール上で、inner htmlをコピーしてみると違いが出た
 
 ✅空白のplainが入る問題
  机上で解消

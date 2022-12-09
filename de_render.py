@@ -69,6 +69,7 @@ code:rootcodeblock
         page.name = 'scb page sample'
 
         renderer = dobu.HTMLRenderer(page)
+        renderer.use_line_flattening()
         lines = renderer.render()
 
         self.to_file('2_html_debugout.html', lines)

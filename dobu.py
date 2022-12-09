@@ -559,6 +559,9 @@ class Renderer:
     def __init__(self, page):
         self._page = page
 
+        # 行指向で扱っている関係上、各 line は改行されてレンダリングする。
+        # が、これだと困る場合があるので、改行をなくすオプションを用意。
+        # とりあえず HTML 用に、line（内のinline element）間の改行をなくす用。
         self._use_line_flattening = False
 
     @property
@@ -568,6 +571,9 @@ class Renderer:
     @page.setter
     def page(self, page):
         self._page = page
+
+    def use_line_flattening(self):
+        self._use_line_flattening = True
 
     def render(self):
         page = self._page
@@ -618,10 +624,12 @@ class Renderer:
                 element_outlines = self._render_plain(inline_element)
             outlines.extend(element_outlines)
 
-            # たぶん inlineelement 間のマージンを入れるi/fもあった方がいい……
-
         element_outlines = self._render_line_footer(lineobj, indent_depth)
         outlines.extend(element_outlines)
+
+        if self._use_line_flattening:
+            oneline = ''.join(outlines)
+            outlines = [oneline]
 
         return outlines
 

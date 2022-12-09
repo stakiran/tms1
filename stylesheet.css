@@ -15,8 +15,17 @@ blockquote{
     padding-left:4px
 }
 
-/* literal */
-.node .code-block,.node code{
-    background-color:rgba(0,0,0,.04)
+code{
+    font-family:Menlo,Monaco,Consolas,Courier New,monospace
 }
 
+/* literal */
+.node code{
+    background-color:rgba(0,0,0,0.04)
+}
+
+.node code[class*="code-block"]{
+    background-color:rgba(0,255,0,0.1)
+}
+
+/* codeblock */

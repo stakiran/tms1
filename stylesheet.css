@@ -8,15 +8,15 @@
     font-family:Roboto,Helvetica,Arial,Hiragino Sans,sans-serif;
     background-color:#fefefe
 }
-.line{
+.node{
     white-space:pre-wrap;
     word-wrap:break-word
 }
-.line img.icon{
+.node img.icon{
     height:1.3em;
     vertical-align:top
 }
-.line img.strong-icon{
+.node img.strong-icon{
     height:3.9em;
     vertical-align:bottom
 }
@@ -77,7 +77,7 @@
 .deco .deco-_{
     text-decoration:underline
 }
-.line .quote{
+.node .quote{
     margin:0;
     font-style:italic;
     background-color:hsla(0,0%,50%,.1);
@@ -85,13 +85,13 @@
     border-left:4px solid #a0a0a0;
     padding-left:4px
 }
-.line .quote>.tag{
+.node .quote>.tag{
     visibility:hidden
 }
 code{
     font-family:Menlo,Monaco,Consolas,Courier New,monospace
 }
-.line code{
+.node code{
     padding:0;
     font-size:90%;
     color:#342d9c;
@@ -99,29 +99,29 @@ code{
     word-wrap:break-word;
     border-radius:4px
 }
-.line .code-block,.line code{
+.node .code-block,.node code{
     background-color:rgba(0,0,0,.04)
 }
-.line .code-block{
+.node .code-block{
     display:block;
     line-height:2em
 }
-.line .code-block .code-block-start{
+.node .code-block .code-block-start{
     font-size:.9em;
     background-color:#ffcfc6;
     padding:1px 2px
 }
-.line code.helpfeel{
+.node code.helpfeel{
     background-color:#fbebdd;
     padding:3px!important
 }
-.line code.helpfeel .prefix{
+.node code.helpfeel .prefix{
     color:#f17c00
 }
-.line code.helpfeel .entry{
+.node code.helpfeel .entry{
     color:#cc5020
 }
-.line a.link .image{
+.node a.link .image{
     padding-bottom:3px;
     border:1.5px #8fadf9;
     border-style:none none solid
@@ -146,7 +146,7 @@ code{
 .table-block .cell:nth-child(odd){
     background-color:rgba(0,0,0,.04)
 }
-.line .formula{
+.node .formula{
     margin:auto 6px
 }
 a{
@@ -155,19 +155,19 @@ a{
 a:active,a:focus,a:hover{
     color:#1555f3
 }
-.line a.page-link{
+.node a.page-link{
     text-decoration:none
 }
-.line.line-title{
+.node.node-title{
     font-size:1.73em;
     line-height:42px;
     color:#000;
     padding-bottom:21px
 }
-.line code.cli .prefix{
+.node code.cli .prefix{
     color:#9c6248
 }
-.line span.code-block .code-block-start a,.table-block .table-block-start a{
+.node span.code-block .code-block-start a,.table-block .table-block-start a{
     color:#342d9c;
     text-decoration:underline
 }

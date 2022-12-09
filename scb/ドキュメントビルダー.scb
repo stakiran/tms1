@@ -116,8 +116,13 @@ Renderer方針
     まあこっちだよなぁ
     pageのparseは基底側で行ってしまいたい
 
-HTML Rendererに改行を消すオプションを入れる
+複数ファイルのパースと保存
  
+
+✅HTML Rendererに改行を消すオプションを入れる
+ Renderer に、parse_as_line の後の lines を oneline にするオプションを入れる
+ use_line_flattening
+ ok 2022/12/10 08:34:31
 
 ✅HTML Renderer
  どういうhtml tagやcss使えばいいか何もわからんのだが

@@ -756,9 +756,9 @@ class HTMLRenderer(Renderer):
 
         lines.append(f'<div class="node" style="{indent_part}">')
         lines.append(f'<span class="code-block-start">{codeblock.caption}</span>')
-        lines.append(f'<code class="code-block">')
+        lines.append(f'<pre class="code-block">')
         lines.extend(codeblock.lines)
-        lines.append('</code></div>')
+        lines.append('</pre></div>')
         return lines
 
     def _render_link(self, inline_element):

@@ -15,7 +15,7 @@ blockquote{
     padding-left:4px
 }
 
-code{
+code,pre{
     font-family:Menlo,Monaco,Consolas,Courier New,monospace;
 }
 
@@ -25,12 +25,15 @@ code{
 }
 
 /* codeblock */
-.node code[class*="code-block"]{
-    background-color:rgba(0,255,0,0.1);
+.node pre{
+    background-color:rgba(0,0,0,0.04);
+    /* background-color:rgba(0,255,0,0.1); */
     white-space:pre;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 .node .code-block-start{
-    font-size:.9em;
-    background-color:#ffcfc6;
-    padding:1px 2px
+    font-size:.7em;
+    background-color:rgba(255,0,0,0.05);
+    padding:1px 2px;
 }

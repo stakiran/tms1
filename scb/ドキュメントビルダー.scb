@@ -116,7 +116,10 @@ Renderer方針
     まあこっちだよなぁ
     pageのparseは基底側で行ってしまいたい
 
-HTML Renderer
+HTML Rendererに改行を消すオプションを入れる
+ 
+
+✅HTML Renderer
  どういうhtml tagやcss使えばいいか何もわからんのだが
  [scrapbox-readerを読む]
   基本的にdiv行を列挙する
@@ -178,7 +181,11 @@ HTML Renderer
   spanレベルで折り返されてlineが1行にならないので、normalにする
   が、codeの中身も改行されてないので、別途調整が要るか
 
-div内のspan間に空白ができる問題
+❌div内のspan間に空白ができる問題
+ 結論
+  [div内のspan間に空白ができる問題 - stakiran研究所 https://scrapbox.io/sta/div%E5%86%85%E3%81%AEspan%E9%96%93%E3%81%AB%E7%A9%BA%E7%99%BD%E3%81%8C%E3%81%A7%E3%81%8D%E3%82%8B%E5%95%8F%E9%A1%8C]
+  対処自体は、html上の改行を消す実装を入れる必要がある
+ ---
  [インライン要素で謎の隙間が出てくる問題 - Qiita https://qiita.com/nabettu/items/f34624d9094276d05e70]
  1 inline-block; で配置する
  2 html上の改行のせいで空白になっているのを除去する

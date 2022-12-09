@@ -600,7 +600,6 @@ class Renderer:
         outlines = []
 
         inline_elements = lineobj.inline_elements
-        rawline = lineobj.raw
 
         element_outlines = self._render_line_header(lineobj, indent_depth)
         outlines.extend(element_outlines)

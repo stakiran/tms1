@@ -1,3 +1,22 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i");
 
 /* from https://github.com/yuta0801/scrapbox-reader/blob/master/assets/app.css */
+
+.node{
+    white-space:normal;
+}
+
+blockquote{
+    margin:0;
+    font-style:italic;
+    background-color:hsla(0,0%,50%,.1);
+    display:block;
+    border-left:4px solid #a0a0a0;
+    padding-left:4px
+}
+
+/* literal */
+.node .code-block,.node code{
+    background-color:rgba(0,0,0,.04)
+}
+

@@ -173,6 +173,14 @@ HTML Renderer
   が、クラスを全部このとおりに合わせるのはよーわからんなぁ🐰
  中身はこれを使いつつ、一つずつ足してみるか……
 
+ white-space:pre-wrap;
+  [white-space - CSS: カスケーディングスタイルシート | MDN https://developer.mozilla.org/ja/docs/Web/CSS/white-space]
+  spanレベルで折り返されてlineが1行にならないので、normalにする
+  が、codeの中身も改行されてないので、別途調整が要るか
+
+ 
+
+
 ✅空白のplainが入る問題
  机上で解消
  テストコードでやっぱり一通りやっておくべき（to_Lr でサボってたやつだなｗ）

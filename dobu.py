@@ -728,11 +728,14 @@ class HTMLRenderer(Renderer):
 
     def _render_line_header(self, lineobj, indent_depth):
         lines = []
-        otamesi = '.'*indent_depth
+
+        margin_value = 1.5*indent_depth
+        indent_part = f'margin-left: {margin_value}em;'
+
         quote_part = ''
         if lineobj.is_quote:
             quote_part = '<blockquote>'
-        lines.append(f'<div class="node">{quote_part}{otamesi}')
+        lines.append(f'<div class="node" style="{indent_part}">{quote_part}')
         return lines
 
     def _render_line_footer(self, lineobj, indent_depth):
@@ -747,7 +750,11 @@ class HTMLRenderer(Renderer):
 
     def _render_codeblock(self, codeblock, indent_depth):
         lines = []
-        lines.append('<div class="code-block"><code>')
+
+        margin_value = 1.5*indent_depth
+        indent_part = f'margin-left: {margin_value}em;'
+
+        lines.append(f'<div class="code-block" style="{indent_part}"><code>')
         lines.extend(codeblock.lines)
         lines.append('</code></div>')
         return lines

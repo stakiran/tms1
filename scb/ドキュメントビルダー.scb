@@ -178,8 +178,12 @@ HTML Renderer
   spanレベルで折り返されてlineが1行にならないので、normalにする
   が、codeの中身も改行されてないので、別途調整が要るか
 
- 
-
+div内のspan間に空白ができる問題
+ [インライン要素で謎の隙間が出てくる問題 - Qiita https://qiita.com/nabettu/items/f34624d9094276d05e70]
+ 1 inline-block; で配置する
+ 2 html上の改行のせいで空白になっているのを除去する
+  物理的に消すか、<!-->みたいなコメントでpaddingするか
+  どっちも微妙……🐰
 
 ✅空白のplainが入る問題
  机上で解消

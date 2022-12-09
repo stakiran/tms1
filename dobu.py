@@ -559,6 +559,8 @@ class Renderer:
     def __init__(self, page):
         self.page = page
 
+        self._use_line_flattening = False
+
     @property
     def page(self):
         return self._page

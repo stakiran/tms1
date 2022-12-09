@@ -557,7 +557,7 @@ class Literal(InlineElement):
 
 class Renderer:
     def __init__(self, page):
-        self.page = page
+        self._page = page
 
         self._use_line_flattening = False
 
@@ -570,7 +570,7 @@ class Renderer:
         self._page = page
 
     def render(self):
-        page = self.page
+        page = self._page
         nodes = page.nodes
         outlines = []
 

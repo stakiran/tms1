@@ -85,7 +85,7 @@ class TestConverter(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_onepass(self):
+    def xtest_onepass(self):
         sourcedir = os.path.join(self.MYDIR, 'scb')
         outputdir = os.path.join(self.MYDIR, 'html_debugout')
 
@@ -104,6 +104,26 @@ class TestConverter(unittest.TestCase):
         testee_filepath = filepathes[0]
         page = converter.filepath2page(testee_filepath)
         converter.page2file(page)
+
+    def test_all_generate(self):
+        sourcedir = os.path.join(self.MYDIR, 'scb')
+        outputdir = os.path.join(self.MYDIR, 'html_debugout')
+
+        try:
+            os.mkdir(outputdir)
+        except FileExistsError:
+            pass
+
+        converter = dobu.Converter(output_directory=outputdir)
+        filepathes = converter.directory2filepathes(sourcedir)
+
+        print(f'sourcedir: {sourcedir}')
+        print(f'outputdir: {outputdir}')
+        print(f'the count of sourcefiles is: {len(filepathes)}')
+
+        for target_filepath in filepathes:
+            page = converter.filepath2page(target_filepath)
+            converter.page2file(page)
 
 if __name__ == '__main__':
     unittest.main()

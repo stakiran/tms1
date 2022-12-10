@@ -1,5 +1,8 @@
 # encoding: utf-8
 
+import glob
+import os
+
 def parse_arguments():
     import argparse
 
@@ -33,6 +36,12 @@ def string2lines(s):
 def list2file(filepath, ls):
     with open(filepath, encoding='utf8', mode='w') as f:
         f.writelines(['{:}\n'.format(line) for line in ls] )
+
+def get_filename(path):
+    return os.path.basename(path)
+
+def get_basename(path):
+    return os.path.splitext(get_filename(path))[0]
 
 def is_http(line, use_https=False):
     line_without_casesensitive = line.lower()
@@ -794,6 +803,39 @@ class HTMLRenderer(Renderer):
         lines = []
         lines.append(f'<span class="plain">{inline_element.text}</span>')
         return lines
+
+class Converter:
+    def __init__(self, output_directory):
+        self._output_directory = output_directory
+
+    @staticmethod
+    def directory2filepathes(directory):
+        query = os.path.join(
+            directory,
+            '*.scb',
+        )
+        filepathes = glob.glob(query, recursive=False)
+        return filepathes
+
+    @staticmethod
+    def filepath2page(filepath):
+        lines = file2list(filepath)
+        linepasser = LinePasser(lines)
+        pageparser = PageParser(linepasser)
+        page = pageparser.parse()
+        page.name = get_basename(filepath)
+        return page
+
+    def page2file(self, page):
+        renderer = HTMLRenderer(page)
+        renderer.use_line_flattening()
+        lines = renderer.render()
+
+        filename = f'{get_corrected_filename(page.name)}.html'
+        directory = self._output_directory
+        fullpath = os.path.join(directory, filename)
+
+        list2file(fullpath, lines)
 
 if __name__ == "__main__":
     args = parse_arguments()

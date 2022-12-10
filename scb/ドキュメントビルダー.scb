@@ -117,7 +117,10 @@ Renderer方針
     pageのparseは基底側で行ってしまいたい
 
 複数ファイルのパースと保存
- 
+ directory2filenames()
+ filename2page()
+ page2file()
+
 
 ✅HTML Rendererに改行を消すオプションを入れる
  Renderer に、parse_as_line の後の lines を oneline にするオプションを入れる

@@ -120,7 +120,8 @@ Renderer方針
  directory2filenames()
  filename2page()
  page2file()
-
+ 寝かせる
+ 
 
 ✅HTML Rendererに改行を消すオプションを入れる
  Renderer に、parse_as_line の後の lines を oneline にするオプションを入れる

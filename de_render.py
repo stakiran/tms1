@@ -1,4 +1,7 @@
 # encoding: utf-8
+import os
+import sys
+
 import unittest
 
 import dobu
@@ -73,6 +76,34 @@ code:rootcodeblock
         lines = renderer.render()
 
         self.to_file('2_html_debugout.html', lines)
+
+class TestConverter(unittest.TestCase):
+    def setUp(self):
+        self.MYFULLPATH = os.path.abspath(sys.argv[0])
+        self.MYDIR = os.path.dirname(self.MYFULLPATH)
+
+    def tearDown(self):
+        pass
+
+    def test_onepass(self):
+        sourcedir = os.path.join(self.MYDIR, 'scb')
+        outputdir = os.path.join(self.MYDIR, 'html_debugout')
+
+        try:
+            os.mkdir(outputdir)
+        except FileExistsError:
+            pass
+
+        converter = dobu.Converter(output_directory=outputdir)
+        filepathes = converter.directory2filepathes(sourcedir)
+
+        print(f'sourcedir: {sourcedir}')
+        print(f'outputdir: {outputdir}')
+        print(f'the count of sourcefiles is: {len(filepathes)}')
+
+        testee_filepath = filepathes[0]
+        page = converter.filepath2page(testee_filepath)
+        converter.page2file(page)
 
 if __name__ == '__main__':
     unittest.main()

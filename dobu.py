@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+import html
 import glob
 import os
 
@@ -72,6 +73,9 @@ def get_corrected_filename(filename):
     for target_char in target_chars:
         ret = ret.replace(target_char, after_char)
     return ret
+
+def escape(s):
+    return html.escape(s, quote=True)
 
 class Stack:
     def __init__(self, ls):
@@ -721,7 +725,7 @@ class HTMLRenderer(Renderer):
         super().__init__(page)
 
     def _render_page_header(self, page):
-        title = f'{page.name}'
+        title = f'{escape(page.name)}'
         s = f"""
 <!DOCTYPE html>
 <html>
@@ -773,9 +777,12 @@ class HTMLRenderer(Renderer):
         indent_part = f'margin-left: {margin_value}em;'
 
         lines.append(f'<div class="node" style="{indent_part}">')
-        lines.append(f'<span class="code-block-start">{codeblock.caption}</span>')
+        lines.append(f'<span class="code-block-start">{escape(codeblock.caption)}</span>')
         lines.append(f'<pre class="code-block">')
-        lines.extend(codeblock.lines)
+
+        codeblocklines = [escape(line) for line in codeblock.lines]
+        lines.extend(codeblocklines)
+
         lines.append('</pre></div>')
         return lines
 
@@ -791,17 +798,17 @@ class HTMLRenderer(Renderer):
             uri = get_corrected_filename(uri)
             uri = f'{uri}.html'
 
-        lines.append(f'<span class="link"><a href="{uri}">{text}</a></span>')
+        lines.append(f'<span class="link"><a href="{escape(uri)}">{escape(text)}</a></span>')
         return lines
 
     def _render_literal(self, inline_element):
         lines = []
-        lines.append(f'<code class="literal">{inline_element.text}</code>')
+        lines.append(f'<code class="literal">{escape(inline_element.text)}</code>')
         return lines
 
     def _render_plain(self, inline_element):
         lines = []
-        lines.append(f'<span class="plain">{inline_element.text}</span>')
+        lines.append(f'<span class="plain">{escape(inline_element.text)}</span>')
         return lines
 
 class Converter:

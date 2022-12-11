@@ -83,15 +83,25 @@ dobuフォーマット
   scbから変換する中間オブジェクト
 
 htmlファイルに出力してみて、気になるところ
- [GTD file:///D:/work/github/stakiran/tms1/html_debugout/GTD.html]
+ GTD
   引用ブロックがマージンが深い
- [繰り返し行うという営為 file:///D:/work/github/stakiran/tms1/html_debugout/%E7%B9%B0%E3%82%8A%E8%BF%94%E3%81%97%E8%A1%8C%E3%81%86%E3%81%A8%E3%81%84%E3%81%86%E5%96%B6%E7%82%BA.html]
+ 繰り返し行うという営為
   行が長くて続いてると正直読みにくい
- [ドキュメントビルダー file:///D:/work/github/stakiran/tms1/html_debugout/%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%83%93%E3%83%AB%E3%83%80%E3%83%BC.html]
+ ✅ドキュメントビルダー
   途中でコードブロックが終端していない
   `<code>`みたいにhtml書いてる場合にエスケープが要る🐰🐰
    これはhtml renderrerの話なので、そこでやる
- 
+ trash
+  定義生成パターンが空ファイル
+
+✅エスケープ対処
+ text, url, linesなど実際に差し込む部分に対してのみ行う必要がある
+ nodefactoryかなぁ🐰
+ いや、利用者の責務だから、利用者側で頑張るべき
+  生成元は必要最小限であるべきだろ
+ htmlrendererの各場所でもれなく行うしかないな……🐰
+ エスケープ関数でくくっちゃうか
+  espace()
 
 ✅パーサ一通り書いたけど次は？
  CLIを経由した出力ワンパス

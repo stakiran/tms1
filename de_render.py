@@ -60,7 +60,7 @@ code:rootcodeblock
         renderer = dobu.DebugRenderer(page)
         lines = renderer.render()
 
-        self.to_file('1_debug_debugout.txt', lines)
+        self.to_file('debugout_debug.txt', lines)
 
     def test_print_with_htmlrenderer(self):
         scb = self._scb
@@ -75,7 +75,7 @@ code:rootcodeblock
         renderer.use_line_flattening()
         lines = renderer.render()
 
-        self.to_file('2_html_debugout.html', lines)
+        self.to_file('debugout_html.html', lines)
 
 class TestConverter(unittest.TestCase):
     def setUp(self):

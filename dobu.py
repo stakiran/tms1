@@ -11,14 +11,12 @@ def parse_arguments():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
 
-    parser.add_argument('-i', '--input-path', default=None)
-    parser.add_argument('--input-from-cd', default=False, action='store_true')
+    parser.add_argument('-i', '--input-single', default=None)
+    parser.add_argument('-c', '--input-from-cd', default=False, action='store_true')
 
-    parser.add_argument('--to-dobu', default=True, action='store_true')
-    parser.add_argument('--to-html', default=False, action='store_true')
+    parser.add_argument('-o', '--output-directory', default=None)
 
-    parser.add_argument('--not-stdout-but-file', default=False, action='store_true')
-
+    parser.add_argument('--html-stylesheet', default=None)
     parser.add_argument('--html-template', default=None)
 
     args = parser.parse_args()
@@ -848,3 +846,20 @@ class Converter:
 
 if __name__ == "__main__":
     args = parse_arguments()
+
+    single_target = args.input_single
+    target_directory = args.input_from_cd
+
+    converter = Converter(output_directory=args.output_directory)
+
+    target_filepathes = []
+    if single_target:
+        target_filepathes.append(single_target)
+    elif target_directory:
+        target_filepathes = converter.directory2filepathes(target_directory)
+    else:
+        raise RuntimeError('No target given.')
+
+    for target_filepath in target_filepathes:
+        page = converter.filepath2page(target_filepath)
+        converter.page2file(page)

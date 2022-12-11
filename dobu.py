@@ -341,6 +341,7 @@ class Line:
         firstchar = line[0]
         if firstchar == '>':
             self._is_quote = True
+            self._raw = self._raw[1:]
 
     def _parse(self):
         new_inline_elements = []

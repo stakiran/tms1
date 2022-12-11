@@ -4,10 +4,24 @@
 
 .node{
     white-space:normal;
+    font-size:15px;
+    line-height:28px;
+    font-family:Roboto,Helvetica,Arial,Hiragino Sans,sans-serif;
+    background-color:#fefefe
 }
 
 code,pre{
     font-family:Menlo,Monaco,Consolas,Courier New,monospace;
+}
+
+/* line */
+.line > span{
+    border-left: 4px ridge #000000;
+    padding-left: 6px;
+}
+.line > span:empty{
+    border-left: none;
+    padding-left: none;
 }
 
 /* quote */
@@ -38,5 +52,3 @@ blockquote{
     background-color:rgba(255,0,0,0.05);
     padding:1px 2px;
 }
-
-/* line */

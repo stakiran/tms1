@@ -322,9 +322,10 @@ class Line:
         self._inline_elements = []
         self._is_quote = False
 
+        self._parse_mode()
+
         initial = Undefined(self._raw)
         self._inline_elements.append(initial)
-        self._parse_mode()
         self._parse()
 
     def _parse_mode(self):

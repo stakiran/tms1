@@ -11,8 +11,8 @@ def parse_arguments():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
 
-    parser.add_argument('-i', '--input-single', default=None)
-    parser.add_argument('-c', '--input-from-cd', default=False, action='store_true')
+    parser.add_argument('--input-single', default=None)
+    parser.add_argument('-i', '--input-directory', default=False)
 
     parser.add_argument('-o', '--output-directory', default=None)
 
@@ -848,7 +848,7 @@ if __name__ == "__main__":
     args = parse_arguments()
 
     single_target = args.input_single
-    target_directory = args.input_from_cd
+    target_directory = args.input_directory
 
     converter = Converter(output_directory=args.output_directory)
 

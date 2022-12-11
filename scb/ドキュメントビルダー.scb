@@ -89,8 +89,11 @@ dobuフォーマット
  3 2について全部ファイル有無を見ていって、無い場合はダミーをつくる
 ここまでつくるならlinksや2hoplinkも表示してしまいたいけど……
 
-コマンドのサポート
- stylesheet.cssも併せてコピーしたい
+stylesheetとtemplateのサポート
+ templateは外部ファイル化する。{title}はそのまま書かせればいい
+ stylesheetは……いらないか。template側で指定すればいい
+
+✅コマンドのサポート
 
 ✅htmlファイルに出力してみて、気になるところ
  ✅GTD

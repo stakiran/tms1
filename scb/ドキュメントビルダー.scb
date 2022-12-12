@@ -93,8 +93,9 @@ stylesheetとtemplateのサポート
  templateは外部ファイル化する。{title}はそのまま書かせればいい
  stylesheetは……いらないか。template側で指定すればいい
 
-先にデプロイをサポートする
- 
+✅先にデプロイをサポートする
+ [ドキュメントビルダー https://tms1-stakiran.vercel.app/%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%83%93%E3%83%AB%E3%83%80%E3%83%BC.html]
+ ok 2022/12/12 18:32:30
 
 ✅コマンドのサポート
 

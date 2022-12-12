@@ -87,11 +87,20 @@ dobuフォーマット
  1 page.link_uris() みたいなのを用意する
  2 全pageについて1を実行して、このネットワークのリンク先という集合を得る
  3 2について全部ファイル有無を見ていって、無い場合はダミーをつくる
+ ---
+ Network
+  _pages: Page[]
+ Page
+  links: Link[]
+  
 ここまでつくるならlinksや2hoplinkも表示してしまいたいけど……
 
 stylesheetとtemplateのサポート
  templateは外部ファイル化する。{title}はそのまま書かせればいい
  stylesheetは……いらないか。template側で指定すればいい
+
+blankline
+ たぶん Line.is_blank() が良い
 
 ✅先にデプロイをサポートする
  [ドキュメントビルダー https://tms1-stakiran.vercel.app/%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%83%93%E3%83%AB%E3%83%80%E3%83%BC.html]

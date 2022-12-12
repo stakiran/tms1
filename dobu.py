@@ -477,14 +477,6 @@ class Line:
     def is_quote(self):
         return self._is_quote
 
-class QuoteLine:
-    def __init__(self):
-        pass
-
-class BlankLine:
-    def __init__(self):
-        pass
-
 class InlineElement:
     def __init__(self, raw):
         self._raw = raw

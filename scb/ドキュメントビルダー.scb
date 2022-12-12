@@ -93,6 +93,9 @@ stylesheetとtemplateのサポート
  templateは外部ファイル化する。{title}はそのまま書かせればいい
  stylesheetは……いらないか。template側で指定すればいい
 
+先にデプロイをサポートする
+ 
+
 ✅コマンドのサポート
 
 ✅htmlファイルに出力してみて、気になるところ

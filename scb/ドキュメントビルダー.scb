@@ -1,3 +1,101 @@
+空ファイル
+ これは pages を解釈する層が要るなぁ……🐰
+ 1 page.link_uris() みたいなのを用意する
+ 2 全pageについて1を実行して、このネットワークのリンク先という集合を得る
+ 3 2について全部ファイル有無を見ていって、無い場合はダミーをつくる
+ 先にネットワーク層だな🐰
+linksや2hoplinkも表示してしまいたいけど……
+ 先にネットワーク層だな🐰
+
+ネットワーク層をつくる
+ ---
+ Network
+  _pages: Page[]
+ Page
+  links: Link[]
+ Line:
+  links: Link[]
+ ---
+ グラフをどうつくるか
+  scbjson2ghpagesのときは？
+   https://github.com/stakiran/scbjson2ghpages/blob/master/scbjson2ghpages.py#L135
+   https://github.com/stakiran/scbjson2ghpages/blob/master/scbjson2ghpages.py#L364
+   page
+    linkto_instancesとlinkfrom_instancesを持っている
+    linktoはupdate_linkto()で更新
+    linkfromはappend_to_linkfrom()で更新
+    いずれにせよ Page のインスタンスへの参照を持っている（ページ名ではなく）
+   2hopは、表示時にその場で計算している（pageには持たせない）
+   [✅Linksに相当するFooterをつける - stakiran研究所 https://scrapbox.io/sta/%E2%9C%85Links%E3%81%AB%E7%9B%B8%E5%BD%93%E3%81%99%E3%82%8BFooter%E3%82%92%E3%81%A4%E3%81%91%E3%82%8B]
+   [解説付き一文字名 - stakiran研究所 https://scrapbox.io/sta/%E8%A7%A3%E8%AA%AC%E4%BB%98%E3%81%8D%E4%B8%80%E6%96%87%E5%AD%97%E5%90%8D]
+   テストは？
+    手作業で（つくった）json を実際にスクボに食わせることで見ている
+    今回はテストコードにしてえなー🐰
+  今回は？
+   また一から書いてみるか
+   今度はわかりやすく、賢く、計算量も抑えて
+ ---
+ linktoは辿るだけ
+ linkfromは二重ネスト不可避か
+ 2hop
+
+ 1 networkが持つすべてのpage（が持つすべてのlink）を辿って、すべてのpagenameをつくる
+  ゴーストリンク分も手に入れることができる
+  code:json
+   [
+    "pagename1",
+    "pagename2",
+    ……
+   ]
+  :c
+ 2 networkが持つすべてのpage（のインスタンス）を辿って、pagenameをキー、pageインスタンスを値とした辞書をつくる
+  code:json
+   {
+    "pagename1": page,
+    "pagename2": page,
+    ...
+   }
+  :c
+  このとき、ゴーストページ分のインスタンスもつくる
+   Page.is_ghost() もサポートするか
+
+ 3 1+2より、各pageインスタンスに、linkto先のpageインスタンスをぶら下げる
+  page.linkto_pages
+
+ 4 3より、各pageインスタンスに、linkfrom先のpageインスタンスをぶら下げる
+  code:py
+   # A-->B1
+   # |
+   # +-->B2
+   for A in all_pages:
+       for B in A.linkto_pages:
+           B.append_to_linkfrom(A)
+  :c
+
+ 5 3+4より、linksをつくる
+  links は linkto + linkfrom
+  ただ並び順が使いづらそうなので工夫が必要か……🐰
+   sta-scbではタイムスタンプがないので、別の指標を使う必要
+   page.指標プロパティ みたいなのをつくって、sortさせればよい
+    line_count, cline_count, length_by_string, codeblock_count etc
+   あるいは 2022/12/13 みたいな文字列を手動で書いているので、それをタイムスタンプにする案もある
+    ……が、これは user defined でしかないので、このスクリとして実装するべきではない🐰
+
+ 最後に、2hopリンクだけども……
+  
+
+
+
+stylesheetとtemplateのサポート
+ templateは外部ファイル化する。{title}はそのまま書かせればいい
+ stylesheetは……いらないか。template側で指定すればいい
+
+blankline
+ たぶん Line.is_blank() が良い
+
+---
+3 ひとまずデプロイするまで
+
 Structure:
  Page
   nodes: Node[]
@@ -81,26 +179,6 @@ dobuフォーマット
   入力ファイルフォーマット。hidemaru scbフォーマット
  2 mebject
   scbから変換する中間オブジェクト
-
-空ファイル
- これは pages を解釈する層が要るなぁ……🐰
- 1 page.link_uris() みたいなのを用意する
- 2 全pageについて1を実行して、このネットワークのリンク先という集合を得る
- 3 2について全部ファイル有無を見ていって、無い場合はダミーをつくる
- ---
- Network
-  _pages: Page[]
- Page
-  links: Link[]
-  
-ここまでつくるならlinksや2hoplinkも表示してしまいたいけど……
-
-stylesheetとtemplateのサポート
- templateは外部ファイル化する。{title}はそのまま書かせればいい
- stylesheetは……いらないか。template側で指定すればいい
-
-blankline
- たぶん Line.is_blank() が良い
 
 ✅先にデプロイをサポートする
  [ドキュメントビルダー https://tms1-stakiran.vercel.app/%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%83%93%E3%83%AB%E3%83%80%E3%83%BC.html]

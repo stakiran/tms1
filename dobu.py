@@ -232,6 +232,8 @@ class Page:
         self._nodes = []
         self._name = ''
 
+        self._inpage_links = []
+
     def add_node(self, node):
         self._nodes.append(node)
 
@@ -246,6 +248,25 @@ class Page:
     @name.setter
     def name(self, name):
         self._name = name
+
+    @property
+    def inpagelinks(self):
+        # ネットワーク計算時、page が持つリンク一覧は何度も参照する。
+        # 毎回計算するとバカにならないと思われるのでキャッシュしてみる。
+        if self._inpage_links:
+            return self._inpage_links
+
+        links = []
+        for node in self._nodes:
+            nodecontent = node.content
+            if not nodecontent.is_line():
+                continue
+            lineobj = nodecontent.content
+            inpagelinks = lineobj.inpagelinks
+            links.extend(inpagelinks)
+
+        self._inpage_links = links
+        return self._inpage_links
 
 class Node:
     def __init__(self):

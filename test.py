@@ -257,6 +257,44 @@ code:rootcodeblock
         self.assertTrue(nodes[9].content.is_line())
         self.assertTrue(nodes[10].content.is_codeblock())
 
+    def test_inpagelinks(self):
+        scb = """scb page sample
+line
+ line1
+  line2
+   [link1]
+block
+ code:codeblock1
+  aaa
+  bbb
+  [https://www.google.com/ not link]
+  [https://www.google.com/]
+ :c
+ line1 [link2] [not link https://www.google.com/]
+special lines
+ >quote [link3]
+ `literal [not link]` [link4] [りんく5] `not link`
+ >[link6] `literal [not link]`
+"""
+
+        lines = scb.split('\n')
+        linepasser = dobu.LinePasser(lines)
+
+        pageparser = dobu.PageParser(linepasser)
+
+        page = pageparser.parse()
+
+        a = page.inpagelinks
+
+        e = 6
+        self.assertEqual(e, len(a))
+        self.assertEqual('link1', a[0].text)
+        self.assertEqual('link2', a[1].text)
+        self.assertEqual('link3', a[2].text)
+        self.assertEqual('link4', a[3].text)
+        self.assertEqual('りんく5', a[4].text)
+        self.assertEqual('link6', a[5].text)
+
 class TestLine(unittest.TestCase):
     def setUp(self):
         pass

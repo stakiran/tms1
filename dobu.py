@@ -550,6 +550,10 @@ class Link(InlineElement):
             return
         self._text = line
 
+    def is_in_page(self):
+        is_link_in_page = self._uri == ''
+        return is_link_in_page
+
 class Uri(InlineElement):
     # 今のところ画像は無いので、Image ではなく「URLのみ記されたもの」的な概念として定義しておく
     def __init__(self, raw):
@@ -778,13 +782,13 @@ class HTMLRenderer(Renderer):
         lines.append('</pre></div>')
         return lines
 
-    def _render_link(self, inline_element):
+    def _render_link(self, link):
         lines = []
 
-        uri = inline_element.uri
-        text = inline_element.text
-        is_link_in_page = inline_element.uri == ''
-        if is_link_in_page:
+        uri = link.uri
+        text = link.text
+
+        if link.is_in_page():
             filename = text
             uri = filename
             uri = get_corrected_filename(uri)

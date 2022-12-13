@@ -592,6 +592,10 @@ class Literal(InlineElement):
         super().__init__(raw)
         self.text = raw
 
+class Network:
+    def __init__(self, pages):
+        self._pages = []
+
 class Renderer:
     def __init__(self, page):
         self._page = page

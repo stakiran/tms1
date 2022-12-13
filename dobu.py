@@ -474,6 +474,18 @@ class Line:
         return self._inline_elements
 
     @property
+    def inpagelinks(self):
+        outs = []
+        for inline_element in self._inline_elements:
+            if not isinstance(inline_element, Link):
+                continue
+            link = inline_element
+            if not link.is_in_page():
+                continue
+            outs.append(link)
+        return outs
+
+    @property
     def is_quote(self):
         return self._is_quote
 

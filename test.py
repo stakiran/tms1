@@ -312,6 +312,21 @@ class TestLine(unittest.TestCase):
         count_of_element_is_only_link = 1
         self.assertEqual(count_of_element_is_only_link, len(a))
 
+    def test_inpagelinks(self):
+        line = '[Google]、[Google URLなし]、[Google https://www.google.com/]、[https://www.google.com/ Google]、[https://www.google.com/]'
+        lineobj = dobu.Line(line)
+
+        a = lineobj.inpagelinks
+        self.assertEqual(2, len(a))
+        self.assertEqual('Google', a[0].text)
+        self.assertEqual('Google URLなし', a[1].text)
+
+        line = 'Google、Google URLなし、Google https://www.google.com/、https://www.google.com/ Google、https://www.google.com/'
+        lineobj = dobu.Line(line)
+
+        a = lineobj.inpagelinks
+        self.assertEqual(0, len(a))
+
 class TestLink(unittest.TestCase):
     def setUp(self):
         pass

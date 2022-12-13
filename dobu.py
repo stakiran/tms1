@@ -587,11 +587,6 @@ class Link(InlineElement):
         is_link_in_page = self._uri == ''
         return is_link_in_page
 
-class Uri(InlineElement):
-    # 今のところ画像は無いので、Image ではなく「URLのみ記されたもの」的な概念として定義しておく
-    def __init__(self, raw):
-        super().__init__(raw)
-
 class Literal(InlineElement):
     def __init__(self, raw):
         super().__init__(raw)

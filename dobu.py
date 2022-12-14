@@ -242,6 +242,16 @@ class Page:
     def add_node(self, node):
         self._nodes.append(node)
 
+    def extend_as_backmatter(self, extender_page):
+        ''' backmatter とは
+        ページのコンテンツではないが、コンテンツ末尾に追加したいもの
+        その中身はページと同様、パース済の node から成っている
+
+        コンテンツではないので inpage links や is ghost の計算には絡まない
+        とりあえず関連リンクを想定'''
+        extender_nodes = extender_page.nodes
+        self._nodes.extend(extender_nodes)
+
     @property
     def nodes(self):
         return self._nodes

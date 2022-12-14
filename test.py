@@ -3,6 +3,14 @@ import unittest
 
 import dobu
 
+def pagefactory(s, pagename='dummy'):
+    lines = s.split('\n')
+    linepasser = dobu.LinePasser(lines)
+    pageparser = dobu.PageParser(linepasser)
+    page = pageparser.parse()
+    page.name = pagename
+    return page
+
 class TestIsCorrectFilename(unittest.TestCase):
     def setUp(self):
         pass
@@ -383,6 +391,44 @@ special lines
         self.assertEqual('link4', a[3].text)
         self.assertEqual('りんく5', a[4].text)
         self.assertEqual('link6', a[5].text)
+
+    def test_extend(self):
+        scb = """scb page sample
+line
+ line1
+---"""
+        backmatter = """関連リンク
+links
+ [a] [b] [c]
+2hop links
+ [b] ← [x] [y]
+ [c] ← [z]"""
+        page = pagefactory(scb)
+        backmatter_links = pagefactory(backmatter)
+
+        page.extend_as_backmatter(backmatter_links)
+        a = page.inpagelinks
+
+        nodes = page.nodes
+
+        e = 10
+        a = len(nodes)
+        self.assertEqual(e, a)
+
+        # 始点と終点を軽めに
+        self.assertTrue(nodes[4].content.is_line())
+        self.assertTrue(nodes[9].content.is_line())
+
+        # 軽めにabcの部分だけ見ておく
+        line_abc = nodes[6].content.content
+        self.assertTrue(isinstance(line_abc, dobu.Line))
+        inpagelinks = line_abc.inpagelinks
+        e = 3
+        a = len(inpagelinks)
+        self.assertEqual(e, a)
+        self.assertEqual('a', inpagelinks[0].text)
+        self.assertEqual('b', inpagelinks[1].text)
+        self.assertEqual('c', inpagelinks[2].text)
 
 class TestLine(unittest.TestCase):
     def setUp(self):

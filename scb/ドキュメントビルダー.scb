@@ -103,6 +103,23 @@ linksや2hoplinkも表示してしまいたいけど……
   pagerank的な……
    Page.pagerank を事前に計算しておく必要がある
 
+pageに関連リンクコンテンツを追加するには
+ 制約
+  page自体はnodeしか持ってない
+  事前に「関連リンクを表現するlines」を追加すると、それもコンテンツ（network計算時に見るリンク）に含まれちゃう
+ `page1.extend(page2)`
+  これか？
+ pageインスタンスはlinepasserとpageparserでつくれる
+  code:関連リンクはこんな感じ.scb
+  links
+   [a] [b]
+  2hop links
+   [b] ← [x] [y]
+  :c
+ 以下はたぶん一緒にやる
+  関連リンク部分のテキストをつくる処理
+  pageインスタンスに、そいつのlinktoやlinkfromをぶら下げる処理
+
 pageインスタンスのリストを並べ替えるマン
  たぶん要る
  scrapboxでもページ一覧のみならず、関連ページリストでも機能させている

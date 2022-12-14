@@ -646,6 +646,7 @@ class Network:
                 page = self._physicalpage_dict[pagename]
             if is_ghost:
                 page = Page(is_ghost=True)
+                page.name = pagename
             self._pages.append(page)
 
         self._page_dict = {}

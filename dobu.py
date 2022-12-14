@@ -231,11 +231,13 @@ class NodeFactory:
         return nodecontent
 
 class Page:
-    def __init__(self):
+    def __init__(self, is_ghost=False):
         self._nodes = []
         self._name = ''
 
         self._inpage_links = []
+
+        self._is_ghost = is_ghost
 
     def add_node(self, node):
         self._nodes.append(node)
@@ -251,6 +253,10 @@ class Page:
     @name.setter
     def name(self, name):
         self._name = name
+
+    @property
+    def is_ghost(self):
+        return self._is_ghost
 
     @property
     def inpagelinks(self):
@@ -596,32 +602,57 @@ class Literal(InlineElement):
         self.text = raw
 
 class Network:
-    def __init__(self, pages):
-        self._pages = pages
+    '''
+    physical page: 実際に存在するページ
+    ghost page   : 存在しないが、リンクがされているページ
 
-    def _create_all_pagenames(self):
-        self._pagenames = []
-        for page in self._pages:
-            this_pagename = page.name
-            self._pagenames.append(this_pagename)
-            for link in page.inpagelinks:
-                if not link.is_in_page():
-                    continue
-                linkee_pagename = link.text
-                # ghost page 検出はここだろ
-                # ってことは、事前に page dict つくってないといけない
-                self._pagenames.append(linkee_pagename)
-        without_dup = remove_duplicates_from_list(self._pagenames)
-        self._pagenames = without_dup
+    ghost page Aは実体を持たず、[A]という形でリンクのみされている。
+    このままではページとして扱えないので、明示的に Page インスタンス化する必要がある。
+    なお、導出には「ghost pageでないpage」が必要なので、レトロニムとして physical page と名付ける。
+    '''
 
-    def _create_page_dict(self):
-        self._pagedict = {}
-        # ん、ghost page どうやって検出するんだ？
-        for page in self._pages:
+    def __init__(self, physical_pages):
+        self._physical_pages = physical_pages
+
+    def _create_physicalpage_dict(self):
+        self._physicalpage_dict = {}
+        for page in self._physical_pages:
             pagename = page.name
             key = pagename
             value = page
-            self._pagedict[key] = value
+            self._physicalpage_dict[key] = value
+
+    def _create_all_pagenames(self):
+        physicalpage_dict = {}
+        for page in self._physical_pages:
+            pagename = page.name
+            key = pagename
+            DUMMY = 0
+            value = DUMMY
+            physicalpage_dict[key] = value
+
+        self._pages = []
+        self._pagenames = []
+        for page in self._physical_pages:
+            self._pages.append(page)
+            self._pagenames.append(page.name)
+
+            for link in page.inpagelinks:
+                if not link.is_in_page():
+                    continue
+
+                linkee_pagename = link.text
+                # ページ名の correct name 修正をどう入れ込むか、まだ自信がない……
+                # あとでテストコード書きながらちゃんと吸収する
+                is_ghost = not linkee_pagename in physicalpage_dict
+                if is_ghost:
+                    ghostpage = Page(is_ghost=True)
+                    self._pages.append(ghostpage)
+                self._pagenames.append(linkee_pagename)
+
+        without_dup = remove_duplicates_from_list(self._pagenames)
+        self._pagenames = without_dup
+
 
 class Renderer:
     def __init__(self, page):

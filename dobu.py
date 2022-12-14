@@ -75,6 +75,9 @@ def get_corrected_filename(filename):
 def escape(s):
     return html.escape(s, quote=True)
 
+def remove_duplicates_from_list(ls):
+    return list(set(ls))
+
 class Stack:
     def __init__(self, ls):
         self._contents = ls
@@ -594,7 +597,31 @@ class Literal(InlineElement):
 
 class Network:
     def __init__(self, pages):
-        self._pages = []
+        self._pages = pages
+
+    def _create_all_pagenames(self):
+        self._pagenames = []
+        for page in self._pages:
+            this_pagename = page.name
+            self._pagenames.append(this_pagename)
+            for link in page.inpagelinks:
+                if not link.is_in_page():
+                    continue
+                linkee_pagename = link.text
+                # ghost page 検出はここだろ
+                # ってことは、事前に page dict つくってないといけない
+                self._pagenames.append(linkee_pagename)
+        without_dup = remove_duplicates_from_list(self._pagenames)
+        self._pagenames = without_dup
+
+    def _create_page_dict(self):
+        self._pagedict = {}
+        # ん、ghost page どうやって検出するんだ？
+        for page in self._pages:
+            pagename = page.name
+            key = pagename
+            value = page
+            self._pagedict[key] = value
 
 class Renderer:
     def __init__(self, page):

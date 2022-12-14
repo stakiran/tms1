@@ -271,6 +271,14 @@ class TestNetwork(unittest.TestCase):
         ]
 
         network = dobu.Network(physical_pages)
+        page_dict = network.page_dict
+
+        a = len(page_dict.keys())
+        e = 11 # zero + to分2つ + from分2つ + xyab + ghost2つ
+        self.assertEqual(e, a)
+
+        #self.assertEqual('ZERO', page_dict['ZERO'].name)
+
 
 class TestPage(unittest.TestCase):
     def setUp(self):

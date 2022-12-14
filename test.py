@@ -204,6 +204,74 @@ class TestIndent(unittest.TestCase):
         a = dobu.Indent.get_depth(s)
         self.assertEqual(e, a)
 
+class TestNetwork(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def pagefactory(self, s, pagename):
+        lines = s.split('\n')
+        linepasser = dobu.LinePasser(lines)
+        pageparser = dobu.PageParser(linepasser)
+        page = pageparser.parse()
+        page.name = pagename
+        return page
+
+    def test_all_pages(self):
+        '''
+        テストデータ
+         [✅Linksに相当するFooterをつける - stakiran研究所 https://scrapbox.io/sta/%E2%9C%85Links%E3%81%AB%E7%9B%B8%E5%BD%93%E3%81%99%E3%82%8BFooter%E3%82%92%E3%81%A4%E3%81%91%E3%82%8B#6091f7ed79d3a90000a3a074]
+          https://gyazo.com/9ba7e0d7682feeb1115628a0af61b093
+          昔作った link 系を試す最小テストデータ構造があるので、これに従う
+         加えて ghost page 分として、G1 と GN も追加
+        '''
+
+        ZERO = """孤立点
+ どこにもリンクしていないし、されてもいない"""
+        T1 = """linkto 1
+ 一箇所だけリンクしている
+ [X]
+"""
+        TN = """linkto N
+ 複数箇所にリンクしている
+ [X]
+ [Y]
+"""
+        F1 = """linkfrom 1
+ 一箇所からリンクされている
+"""
+        FN = """linkfrom N
+ 複数箇所からリンクされている
+"""
+        X = """page x
+ [F1] [G1]
+ [FN] [GN]
+"""
+        Y = """page y
+ [FN] [GN]
+"""
+        A = """page a
+ [X]
+"""
+        B = """page b
+ [X]
+"""
+        physical_pages = [
+            self.pagefactory(ZERO, 'ZERO'),
+            self.pagefactory(T1, 'T1'),
+            self.pagefactory(TN, 'TN'),
+            self.pagefactory(F1, 'F1'),
+            self.pagefactory(FN, 'FN'),
+            self.pagefactory(X, 'X'),
+            self.pagefactory(Y, 'Y'),
+            self.pagefactory(A, 'ページA Xを基点とした2hop用'),
+            self.pagefactory(B, 'ページB Xを基点とした2hop用'),
+        ]
+
+        network = dobu.Network(physical_pages)
+
 class TestPage(unittest.TestCase):
     def setUp(self):
         pass

@@ -638,7 +638,7 @@ class Network:
                 self._pagename_dict[k] = DUMMY
 
         self._pages = []
-        for pagename in self._pagename_dict.keys:
+        for pagename in self._pagename_dict.keys():
             is_physical = pagename in self._physicalpage_dict
             is_ghost = not is_physical
 

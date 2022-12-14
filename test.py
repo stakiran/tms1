@@ -277,8 +277,21 @@ class TestNetwork(unittest.TestCase):
         e = 11 # zero + to分2つ + from分2つ + xyab + ghost2つ
         self.assertEqual(e, a)
 
-        #self.assertEqual('ZERO', page_dict['ZERO'].name)
-
+        self.assertEqual('ZERO', page_dict['ZERO'].name)
+        self.assertEqual('T1', page_dict['T1'].name)
+        self.assertEqual('TN', page_dict['TN'].name)
+        self.assertEqual('F1', page_dict['F1'].name)
+        self.assertEqual('FN', page_dict['FN'].name)
+        self.assertEqual('X', page_dict['X'].name)
+        self.assertEqual('Y', page_dict['Y'].name)
+        self.assertEqual('ページA Xを基点とした2hop用', page_dict['ページA Xを基点とした2hop用'].name)
+        self.assertEqual('ページB Xを基点とした2hop用', page_dict['ページB Xを基点とした2hop用'].name)
+        # ghost
+        self.assertEqual('G1', page_dict['G1'].name)
+        self.assertEqual('GN', page_dict['GN'].name)
+        self.assertTrue(page_dict['G1'].is_ghost)
+        self.assertTrue(page_dict['GN'].is_ghost)
+        self.assertFalse(page_dict['X'].is_ghost)
 
 class TestPage(unittest.TestCase):
     def setUp(self):

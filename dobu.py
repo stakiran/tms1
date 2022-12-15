@@ -641,6 +641,7 @@ class Network:
 
         self._create_all_pages()
         self._create_relation_links()
+        self._create_relation_links_contents_to_each_page()
 
     def _create_all_pages(self):
         ''' ghost page Aもページとして含めてやる必要がある。
@@ -714,6 +715,31 @@ class Network:
             pageA = v
             for pageB in pageA.linktos:
                 pageB.append_as_linkfrom(pageA)
+
+    def _create_relation_links_contents_to_each_page(self):
+        DUMMY = None
+        pageparser = PageParser(DUMMY)
+
+        for k in self._page_dict:
+            v = self._page_dict[k]
+            page = v
+
+            lines = []
+
+            linkfromline = 'Links From <- '
+            for linkfrom_page in page.linkfroms:
+                linkfromline = f'{linkfromline} [{linkfrom_page.name}]'
+            lines.append(linkfromline)
+
+            linktoline = 'Links To -> '
+            for linkto_page in page.linktos:
+                linktoline = f'{linktoline} [{linkto_page.name}]'
+            lines.append(linktoline)
+
+            linepasser = LinePasser(lines)
+            pageparser.set_linepasser(linepasser)
+            relation_links_content_by_page = pageparser.parse()
+            page.extend_as_backmatter(relation_links_content_by_page)
 
 class Renderer:
     def __init__(self, page):

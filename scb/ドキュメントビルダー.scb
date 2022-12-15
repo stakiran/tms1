@@ -119,7 +119,15 @@ network層対応
   pageインスタンスに、そいつのlinktoやlinkfromをぶら下げる処理
 
 関連リンクのレンダリング
- 
+ 1 page.linksから以下のような文字列をつくる
+  code:関連リンクはこんな感じ.scb
+  links
+   [a] [b]
+  2hop links
+   [b] ← [x] [y]
+  :c
+ 2 1をpageインスタンスに変換する
+ 3 元々のpageインスタンスたち（linksを計算したもの）を2でextendする
 
 pageインスタンスのリストを並べ替えるマン
  たぶん要る

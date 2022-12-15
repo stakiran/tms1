@@ -339,6 +339,13 @@ class TestNetwork(unittest.TestCase):
         self.assertEqual('ページA Xを基点とした2hop用', page.linkfroms[2].name)
         self.assertEqual('ページB Xを基点とした2hop用', page.linkfroms[3].name)
 
+        # linktoやlinkfromがコンテンツとして反映されているか
+        page = page_dict['X']
+        self.assertEqual(4+2, len(page.nodes)) # 上記定義時の行数+関連リンク2行分
+
+        lineobj = page.nodes[4].content.content
+        self.assertEqual('Links From <- [T1] [TN] [ページA Xを基点とした2hop用] [ページB Xを基点とした2hop用]', lineobj.raw)
+
 class TestPage(unittest.TestCase):
     def setUp(self):
         pass

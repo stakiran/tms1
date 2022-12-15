@@ -305,11 +305,23 @@ class TestNetwork(unittest.TestCase):
         self.assertFalse(page_dict['X'].is_ghost)
 
         # linkto が反映されているか
+        # 1個, n個, n個(ghostあり)の3パターン
 
-        pageT1 = page_dict['T1']
-        self.assertEqual(1, len(pageT1.linktos))
-        self.assertEqual('X', pageT1.linktos[0].name)
+        page = page_dict['T1']
+        self.assertEqual(1, len(page.linktos))
+        self.assertEqual('X', page.linktos[0].name)
 
+        page = page_dict['TN']
+        self.assertEqual(2, len(page.linktos))
+        self.assertEqual('X', page.linktos[0].name)
+        self.assertEqual('Y', page.linktos[1].name)
+
+        page = page_dict['X']
+        self.assertEqual(4, len(page.linktos))
+        self.assertEqual('F1', page.linktos[0].name)
+        self.assertEqual('G1', page.linktos[1].name)
+        self.assertEqual('FN', page.linktos[2].name)
+        self.assertEqual('GN', page.linktos[3].name)
 
 class TestPage(unittest.TestCase):
     def setUp(self):

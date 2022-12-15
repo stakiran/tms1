@@ -708,7 +708,7 @@ class Network:
                 pageA.append_as_linkto(pageB)
 
         # linkfrom
-        # B1-->A<--B2
+        # A1-->B<--A2
         for k in self._page_dict:
             v = self._page_dict[k]
             pageA = v

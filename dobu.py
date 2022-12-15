@@ -696,15 +696,16 @@ class Network:
 
     def _create_relation_links(self):
         # linkto
+        # A-->B
         for k in self._page_dict:
             v = self._page_dict[k]
-            page = v
+            pageA = v
 
-            inpagelinks = page.inpagelinks
+            inpagelinks = pageA.inpagelinks
             pagenames_of_inpagelink = [link.text for link in inpagelinks if link.is_in_page]
             for pagename in pagenames_of_inpagelink:
-                appendee_page = self._page_dict[pagename]
-                page.append_as_linkto(appendee_page)
+                pageB = self._page_dict[pagename]
+                pageA.append_as_linkto(pageB)
 
 class Renderer:
     def __init__(self, page):

@@ -279,6 +279,9 @@ class TestNetwork(unittest.TestCase):
         ]
 
         network = dobu.Network(physical_pages)
+
+        # ページをghost page含めて捕捉しきれているか
+
         page_dict = network.page_dict
 
         a = len(page_dict.keys())
@@ -300,6 +303,13 @@ class TestNetwork(unittest.TestCase):
         self.assertTrue(page_dict['G1'].is_ghost)
         self.assertTrue(page_dict['GN'].is_ghost)
         self.assertFalse(page_dict['X'].is_ghost)
+
+        # linkto が反映されているか
+
+        pageT1 = page_dict['T1']
+        self.assertEqual(1, len(pageT1.linktos))
+        self.assertEqual('X', pageT1.linktos[0].name)
+
 
 class TestPage(unittest.TestCase):
     def setUp(self):

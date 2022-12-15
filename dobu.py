@@ -239,6 +239,9 @@ class Page:
 
         self._is_ghost = is_ghost
 
+        self._linkfrom_pages = []
+        self._linkto_pages = []
+
     def add_node(self, node):
         self._nodes.append(node)
 
@@ -251,6 +254,27 @@ class Page:
         とりあえず関連リンクを想定'''
         extender_nodes = extender_page.nodes
         self._nodes.extend(extender_nodes)
+
+    def append_as_linkfrom(self, page):
+        self._linkfrom_pages.append(page)
+
+    def append_as_linkto(self, page):
+        self._linkto_pages.append(page)
+
+    @property
+    def linkfroms(self):
+        return self._linkfrom_pages
+
+    @property
+    def linktos(self):
+        return self._linkto_pages
+
+    @property
+    def links(self):
+        links = []
+        links.extend(self.linkfroms)
+        links.extend(self.linktos)
+        return links
 
     @property
     def nodes(self):
@@ -616,6 +640,7 @@ class Network:
         self._physical_pages = physical_pages
 
         self._create_all_pages()
+        self._create_relation_links()
 
     def _create_all_pages(self):
         ''' ghost page Aもページとして含めてやる必要がある。
@@ -668,6 +693,18 @@ class Network:
     @property
     def page_dict(self):
         return self._page_dict
+
+    def _create_relation_links(self):
+        # linkto
+        for k in self._page_dict:
+            v = self._page_dict[k]
+            page = v
+
+            inpagelinks = page.inpagelinks
+            pagenames_of_inpagelink = [link.text for link in inpagelinks if link.is_in_page]
+            for pagename in pagenames_of_inpagelink:
+                appendee_page = self._page_dict[pagename]
+                page.append_as_linkto(appendee_page)
 
 class Renderer:
     def __init__(self, page):

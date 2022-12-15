@@ -707,6 +707,14 @@ class Network:
                 pageB = self._page_dict[pagename]
                 pageA.append_as_linkto(pageB)
 
+        # linkfrom
+        # B1-->A<--B2
+        for k in self._page_dict:
+            v = self._page_dict[k]
+            pageA = v
+            for pageB in pageA.linktos:
+                pageB.append_as_linkfrom(pageA)
+
 class Renderer:
     def __init__(self, page):
         self._page = page

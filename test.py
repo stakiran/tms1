@@ -323,6 +323,22 @@ class TestNetwork(unittest.TestCase):
         self.assertEqual('FN', page.linktos[2].name)
         self.assertEqual('GN', page.linktos[3].name)
 
+        # linkfrom が反映されているか
+        # 1個, n個の2パターン。ghostは自分からはどこにもリンクしないので無し
+
+        page = page_dict['Y']
+        self.assertEqual(1, len(page.linkfroms))
+        self.assertEqual('TN', page.linkfroms[0].name)
+
+        page = page_dict['X']
+        self.assertEqual(4, len(page.linkfroms))
+        # linkfroms や linktos の並び順(0番目がT1である、とか)は正直わからんのでそこまでは調べない
+        # （actual の並びにテストコードを合わせる形とする）
+        self.assertEqual('T1', page.linkfroms[0].name)
+        self.assertEqual('TN', page.linkfroms[1].name)
+        self.assertEqual('ページA Xを基点とした2hop用', page.linkfroms[2].name)
+        self.assertEqual('ページB Xを基点とした2hop用', page.linkfroms[3].name)
+
 class TestPage(unittest.TestCase):
     def setUp(self):
         pass

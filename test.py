@@ -332,17 +332,19 @@ class TestNetwork(unittest.TestCase):
 
         page = page_dict['X']
         self.assertEqual(4, len(page.linkfroms))
-        # linkfroms や linktos の並び順(0番目がT1である、とか)は正直わからんのでそこまでは調べない
+        # linkfroms の並び順(0番目がT1である、とか)は正直わからんのでそこまでは調べない
         # （actual の並びにテストコードを合わせる形とする）
+        # linktos はわかる（ページ内の出現順）ので問題ない
         self.assertEqual('T1', page.linkfroms[0].name)
         self.assertEqual('TN', page.linkfroms[1].name)
         self.assertEqual('ページA Xを基点とした2hop用', page.linkfroms[2].name)
         self.assertEqual('ページB Xを基点とした2hop用', page.linkfroms[3].name)
 
         # linktoやlinkfromがコンテンツとして反映されているか
+
         page = page_dict['X']
         self.assertEqual(4+2, len(page.nodes)) # 上記定義時の行数+関連リンク2行分
-
+        # ここもlinkfromsの並び順問題がある
         lineobj = page.nodes[4].content.content
         self.assertEqual('Links From <- [T1] [TN] [ページA Xを基点とした2hop用] [ページB Xを基点とした2hop用]', lineobj.raw)
         lineobj = page.nodes[5].content.content

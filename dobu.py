@@ -1033,6 +1033,12 @@ if __name__ == "__main__":
     else:
         raise RuntimeError('No target given.')
 
+    physical_pages = []
     for target_filepath in target_filepathes:
         page = converter.filepath2page(target_filepath)
+        physical_pages.append(page)
+
+    network = Network(physical_pages)
+    for pagename in network.page_dict:
+        page = network.page_dict[pagename]
         converter.page2file(page)

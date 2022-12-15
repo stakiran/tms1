@@ -726,12 +726,12 @@ class Network:
 
             lines = []
 
-            linkfromline = 'Links From <- '
+            linkfromline = 'Links From <-'
             for linkfrom_page in page.linkfroms:
                 linkfromline = f'{linkfromline} [{linkfrom_page.name}]'
             lines.append(linkfromline)
 
-            linktoline = 'Links To -> '
+            linktoline = 'Links To ->'
             for linkto_page in page.linktos:
                 linktoline = f'{linktoline} [{linkto_page.name}]'
             lines.append(linktoline)

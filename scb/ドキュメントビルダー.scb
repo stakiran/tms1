@@ -118,7 +118,7 @@ network層対応
   関連リンク部分のテキストをつくる処理
   pageインスタンスに、そいつのlinktoやlinkfromをぶら下げる処理
 
-関連リンクのレンダリング
+✅関連リンクのレンダリング
  1 page.linksから以下のような文字列をつくる
   code:関連リンクはこんな感じ.scb
   links
@@ -128,6 +128,18 @@ network層対応
   :c
  2 1をpageインスタンスに変換する
  3 元々のpageインスタンスたち（linksを計算したもの）を2でextendする
+ ---
+ 1-3は `self._page_dict[pagename] for pagename in self._page_dict` 的なループで一気にできる
+ ページ表示順の並び替えを行うタイミングもここか
+ 
+ つまりレンダリング自体はHTML Rendererからいじらない
+ レンダリングする対象となるデータとして、1の文字列を増やすというだけ
+
+ただのurlがリンク化されていない
+ [GitHub https://tms1.vercel.app/GitHub.html]
+
+linktoがなんか重複してるんだが
+ [Doingリスト https://tms1.vercel.app/Doing%E3%83%AA%E3%82%B9%E3%83%88.html]
 
 pageインスタンスのリストを並べ替えるマン
  たぶん要る

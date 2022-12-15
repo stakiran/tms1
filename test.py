@@ -345,6 +345,8 @@ class TestNetwork(unittest.TestCase):
 
         lineobj = page.nodes[4].content.content
         self.assertEqual('Links From <- [T1] [TN] [ページA Xを基点とした2hop用] [ページB Xを基点とした2hop用]', lineobj.raw)
+        lineobj = page.nodes[5].content.content
+        self.assertEqual('Links To -> [F1] [G1] [FN] [GN]', lineobj.raw)
 
 class TestPage(unittest.TestCase):
     def setUp(self):

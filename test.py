@@ -343,11 +343,11 @@ class TestNetwork(unittest.TestCase):
         # linktoやlinkfromがコンテンツとして反映されているか
 
         page = page_dict['X']
-        self.assertEqual(4+2, len(page.nodes)) # 上記定義時の行数+関連リンク2行分
+        self.assertEqual(4+1+2, len(page.nodes)) # 上記定義時の行数+区切り線+関連リンク2行分
         # ここもlinkfromsの並び順問題がある
-        lineobj = page.nodes[4].content.content
-        self.assertEqual('Links From <- [T1] [TN] [ページA Xを基点とした2hop用] [ページB Xを基点とした2hop用]', lineobj.raw)
         lineobj = page.nodes[5].content.content
+        self.assertEqual('Links From <- [T1] [TN] [ページA Xを基点とした2hop用] [ページB Xを基点とした2hop用]', lineobj.raw)
+        lineobj = page.nodes[6].content.content
         self.assertEqual('Links To -> [F1] [G1] [FN] [GN]', lineobj.raw)
 
 class TestPage(unittest.TestCase):

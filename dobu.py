@@ -726,6 +726,9 @@ class Network:
 
             lines = []
 
+            # 見づらいのでやっぱり区切り線入れる
+            lines.append('---')
+
             linkfromline = 'Links From <-'
             for linkfrom_page in page.linkfroms:
                 linkfromline = f'{linkfromline} [{linkfrom_page.name}]'

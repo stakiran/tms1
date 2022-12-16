@@ -76,7 +76,11 @@ def escape(s):
     return html.escape(s, quote=True)
 
 def remove_duplicates_from_list(ls):
-    return list(set(ls))
+    # テストコードの関係でリストの順番を壊したくないので keep order する
+    #  https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order
+    #  py3.7+ で可能なやり方
+    #return list(set(ls))
+    return list(dict.fromkeys(ls))
 
 class Stack:
     def __init__(self, ls):
@@ -260,6 +264,10 @@ class Page:
 
     def append_as_linkto(self, page):
         self._linkto_pages.append(page)
+
+    def cleanup(self):
+        self._linkfrom_pages = remove_duplicates_from_list(self._linkfrom_pages)
+        self._linkto_pages = remove_duplicates_from_list(self._linkto_pages)
 
     @property
     def linkfroms(self):
@@ -715,6 +723,10 @@ class Network:
             pageA = v
             for pageB in pageA.linktos:
                 pageB.append_as_linkfrom(pageA)
+
+        for k in self._page_dict:
+            page = self._page_dict[k]
+            page.cleanup()
 
     def _create_relation_links_contents_to_each_page(self):
         DUMMY = None

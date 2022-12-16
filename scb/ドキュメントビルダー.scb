@@ -1,7 +1,9 @@
+2022/12/17 いったん最低限はできたのでおしまい、かな？
+
 network層対応
  ✅links
- links系のレンダリング
- ghostpageのレンダリング
+ ✅links系のレンダリング
+ ✅ghostpageのレンダリング
  2hoplinks
  pageの並びをsortする機構（page.count_of_char, page.count_of_clineとかも要りそう）
 
@@ -143,7 +145,7 @@ network層対応
   spaceでsplitして、その中にurlがあれば、それらはlinkにしちゃう
  zzz at 2022/12/16
 
-linkfromがなんか重複してるんだが
+✅linkfromがなんか重複してるんだが
  [Doingリスト https://tms1.vercel.app/Doing%E3%83%AA%E3%82%B9%E3%83%88.html]
  fromもtoも、どちらも単純なappendしかしてなくて重複チェックしてない
  案1: Page._linkfrom_pages などを list ではなく dict で持つ
@@ -159,7 +161,7 @@ linkfromがなんか重複してるんだが
  google「python remove duplicates from list keep order」
   [python - How do I remove duplicates from a list, while preserving order? - Stack Overflow https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order]
    意味わからんすぎる `seen.add` って何ｗ🐰
-   `ist(dict.fromkeys(items))`
+   `list(dict.fromkeys(items))`
     こっちだな🐰
     py3.7からだけど、まあいいだろ
 

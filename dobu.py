@@ -12,12 +12,14 @@ def parse_arguments():
     )
 
     parser.add_argument('--input-single', default=None)
-    parser.add_argument('-i', '--input-directory', default=False)
+    parser.add_argument('-i', '--input-directory', default=None)
 
     parser.add_argument('-o', '--output-directory', default=None)
 
     parser.add_argument('--html-stylesheet', default=None)
     parser.add_argument('--html-template', default=None)
+
+    parser.add_argument('--debug-display-parsee-filename', default=False, action='store_true')
 
     args = parser.parse_args()
     return args
@@ -661,7 +663,10 @@ class Network:
          3:2を走査する、このとき、
           1と照合すれば、そのページ名がghostなのかどうかがわかる
           ghostの場合、まだインスタンスがないのでつくる
-         4:3にてページインスタンスの一覧と辞書をつくる '''
+         4:3にてページインスタンスの一覧と辞書をつくる
+         
+         ただし「2種類のpagename問題」があるのでややこしい小細工が挟まっている……
+         '''
         self._physicalpage_dict = {}
         for page in self._physical_pages:
             pagename = page.name
@@ -680,24 +685,35 @@ class Network:
                 linkee_pagename = link.text
                 k = linkee_pagename
                 self._pagename_dict[k] = DUMMY
+                # self._physical_pages 内の pagename はファイル名ベースなので correct されている。
+                # が、実際のリンクは correct されずに書かれている(2種類のpagename問題)。
+                # 例: 前者はBlack_Duck_API.scb、後者は[Black Duck API]
+                #
+                # 1: このままだと後者が ghost page 判定されるので、後者の名前も key として追加しておく
+                #
+                # 2: ただしこの時点で ghost page にあたってしまう可能性もある(KeyError)ので回避する
+                k_corrected = get_corrected_filename(k)
+                if not k_corrected in self._physicalpage_dict:
+                    continue
+                v = self._physicalpage_dict[k_corrected]
+                self._physicalpage_dict[k] = v
 
         self._pages = []
+        self._page_dict = {}
         for pagename in self._pagename_dict.keys():
             is_physical = pagename in self._physicalpage_dict
             is_ghost = not is_physical
 
             if is_physical:
                 page = self._physicalpage_dict[pagename]
-            if is_ghost:
+            elif is_ghost:
                 page = Page(is_ghost=True)
                 page.name = pagename
-            self._pages.append(page)
+            else:
+                raise RuntimeError
 
-        self._page_dict = {}
-        for page in self._pages:
-            k = page.name
-            v = page
-            self._page_dict[k] = v
+            self._pages.append(page)
+            self._page_dict[pagename] = page
 
     @property
     def page_dict(self):
@@ -732,9 +748,22 @@ class Network:
         DUMMY = None
         pageparser = PageParser(DUMMY)
 
+        # 2種類のpagename問題のせいで、同じpageに2回backmatterをつけるケースがありえる。
+        # {
+        #   "black duck" : page1,
+        #   "black_duck" : page1,
+        # }
+        # 
+        # 2回つけないよう重複チェックをここで行う。
+        # （Page インスタンス側に入れるのがかんたんだがスコープじゃない）
+        backmatter_appended = []
+
         for k in self._page_dict:
             v = self._page_dict[k]
             page = v
+
+            if page in backmatter_appended:
+                continue
 
             lines = []
 
@@ -755,6 +784,7 @@ class Network:
             pageparser.set_linepasser(linepasser)
             relation_links_content_by_page = pageparser.parse()
             page.extend_as_backmatter(relation_links_content_by_page)
+            backmatter_appended.append(page)
 
 class Renderer:
     def __init__(self, page):
@@ -1050,6 +1080,8 @@ if __name__ == "__main__":
 
     physical_pages = []
     for target_filepath in target_filepathes:
+        if args.debug_display_parsee_filename:
+            print(f'{target_filepath}...')
         page = converter.filepath2page(target_filepath)
         physical_pages.append(page)
 
